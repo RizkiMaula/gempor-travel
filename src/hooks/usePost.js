@@ -4,7 +4,7 @@ import useLocalStorage from './useLocalStorage';
 const usePost = (endpoint) => {
   const [token, setToken] = useLocalStorage('authToken', '');
 
-  const createItem = (item) => {
+  const createItem = (item) =>
     axios
       .post(`https://travel-journal-api-bootcamp.do.dibimbing.id/${endpoint}`, item, {
         headers: {
@@ -16,7 +16,6 @@ const usePost = (endpoint) => {
       .catch((error) => {
         throw error;
       });
-  };
 
   return { createItem };
 };

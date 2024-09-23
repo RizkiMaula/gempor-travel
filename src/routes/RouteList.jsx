@@ -5,24 +5,13 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import NotFound from '../pages/NotFound';
 import Activity from '../pages/Activity';
+import Home from '../pages/Home';
+import LayoutAdmin from '../pages/LayoutAdmin';
+import LayoutUsers from '../pages/LayoutUsers';
+import Dashboard from '../pages/Dashboard';
+import ProtectedRoute from './ProtectedRoute';
 
 export const RouteList = [
-  {
-    path: '/',
-    element: <Promos />,
-  },
-  {
-    path: '/activity',
-    element: <Activity />,
-  },
-  {
-    path: '/categories',
-    element: <Categories />,
-  },
-  {
-    path: '/banner',
-    element: <Banner />,
-  },
   {
     path: '/register',
     element: <Register />,
@@ -31,12 +20,55 @@ export const RouteList = [
     path: '/login',
     element: <Login />,
   },
+
   {
-    path: '/promos',
-    element: <Promos />,
+    path: '/',
+    element: <LayoutUsers />,
+    children: [
+      {
+        index: true,
+        element: <Home />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+        errorElement: <NotFound />,
+      },
+    ],
   },
   {
-    path: '*',
-    element: <NotFound />,
+    path: '/admin',
+    element: (
+      <ProtectedRoute>
+        <LayoutAdmin />
+      </ProtectedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
+        path: 'banner',
+        element: <Banner />,
+      },
+      {
+        path: 'categories',
+        element: <Categories />,
+      },
+      {
+        path: 'promos',
+        element: <Promos />,
+      },
+      {
+        path: 'activity',
+        element: <Activity />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+        errorElement: <NotFound />,
+      },
+    ],
   },
 ];
