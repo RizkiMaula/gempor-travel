@@ -10,6 +10,7 @@ import LayoutAdmin from '../pages/LayoutAdmin';
 import LayoutUsers from '../pages/LayoutUsers';
 import Dashboard from '../pages/Dashboard';
 import ProtectedRoute from './ProtectedRoute';
+import User from '../pages/Users';
 
 export const RouteList = [
   {
@@ -63,6 +64,10 @@ export const RouteList = [
       {
         path: 'activity',
         element: <Activity />,
+      },
+      {
+        path: 'users',
+        element: <User />,
       },
       {
         path: '*',

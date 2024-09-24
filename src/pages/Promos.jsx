@@ -1,7 +1,12 @@
-import usePromos from '../hooks/usePromos';
+import useFetch from '../hooks/useFetch';
+import Table from '../components/elements/Table';
+import useDelete from '../hooks/useDelete';
+import { useState } from 'react';
 
 const PromosPage = () => {
-  const { promos, loading, error } = usePromos();
+  const { data, loading, error, reFetch } = useFetch('api/v1/promos');
+  const { deleteItem } = useDelete('api/v1/delete-promo');
+  const [deleteId, setDeleteId] = useState(null);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -11,16 +16,52 @@ const PromosPage = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
+
+  const handleDelete = async (id) => {
+    setDeleteId(id);
+
+    try {
+      const response = await deleteItem(id);
+      if (response.status === 'OK') {
+        confirm('Are You Sure?');
+        reFetch();
+        setDeleteId(null);
+      }
+    } catch (error) {
+      alert(error.message);
+      console.log(error);
+    }
+  };
+
   return (
-    <div>
+    <div className="flex flex-col items-center gap-2">
       <h1>Promo</h1>
-      <ul>
-        {promos?.map((promo, index) => (
-          <li key={promo.id}>
-            {index + 1}. {promo.title}: {promo.description}
-          </li>
+
+      <Table
+        logic={data?.data?.map((promo) => (
+          <tr
+            key={promo?.id}
+            className="text-center"
+          >
+            <td className="border-b-2">{promo?.title}</td>
+            <td className="border-b-2">{formatDate(promo.createdAt)}</td>
+            <td className="border-b-2">{formatDate(promo.updatedAt)}</td>
+            <td className="flex justify-center gap-2 border-b-2">
+              <button>Details</button>
+              <button>Edit</button>
+              <button onClick={() => handleDelete(promo.id)}>Delete</button>
+            </td>
+          </tr>
         ))}
-      </ul>
+      />
     </div>
   );
 };
