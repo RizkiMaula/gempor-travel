@@ -26,12 +26,14 @@ const PromosPage = () => {
   };
 
   const handleDelete = async (id) => {
-    setDeleteId(id);
-
+    const confirmed = window.confirm('Are You Sure?');
+    if (!confirmed) {
+      setDeleteId(null);
+      return;
+    }
     try {
       const response = await deleteItem(id);
       if (response.status === 'OK') {
-        confirm('Are You Sure?');
         reFetch();
         setDeleteId(null);
       }
