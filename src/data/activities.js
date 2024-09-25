@@ -1,0 +1,85 @@
+const ownData = [
+  {
+    id: '679786b7-bf9c-47a7-a01d-d6498367a8b4',
+    categoryId: 'c85d9659-45b6-4d29-a7d4-772f7afc4417',
+    category: {
+      id: 'c85d9659-45b6-4d29-a7d4-772f7afc4417',
+      name: 'China',
+      imageUrl: 'https://travel-journal-api-bootcamp.do.dibimbing.id/images/1725641109106-china.png',
+      createdAt: '2024-08-01T04:01:13.236Z',
+      updatedAt: '2024-09-06T16:45:10.547Z',
+    },
+    title: 'Tiananmen square Protest',
+    description:
+      '动态网自由门 天安門 天安门 法輪功 李洪志 Free Tibet 六四天安門事件 The Tiananmen Square protests of 1989 天安門大屠殺 The Tiananmen Square Massacre 反右派鬥爭 The Anti-Rightist Struggle 大躍進政策 The Great Leap Forward 文化大革命 The Great Proletarian Cultural Revolution 人權 Human Rights 民運 Democratization 自由 Freedom 獨立 Independence 多黨制 Multi-party system 台灣 臺灣 Taiwan Formosa 中華民國 Republic of China 西藏 土伯特 唐古特 Tibet 達賴喇嘛 Dalai Lama 法輪功 Falun Dafa 新疆維吾爾自治區 The Xinjiang Uyghur Autonomous Region 諾貝爾和平獎 Nobel Peace Prize 劉暁波 Liu Xiaobo 民主 言論 思想 反共 反革命 抗議 運動 騷亂 暴亂 騷擾 擾亂 抗暴 平反 維權 示威游行 李洪志 法輪大法 大法弟子 強制斷種 強制堕胎 民族淨化 人體實驗 肅清 胡耀邦 趙紫陽 魏京生 王丹 還政於民 和平演變 激流中國 北京之春 大紀元時報 九評論共産黨 獨裁 專制 壓制 統一 監視 鎮壓 迫害 侵略 掠奪 破壞 拷問 屠殺 活摘器官 誘拐 買賣人口 遊進 走私 毒品 賣淫 春畫 賭博 六合彩 天安門 天安门 法輪功 李洪志 Winnie the Pooh 劉曉波动态网自由门',
+    imageUrls: ['https://travel-journal-api-bootcamp.do.dibimbing.id/images/1727151180601-512px-the_tank_man_against_army_moving_forward.jpg'],
+    price: 1000,
+    price_discount: 100,
+    rating: 5,
+    total_reviews: 3999,
+    facilities: 'Tank, Gun',
+    address: 'China, Beijing, Dongcheng, 前门 邮政编码: 100051',
+    province: 'Beijing',
+    city: 'Dongcheng',
+    location_maps:
+      '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.604360360655!2d116.39763169999999!3d39.90548950000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36637698dc4374d9%3A0x2aea2ec9ad545913!2sTiananmen%20Square!5e0!3m2!1sen!2sid!4v1727151107215!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+    createdAt: '2024-09-24T04:12:01.140Z',
+    updatedAt: '2024-09-24T04:13:00.665Z',
+  },
+  {
+    id: '679786b7-bf9c-47a7-a01d-d6498367a8b4',
+    categoryId: 'c85d9659-45b6-4d29-a7d4-772f7afc4417',
+    category: {
+      id: 'c85d9659-45b6-4d29-a7d4-772f7afc4417',
+      name: 'China',
+      imageUrl: 'https://travel-journal-api-bootcamp.do.dibimbing.id/images/1725641109106-china.png',
+      createdAt: '2024-08-01T04:01:13.236Z',
+      updatedAt: '2024-09-06T16:45:10.547Z',
+    },
+    title: 'Tiananmen square Protest',
+    description:
+      '动态网自由门 天安門 天安门 法輪功 李洪志 Free Tibet 六四天安門事件 The Tiananmen Square protests of 1989 天安門大屠殺 The Tiananmen Square Massacre 反右派鬥爭 The Anti-Rightist Struggle 大躍進政策 The Great Leap Forward 文化大革命 The Great Proletarian Cultural Revolution 人權 Human Rights 民運 Democratization 自由 Freedom 獨立 Independence 多黨制 Multi-party system 台灣 臺灣 Taiwan Formosa 中華民國 Republic of China 西藏 土伯特 唐古特 Tibet 達賴喇嘛 Dalai Lama 法輪功 Falun Dafa 新疆維吾爾自治區 The Xinjiang Uyghur Autonomous Region 諾貝爾和平獎 Nobel Peace Prize 劉暁波 Liu Xiaobo 民主 言論 思想 反共 反革命 抗議 運動 騷亂 暴亂 騷擾 擾亂 抗暴 平反 維權 示威游行 李洪志 法輪大法 大法弟子 強制斷種 強制堕胎 民族淨化 人體實驗 肅清 胡耀邦 趙紫陽 魏京生 王丹 還政於民 和平演變 激流中國 北京之春 大紀元時報 九評論共産黨 獨裁 專制 壓制 統一 監視 鎮壓 迫害 侵略 掠奪 破壞 拷問 屠殺 活摘器官 誘拐 買賣人口 遊進 走私 毒品 賣淫 春畫 賭博 六合彩 天安門 天安门 法輪功 李洪志 Winnie the Pooh 劉曉波动态网自由门',
+    imageUrls: ['https://travel-journal-api-bootcamp.do.dibimbing.id/images/1727151180601-512px-the_tank_man_against_army_moving_forward.jpg'],
+    price: 1000,
+    price_discount: 100,
+    rating: 5,
+    total_reviews: 3999,
+    facilities: 'Tank, Gun',
+    address: 'China, Beijing, Dongcheng, 前门 邮政编码: 100051',
+    province: 'Beijing',
+    city: 'Dongcheng',
+    location_maps:
+      '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.604360360655!2d116.39763169999999!3d39.90548950000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36637698dc4374d9%3A0x2aea2ec9ad545913!2sTiananmen%20Square!5e0!3m2!1sen!2sid!4v1727151107215!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+    createdAt: '2024-09-24T04:12:01.140Z',
+    updatedAt: '2024-09-24T04:13:00.665Z',
+  },
+  {
+    id: '679786b7-bf9c-47a7-a01d-d6498367a8b4',
+    categoryId: 'c85d9659-45b6-4d29-a7d4-772f7afc4417',
+    category: {
+      id: 'c85d9659-45b6-4d29-a7d4-772f7afc4417',
+      name: 'China',
+      imageUrl: 'https://travel-journal-api-bootcamp.do.dibimbing.id/images/1725641109106-china.png',
+      createdAt: '2024-08-01T04:01:13.236Z',
+      updatedAt: '2024-09-06T16:45:10.547Z',
+    },
+    title: 'Tiananmen square Protest',
+    description:
+      '动态网自由门 天安門 天安门 法輪功 李洪志 Free Tibet 六四天安門事件 The Tiananmen Square protests of 1989 天安門大屠殺 The Tiananmen Square Massacre 反右派鬥爭 The Anti-Rightist Struggle 大躍進政策 The Great Leap Forward 文化大革命 The Great Proletarian Cultural Revolution 人權 Human Rights 民運 Democratization 自由 Freedom 獨立 Independence 多黨制 Multi-party system 台灣 臺灣 Taiwan Formosa 中華民國 Republic of China 西藏 土伯特 唐古特 Tibet 達賴喇嘛 Dalai Lama 法輪功 Falun Dafa 新疆維吾爾自治區 The Xinjiang Uyghur Autonomous Region 諾貝爾和平獎 Nobel Peace Prize 劉暁波 Liu Xiaobo 民主 言論 思想 反共 反革命 抗議 運動 騷亂 暴亂 騷擾 擾亂 抗暴 平反 維權 示威游行 李洪志 法輪大法 大法弟子 強制斷種 強制堕胎 民族淨化 人體實驗 肅清 胡耀邦 趙紫陽 魏京生 王丹 還政於民 和平演變 激流中國 北京之春 大紀元時報 九評論共産黨 獨裁 專制 壓制 統一 監視 鎮壓 迫害 侵略 掠奪 破壞 拷問 屠殺 活摘器官 誘拐 買賣人口 遊進 走私 毒品 賣淫 春畫 賭博 六合彩 天安門 天安门 法輪功 李洪志 Winnie the Pooh 劉曉波动态网自由门',
+    imageUrls: ['https://travel-journal-api-bootcamp.do.dibimbing.id/images/1727151180601-512px-the_tank_man_against_army_moving_forward.jpg'],
+    price: 1000,
+    price_discount: 100,
+    rating: 5,
+    total_reviews: 3999,
+    facilities: 'Tank, Gun',
+    address: 'China, Beijing, Dongcheng, 前门 邮政编码: 100051',
+    province: 'Beijing',
+    city: 'Dongcheng',
+    location_maps:
+      '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3060.604360360655!2d116.39763169999999!3d39.90548950000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x36637698dc4374d9%3A0x2aea2ec9ad545913!2sTiananmen%20Square!5e0!3m2!1sen!2sid!4v1727151107215!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>',
+    createdAt: '2024-09-24T04:12:01.140Z',
+    updatedAt: '2024-09-24T04:13:00.665Z',
+  },
+];
+
+export { ownData };

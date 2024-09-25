@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import NavbarAdmin from '../components/fragmentes/NavbarAdmin';
 
 const LayoutAdmin = () => {
   return (
     <>
-      <h1>Header</h1>
+      <NavbarAdmin />
       <Outlet />
       <h1>Footer</h1>
     </>
