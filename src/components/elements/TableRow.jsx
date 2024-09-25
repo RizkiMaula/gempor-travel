@@ -1,7 +1,7 @@
 import { faCircleInfo, faFilePen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // eslint-disable-next-line react/prop-types
-const TableRow = ({ key, name, createdAt, updatedAt, eventDelete, eventEdit, eventView }) => {
+const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit, eventView }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     return date.toLocaleString('id-ID', {
@@ -11,10 +11,7 @@ const TableRow = ({ key, name, createdAt, updatedAt, eventDelete, eventEdit, eve
     });
   };
   return (
-    <tr
-      key={key}
-      className="text-center"
-    >
+    <tr className="text-center">
       <td className="py-2 border-b-2">{name}</td>
       <td className="py-2 border-b-2">{formatDate(createdAt)}</td>
       <td className="py-2 border-b-2">{formatDate(updatedAt)}</td>

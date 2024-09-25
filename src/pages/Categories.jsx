@@ -26,9 +26,12 @@ const Categories = () => {
     try {
       const response = await deleteItem(id);
       if (response.status === 'OK') {
-        confirm('Are You Sure?');
-        reFetch();
-        setDeleteId(null);
+        const confirmed = window.confirm('Are You Sure?');
+        if (confirmed) {
+          alert('deleted');
+          reFetch();
+          setDeleteId(null);
+        }
       }
     } catch (error) {
       alert(error.message);
@@ -36,9 +39,24 @@ const Categories = () => {
     }
   };
 
+  const cobaConfirm = () => {
+    const confirmed = window.confirm('Are You Sure?');
+    if (confirmed) {
+      console.log('benar');
+    } else {
+      console.log('salah');
+    }
+  };
+
   return (
     <div className="flex flex-col items-center gap-2">
       <h1>Categories</h1>
+
+      <Button
+        text="coba confirm"
+        event={cobaConfirm}
+        bgColor="bg-blue-500"
+      />
 
       <Button
         text="Add"
