@@ -59,7 +59,7 @@ const Login = () => {
           onChange={handleEmail}
         />
         <input
-          type="text"
+          type="password"
           name="password"
           id="password"
           placeholder="Password"

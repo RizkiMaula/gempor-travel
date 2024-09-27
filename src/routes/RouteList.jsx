@@ -11,6 +11,9 @@ import LayoutUsers from '../pages/LayoutUsers';
 import Dashboard from '../pages/Dashboard';
 import ProtectedRoute from './ProtectedRoute';
 import User from '../pages/Users';
+import AddActivity from '../pages/AddActivity';
+import AddPromo from '../pages/AddPromo';
+import DetailPromo from '../pages/DetailPromo';
 
 export const RouteList = [
   {
@@ -62,8 +65,20 @@ export const RouteList = [
         element: <Promos />,
       },
       {
+        path: 'promos/:id',
+        element: <DetailPromo />,
+      },
+      {
         path: 'activity',
         element: <Activity />,
+      },
+      {
+        path: 'add-activity',
+        element: <AddActivity />,
+      },
+      {
+        path: 'add-promo',
+        element: <AddPromo />,
       },
       {
         path: 'users',
