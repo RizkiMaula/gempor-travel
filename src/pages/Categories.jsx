@@ -10,9 +10,11 @@ import usePost from '../hooks/usePost';
 import axios from 'axios';
 import useLocalStorage from '../hooks/useLocalStorage';
 import useUpdate from '../hooks/useUpdate';
+import { useNavigate } from 'react-router-dom';
 
 const Categories = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/categories');
+  const navigate = useNavigate();
 
   // Hooks Untuk Create
   const [showModal, setShowModal] = useState(false);
@@ -157,27 +159,24 @@ const Categories = () => {
           .then((res) => {
             if (res.status === 200) {
               console.log(res.data);
-
               urlFoto = res.data.url;
             }
           })
           .catch((err) => {
             console.log(err);
-            // return alert('Failed to upload image');
           });
       }
 
       const bannerData = {
         name: categoryNameUpdate,
       };
-
       if (urlFoto) {
         bannerData.imageUrl = urlFoto;
       }
 
       const createdItem = await updateItem(updateId, bannerData);
       reFetch();
-      setShowModal(false);
+      setShowModalUpdate(false);
       alert(`Success: ${createdItem.message}`);
     } catch (error) {
       console.log(error);
@@ -188,13 +187,11 @@ const Categories = () => {
   return (
     <div className="flex flex-col items-center gap-2">
       <h1>Categories</h1>
-
       <Button
         text="Add"
         event={() => setShowModal(true)}
         bgColor="bg-blue-500"
       />
-
       <Table
         logic={data?.data?.map((category) => (
           <TableRow
@@ -203,18 +200,19 @@ const Categories = () => {
             createdAt={category.createdAt}
             updatedAt={category.updatedAt}
             eventDelete={() => handleDelete(category.id)}
-            // yang bawah nanti dulu
             eventEdit={() => {
               setShowModalUpdate(true);
               setCategoryNameUpdate(category.name);
               setCategoryImagePreview(category.imageUrl);
               setUpdateId(category.id);
             }}
-            // eventView={() => setShowModal(true)}
+            // yang bawah nanti dulu
+            eventView={() => {
+              navigate(`/admin/categories/${category.id}`);
+            }}
           />
         ))}
       />
-
       {showModal && (
         <AddPicsModal
           text="Add Category"
@@ -224,7 +222,6 @@ const Categories = () => {
           onClose={() => setShowModal(false)}
         />
       )}
-
       {showModalUpdate && (
         <UpdatePicsModal
           text="Update Category"
@@ -236,7 +233,8 @@ const Categories = () => {
           onClose={() => {
             setShowModalUpdate(false);
             setCategoryNameUpdate('');
-            setCategoryImagePreview('');
+            setCategoryImageUpdate('');
+            setCategoryImageUpdateFile('');
             setUpdateId(null);
             setCategoryImageUpdateFile(null);
           }}

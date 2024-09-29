@@ -9,9 +9,12 @@ import usePost from '../hooks/usePost';
 import axios from 'axios';
 import useLocalStorage from '../hooks/useLocalStorage';
 import UpdatePicsModal from '../components/fragmentes/UpdatePicsModal';
+import useUpdate from '../hooks/useUpdate';
+import { useNavigate } from 'react-router-dom';
 
 const Banner = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/banners');
+  const navigate = useNavigate();
 
   // hooks Untuk delete
   const { deleteItem } = useDelete('api/v1/delete-banner');
@@ -32,7 +35,7 @@ const Banner = () => {
   const [bannerImageUpdate, setBannerImageUpdate] = useState('');
   const [bannerImagePreview, setBannerImagePreview] = useState('');
   const [bannerImageUpdateFile, setBannerImageUpdateFile] = useState(null);
-  const { updateItem } = usePost('api/v1/update-banner');
+  const { updateItem } = useUpdate('api/v1/update-banner');
 
   if (loading) {
     return <div>Loading...</div>;
@@ -132,6 +135,7 @@ const Banner = () => {
   // untuk fungsi update
   const handleUpdate = async (e) => {
     e.preventDefault();
+
     try {
       let urlFoto = '';
       if (bannerImageUpdateFile) {
@@ -154,6 +158,7 @@ const Banner = () => {
           })
           .then((res) => {
             if (res.status === 200) {
+              console.log(res.data);
               urlFoto = res.data.url;
             }
           })
@@ -165,7 +170,6 @@ const Banner = () => {
       const bannerData = {
         name: bannerNameUpdate,
       };
-
       if (urlFoto) {
         bannerData.imageUrl = urlFoto;
       }
@@ -204,7 +208,7 @@ const Banner = () => {
               setUpdateId(banner.id);
             }}
             // yang bawah nanti dulu
-            // eventView={() => setShowModal(true)}
+            eventView={() => navigate(`/admin/banner/${banner.id}`)}
           />
         ))}
       />

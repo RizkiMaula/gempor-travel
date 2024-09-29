@@ -7,7 +7,6 @@ const DetailPromo = () => {
   const [data, setData] = useState([]);
 
   const { id } = useParams();
-  const editable = searchParams.get('edit') === 'true';
 
   const getDataPromo = async () => {
     let config = {

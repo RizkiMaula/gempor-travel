@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import usePost from '../hooks/usePost';
+import Button from '../components/elements/Button';
 const Login = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
@@ -67,7 +68,17 @@ const Login = () => {
         />
       </form>
 
-      <button onClick={handleLogin}>Login</button>
+      <Button
+        text="Login"
+        bgColor="bg-blue-500"
+        event={handleLogin}
+      />
+
+      <Button
+        text="Register"
+        bgColor="bg-red-500"
+        event={() => navigate('/register')}
+      />
     </div>
   );
 };

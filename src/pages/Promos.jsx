@@ -1,7 +1,8 @@
 import useFetch from '../hooks/useFetch';
 import Table from '../components/elements/Table';
+import TableRow from '../components/elements/TableRow';
 import useDelete from '../hooks/useDelete';
-import { useState } from 'react';
+import { act, useState } from 'react';
 import Button from '../components/elements/Button';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -18,15 +19,6 @@ const PromosPage = () => {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
-  };
 
   const handleDelete = async (id) => {
     const confirmed = window.confirm('Are You Sure?');
@@ -51,27 +43,23 @@ const PromosPage = () => {
       <h1>Promo</h1>
 
       <Button
-        text="add Activity"
+        text="add Pomo"
         bgColor="bg-blue-500"
-        event={() => navigate('/admin/add-activity')}
+        event={() => navigate('/admin/add-promo')}
       />
 
       <Table
         logic={data?.data?.map((promo) => (
-          <tr
-            key={promo?.id}
-            className="text-center"
-          >
-            <td className="border-b-2">{promo?.title}</td>
-            <td className="border-b-2">{formatDate(promo.createdAt)}</td>
-            <td className="border-b-2">{formatDate(promo.updatedAt)}</td>
-            <td className="flex justify-center gap-2 border-b-2">
-              <Link to={`/admin/promos/${promo.id}`}>Details</Link>
-              <Link to={`/admin/promos/${promo.id}?edit=true`}>Edit</Link>
-
-              <button onClick={() => handleDelete(promo.id)}>Delete</button>
-            </td>
-          </tr>
+          <TableRow
+            key={promo.id}
+            name={promo.title}
+            createdAt={promo.createdAt}
+            updatedAt={promo.updatedAt}
+            eventDelete={() => handleDelete(promo.id)}
+            eventView={() => navigate(`/admin/promos/${promo.id}`)}
+            // nanti dulu
+            // eventEdit={}
+          />
         ))}
       />
     </div>

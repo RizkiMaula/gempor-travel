@@ -4,6 +4,7 @@ import axios from 'axios';
 import useLocalStorage from '../hooks/useLocalStorage';
 import usePost from '../hooks/usePost';
 import useFetch from '../hooks/useFetch';
+import { useNavigate } from 'react-router-dom';
 
 const AddActivity = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
@@ -22,76 +23,133 @@ const AddActivity = () => {
   const [profilePictureName, setProfilePictureName] = useState('');
   const [profilePictureFile, setProfilePictureFile] = useState([]);
 
-  const { data, loading, error } = useFetch('api/v1/categories');
+  const { data } = useFetch('api/v1/categories');
   const { createItem } = usePost('api/v1/create-activity');
+  const navigate = useNavigate();
 
   const handleCategory = (e) => {
-    console.log(e.target.value);
     setCategory(e.target.value);
   };
 
   const handleTitle = (e) => {
-    console.log(e.target.value);
     setTitle(e.target.value);
   };
 
   const handlePrice = (e) => {
-    console.log(e.target.value);
     setPrice(e.target.value);
   };
 
   const handleDiscount = (e) => {
-    console.log(e.target.value);
     setDiscount(e.target.value);
   };
 
   const handleRating = (e) => {
-    console.log(e.target.value);
     setRating(e.target.value);
   };
 
   const handleReviews = (e) => {
-    console.log(e.target.value);
     setReviews(e.target.value);
   };
 
   const handleFacilities = (e) => {
-    console.log(e.target.value);
     setFacilities(e.target.value);
   };
 
   const handleDescription = (e) => {
-    console.log(e.target.value);
     setDescription(e.target.value);
   };
 
   const handleProvince = (e) => {
-    console.log(e.target.value);
     setProvince(e.target.value);
   };
 
   const handleCity = (e) => {
-    console.log(e.target.value);
     setCity(e.target.value);
   };
 
   const handleAddress = (e) => {
-    console.log(e.target.value);
     setAddress(e.target.value);
   };
 
   const handleLocationMaps = (e) => {
-    console.log(e.target.value);
     setLocationMaps(e.target.value);
   };
 
   const handlePicture = (e) => {
     setProfilePictureName(e.target.value);
     setProfilePictureFile(e.target.files);
-    console.log(e.target.files);
   };
 
-  const handleSubmit = async (e) => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      let imgUrlList = [];
+      const acceptImage = ['image/'];
+      for (const item of profilePictureFile) {
+        let isFileValid = false;
+
+        for (const type of acceptImage) {
+          if (item.type.startsWith(type)) {
+            isFileValid = true;
+            break;
+          }
+        }
+        if (!isFileValid) {
+          alert('File not valid');
+          return;
+        }
+        if (item?.size > 500 * 1024) {
+          alert('File too large');
+          return;
+        }
+
+        let data = new FormData();
+        data.append('image', item);
+        await axios
+          .post('https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image', data, {
+            headers: {
+              apiKey: '24405e01-fbc1-45a5-9f5a-be13afcd757c',
+              Authorization: `Bearer ${token}`,
+            },
+          })
+          .then((res) => {
+            if (res.status === 200) {
+              imgUrlList.push(res.data.url);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
+
+      const formData = {
+        categoryId: category,
+        title: title,
+        description: description,
+        imageUrls: imgUrlList,
+        price: parseInt(price),
+        price_discount: parseInt(discount),
+        rating: parseInt(rating),
+        total_reviews: parseInt(reviews),
+        facilities: facilities,
+        address: address,
+        province: province,
+        city: city,
+        location_maps: locationMaps,
+      };
+
+      console.log(formData);
+      const res = await createItem(formData);
+      alert(res.message);
+      setTimeout(() => {
+        navigate('/admin/activity');
+      }, 3000);
+    } catch (error) {
+      console.log(error);
+      alert(error.message);
+    }
+  };
 
   return (
     <>

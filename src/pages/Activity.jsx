@@ -4,6 +4,7 @@ import useDelete from '../hooks/useDelete';
 import { useState } from 'react';
 import Button from '../components/elements/Button';
 import { useNavigate } from 'react-router-dom';
+import TableRow from '../components/elements/TableRow';
 
 const Activity = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/activities');
@@ -19,14 +20,7 @@ const Activity = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('id-ID', {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
-  };
+  console.log(data);
 
   const handleDelete = async (id) => {
     const confirmed = window.confirm('Are You Sure?');
@@ -58,19 +52,16 @@ const Activity = () => {
 
       <Table
         logic={data?.data?.map((activity) => (
-          <tr
+          <TableRow
             key={activity.id}
-            className="text-center"
-          >
-            <td className="border-b-2">{activity.title}</td>
-            <td className="border-b-2">{formatDate(activity.createdAt)}</td>
-            <td className="border-b-2">{formatDate(activity.updatedAt)}</td>
-            <td className="flex justify-center gap-2 border-b-2">
-              <button>Details</button>
-              <button>Edit</button>
-              <button onClick={() => handleDelete(activity.id)}>Delete</button>
-            </td>
-          </tr>
+            name={activity.title}
+            createdAt={activity.createdAt}
+            updatedAt={activity.updatedAt}
+            eventDelete={() => handleDelete(activity.id)}
+            eventView={() => navigate(`/admin/activity/${activity.id}`)}
+            // nanti dulu
+            // eventEdit={}
+          />
         ))}
       />
     </div>

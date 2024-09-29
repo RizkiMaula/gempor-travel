@@ -14,6 +14,9 @@ import User from '../pages/Users';
 import AddActivity from '../pages/AddActivity';
 import AddPromo from '../pages/AddPromo';
 import DetailPromo from '../pages/DetailPromo';
+import DetailActivity from '../pages/DetailActivity';
+import DetailCategory from '../pages/DetailCategory';
+import DetailBanner from '../pages/DetailBanner';
 
 export const RouteList = [
   {
@@ -57,8 +60,16 @@ export const RouteList = [
         element: <Banner />,
       },
       {
+        path: 'banner/:id',
+        element: <DetailBanner />,
+      },
+      {
         path: 'categories',
         element: <Categories />,
+      },
+      {
+        path: 'categories/:id',
+        element: <DetailCategory />,
       },
       {
         path: 'promos',
@@ -71,6 +82,10 @@ export const RouteList = [
       {
         path: 'activity',
         element: <Activity />,
+      },
+      {
+        path: 'activity/:id',
+        element: <DetailActivity />,
       },
       {
         path: 'add-activity',

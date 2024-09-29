@@ -26,12 +26,7 @@ const useGetById = (endpoint) => {
     }
   };
 
-  return {
-    data,
-    loading,
-    error,
-    getDataById,
-  };
+  return { data, loading, error, getDataById };
 };
 
 export default useGetById;

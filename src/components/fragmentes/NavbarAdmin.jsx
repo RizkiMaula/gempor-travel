@@ -18,6 +18,9 @@ const NavbarAdmin = () => {
       <Link to="/admin/promos">
         <h1 className="text-xl font-bold">Promo</h1>
       </Link>
+      <Link to="/admin/users">
+        <h1 className="text-xl font-bold">users</h1>
+      </Link>
     </nav>
   );
 };
