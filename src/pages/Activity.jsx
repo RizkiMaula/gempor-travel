@@ -59,8 +59,8 @@ const Activity = () => {
             updatedAt={activity.updatedAt}
             eventDelete={() => handleDelete(activity.id)}
             eventView={() => navigate(`/admin/activity/${activity.id}`)}
+            eventEdit={() => navigate(`../activity/edit/${activity.id}`)}
             // nanti dulu
-            // eventEdit={}
           />
         ))}
       />

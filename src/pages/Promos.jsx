@@ -57,8 +57,8 @@ const PromosPage = () => {
             updatedAt={promo.updatedAt}
             eventDelete={() => handleDelete(promo.id)}
             eventView={() => navigate(`/admin/promos/${promo.id}`)}
+            eventEdit={() => navigate(`/admin/promos/${promo.id}?edit=true`)}
             // nanti dulu
-            // eventEdit={}
           />
         ))}
       />

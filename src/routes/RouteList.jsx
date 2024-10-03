@@ -17,6 +17,7 @@ import DetailPromo from '../pages/DetailPromo';
 import DetailActivity from '../pages/DetailActivity';
 import DetailCategory from '../pages/DetailCategory';
 import DetailBanner from '../pages/DetailBanner';
+import EditActivity from '../pages/EditActivity';
 
 export const RouteList = [
   {
@@ -82,6 +83,10 @@ export const RouteList = [
       {
         path: 'activity',
         element: <Activity />,
+      },
+      {
+        path: 'activity/edit/:id',
+        element: <EditActivity />,
       },
       {
         path: 'activity/:id',

@@ -1,11 +1,13 @@
 import { Outlet } from 'react-router-dom';
+import NavbarUser from '../components/fragmentes/NavbarUser';
+import Footer from '../components/fragmentes/Footer';
 
 const LayoutUsers = () => {
   return (
     <>
-      <h1>Header</h1>
+      <NavbarUser />
       <Outlet />
-      <h1>Footer</h1>
+      <Footer />
     </>
   );
 };
