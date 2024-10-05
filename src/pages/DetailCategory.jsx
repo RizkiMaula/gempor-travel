@@ -47,6 +47,10 @@ const DetailCategory = () => {
         <h1>{data?.name}</h1>
         <p>{data?.createdAt}</p>
         <p>{data?.updatedAt}</p>
+        <img
+          src={data?.imageUrl}
+          alt={data?.name}
+        />
       </div>
 
       <button onClick={() => navigate(-1)}>Back</button>

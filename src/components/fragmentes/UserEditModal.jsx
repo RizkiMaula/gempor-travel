@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import Button from '../elements/Button';
 
 // eslint-disable-next-line react/prop-types
-const UserEditModal = ({ onClose, onAddCategory, text = '....', name = 'diambil dari API nanti', image = '....' }) => {
+const UserEditModal = ({ onClose, onUpdateRole, text = '....', name = 'diambil dari API nanti', image = '....', value, onEventRole }) => {
   const modalRef = useRef();
 
   const closeModal = (e) => {
@@ -21,14 +21,11 @@ const UserEditModal = ({ onClose, onAddCategory, text = '....', name = 'diambil 
         <h4>{text}</h4>
         <div className="flex flex-col items-center w-full h-[10rem] gap-2 border-2 border-black">
           <h1>{name}</h1>
-          <img
-            className="w-1/3 h-1/3"
-            src={image}
-            alt="profile picture"
-          />
           <select
             name="Role"
             id=""
+            value={value}
+            onChange={onEventRole}
           >
             <option value="admin">Admin</option>
             <option value="user">User</option>
@@ -38,7 +35,7 @@ const UserEditModal = ({ onClose, onAddCategory, text = '....', name = 'diambil 
           <Button
             text="Add"
             bgColor="bg-blue-500"
-            event={onAddCategory}
+            event={onUpdateRole}
           />
           <Button
             text="Cancel"

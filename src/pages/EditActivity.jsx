@@ -37,62 +37,62 @@ const EditActivity = () => {
   const navigate = useNavigate();
 
   const handleCategory = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, categoryId: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleTitle = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, title: e.target.value }));
     console.log(e.target.value);
   };
 
   const handlePrice = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, price: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleDiscount = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, price_discount: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleRating = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, rating: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleReviews = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, total_reviews: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleFacilities = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, facilities: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleDescription = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, description: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleProvince = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, province: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleCity = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, city: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleAddress = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, address: e.target.value }));
     console.log(e.target.value);
   };
 
   const handleLocationMaps = (e) => {
-    setFormData(...formData, e.target.value);
+    setFormData((prev) => ({ ...prev, location_maps: e.target.value }));
     console.log(e.target.value);
   };
 
@@ -116,7 +116,7 @@ const EditActivity = () => {
       .then((response) => {
         console.log(response.data.data);
         setDataActivity(response.data.data);
-        if (response.status === 'OK') {
+        if (response.data.status === 'OK') {
           setFormData({
             categoryId: response.data.data.categoryId,
             title: response.data.data.title,
@@ -144,9 +144,7 @@ const EditActivity = () => {
     getDataActivity(id);
   }, []);
 
-  const handleUpdate = async (e, id) => {
-    e.preventDefault();
-
+  const handleUpdate = async () => {
     try {
       let imgUrlList = [];
       const acceptImage = ['image/'];
@@ -204,6 +202,10 @@ const EditActivity = () => {
       };
       console.log(updatedData);
       //   nanti update logicnya di bawah
+      const response = await updateItem(id, updatedData);
+      alert('Update success');
+      console.log(response);
+      navigate(`/admin/activity/edit/${id}`);
     } catch (error) {
       console.log(error);
       alert(error.message);
@@ -224,6 +226,7 @@ const EditActivity = () => {
             name="category"
             id=""
             onChange={handleCategory}
+            value={formData.categoryId || ''}
           >
             {data?.data?.map((item, index) => (
               <option
@@ -251,7 +254,7 @@ const EditActivity = () => {
             type="number"
             name="price"
             id="price"
-            value={formData.price || ''}
+            value={formData.price}
             onChange={handlePrice}
           />
         </span>
@@ -261,7 +264,7 @@ const EditActivity = () => {
             type="number"
             name="discount"
             id="price"
-            value={formData.discount || ''}
+            value={formData.discount}
             onChange={handleDiscount}
           />
         </span>
@@ -271,7 +274,7 @@ const EditActivity = () => {
             type="number"
             name="price"
             id="price"
-            value={formData.rating || ''}
+            value={formData.rating}
             onChange={handleRating}
           />
         </span>
@@ -281,7 +284,7 @@ const EditActivity = () => {
             type="number"
             name="price"
             id="price"
-            value={formData.reviews || ''}
+            value={formData.reviews}
             onChange={handleReviews}
           />
         </span>

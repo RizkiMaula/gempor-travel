@@ -18,6 +18,8 @@ import DetailActivity from '../pages/DetailActivity';
 import DetailCategory from '../pages/DetailCategory';
 import DetailBanner from '../pages/DetailBanner';
 import EditActivity from '../pages/EditActivity';
+import Profile from '../pages/Profile';
+import ProtectedProfile from './ProtectedProfile';
 
 export const RouteList = [
   {
@@ -28,7 +30,10 @@ export const RouteList = [
     path: '/login',
     element: <Login />,
   },
-
+  {
+    path: '/profile',
+    element: <Profile />,
+  },
   {
     path: '/',
     element: <LayoutUsers />,

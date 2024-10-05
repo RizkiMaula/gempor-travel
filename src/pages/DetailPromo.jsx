@@ -24,7 +24,7 @@ const DetailPromo = () => {
 
   const navigate = useNavigate();
   const { updateItem } = useUpdate('api/v1/update-promo');
-  const [profilePictureFile, setProfilePictureFile] = useState([]);
+  const [profilePictureFile, setProfilePictureFile] = useState(null);
   const [token, setToken] = useLocalStorage('authToken', '');
 
   const getDataPromo = async () => {
@@ -52,6 +52,7 @@ const DetailPromo = () => {
       let urlPhoto = '';
       if (profilePictureFile) {
         const acceptImage = ['image/'];
+        console.log(profilePictureFile);
         if (!acceptImage.some((item) => profilePictureFile.type.includes(item))) {
           return alert('Files that are allowed are only of type Image');
         }
@@ -92,11 +93,19 @@ const DetailPromo = () => {
         const updatedItem = await updateItem(id, updatedData);
         alert('Promo updated successfully');
         console.log(updatedItem);
-        navigate('/promos');
+        searchParams.delete('edit');
+        navigate(`/admin/promos/${id}`);
       }
     } catch (error) {
       console.log(error);
       alert(`error: ${error.message}`);
+    }
+  };
+
+  const handleChangePic = (e) => {
+    if (e.target.files[0]) {
+      setData((prev) => ({ ...prev, imageUrl: URL.createObjectURL(e.target.files[0]) }));
+      setProfilePictureFile(e.target.files[0]);
     }
   };
 
@@ -107,13 +116,22 @@ const DetailPromo = () => {
   console.log(data);
 
   if (!data.id) {
-    return <h1>Data tidak ditemukan</h1>;
+    return <h1>No data Found</h1>;
   }
 
   return (
     <>
       <h1>halaman promo</h1>
-
+      {!editable && (
+        <Button
+          text="Edit Promo"
+          bgColor="bg-blue-500"
+          event={() => {
+            searchParams.set('edit', 'true');
+            navigate(`/admin/promos/${id}?${searchParams.toString()}`);
+          }}
+        />
+      )}
       {data && (
         <>
           <span className="flex gap-2 items-center">
@@ -145,7 +163,7 @@ const DetailPromo = () => {
             />
             <input
               type="file"
-              onChange={(e) => setData((prev) => ({ ...prev, imageUrl: e.target.value }))}
+              onChange={handleChangePic}
               disabled={!editable}
               className="border border-gray-300 rounded-md p-2 w-[20rem]"
             />
@@ -191,13 +209,21 @@ const DetailPromo = () => {
               className="border border-gray-300 rounded-md p-2 w-[20rem]"
             />
           </span>
-          <Button
-            text="Edit"
-            bgColor="bg-blue-500"
-            event={() => {
-              handleUpdate();
-            }}
-          />
+          {editable && (
+            <>
+              <Button
+                text="Edit"
+                bgColor="bg-blue-500"
+                event={() => {
+                  handleUpdate();
+                }}
+              />
+              <Button
+                text="Cancel"
+                event={() => navigate(`/admin/promos/${id}`)}
+              />
+            </>
+          )}
         </>
       )}
     </>

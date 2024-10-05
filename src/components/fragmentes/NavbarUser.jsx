@@ -1,8 +1,58 @@
 import { faMoon } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
+import useLocalStorage from '../../hooks/useLocalStorage';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const NavbarUser = () => {
+  const [token, setToken] = useLocalStorage('authToken', '');
+  const [role, setRole] = useLocalStorage('role', '');
+  const navigate = useNavigate();
+
+  console.log(`token: ${token} role: ${role}`);
+
+  const handleLogout = () => {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/logout',
+      headers: {
+        apiKey: '24405e01-fbc1-45a5-9f5a-be13afcd757c',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: 'https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/logout',
+          headers: {
+            apiKey: '24405e01-fbc1-45a5-9f5a-be13afcd757c',
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        axios
+          .request(config)
+          .then((response) => {
+            console.log(JSON.stringify(response.data));
+            setToken('');
+            setRole('');
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="w-full bg-black h-[7rem] top-0 absolute flex flex-col items-center justify-center">
       <div className="w-[88%] rounded-[8px] flex flex-col gap-9 justify-center items-center bg-white h-[70%]">
@@ -35,7 +85,26 @@ const NavbarUser = () => {
             <button>
               <FontAwesomeIcon icon={faMoon} />
             </button>
-            <button>Login</button>
+            {!token && !role && (
+              <button
+                onClick={() => {
+                  navigate('/login');
+                }}
+              >
+                Login
+              </button>
+            )}
+            {token && (
+              <div>
+                <button
+                  onClick={() => {
+                    handleLogout();
+                  }}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>

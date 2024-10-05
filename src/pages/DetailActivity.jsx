@@ -53,6 +53,15 @@ const DetailActivity = () => {
                   <p className="card-text">Price: {dataAct?.price}</p>
                   <p className="card-text">Address: {dataAct?.address}</p>
                   <p className="card-text">Country: {dataAct?.category?.name}</p>
+                  {(dataAct?.imageUrls || []).map((url, index) => (
+                    <img
+                      src={url}
+                      key={index}
+                      className="w-6 h-4"
+                      alt={url}
+                    />
+                  ))}{' '}
+                  {/** (?.) namanya optional chainig. funsinya untuk mengecek apakah dataAct.imageUrls ada atau tidak (null / undefiened) */}
                   <p className="card-text">
                     <iframe
                       src={getGoogleMapsUsingRegex(dataAct?.location_maps)}
