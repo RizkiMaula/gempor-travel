@@ -78,15 +78,17 @@ const Profile = () => {
     }
   };
 
+  console.log(data.data);
+
   return (
     <div className="flex justify-center border-2 border-black">
-      <div className="w-1/3 border-2 border-red-500 flex flex-col gap-2 items-center justify-center">
+      <div className="flex flex-col items-center justify-center w-1/3 gap-2 border-2 border-red-500">
         <h1>Profile</h1>
         {loading && <div>Loading...</div>}
         {error && <div>Error: {error.message}</div>}
 
         {data.data && (
-          <div className="flex flex-col gap-2 items-center">
+          <div className="flex flex-col items-center gap-2">
             <img
               src={data.data.profilePictureUrl}
               alt={data.data.name}
@@ -99,14 +101,14 @@ const Profile = () => {
         )}
       </div>
 
-      <div className="w-2/3 border-2 border-blue-500 flex flex-col gap-2 items-center">
+      <div className="flex flex-col items-center w-2/3 gap-2 border-2 border-blue-500">
         <h1>Edit Profile</h1>
         <form className="flex flex-col gap-2 border-2 border-black w-[85%] p-5">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
-            className="border-2 border-black p-3 rounded"
+            className="p-3 border-2 border-black rounded"
             placeholder="Put Your Name Here"
             value={formData.name}
             onChange={(e) => setFromData({ ...formData, name: e.target.value })}
@@ -115,7 +117,7 @@ const Profile = () => {
           <input
             type="email"
             id="email"
-            className="border-2 border-black p-3 rounded"
+            className="p-3 border-2 border-black rounded"
             placeholder="Put Your Email Here"
             value={formData.email}
             onChange={(e) => setFromData({ ...formData, email: e.target.value })}
@@ -124,7 +126,7 @@ const Profile = () => {
           <input
             type="text"
             id="phoneNumber"
-            className="border-2 border-black p-3 rounded"
+            className="p-3 border-2 border-black rounded"
             placeholder="Put Your Phone Number Here"
             value={formData.phoneNumber}
             onChange={(e) => setFromData({ ...formData, phoneNumber: e.target.value })}

@@ -7,7 +7,7 @@ import { faInstagram, faLinkedin, faXTwitter } from '@fortawesome/free-brands-sv
 const Footer = () => {
   const { data, loading } = useFetch('api/v1/promos');
   return (
-    <footer className="w-full bg-white border-3 border-red py-9 bottom-0 absolute ">
+    <footer className="w-full bg-white border-3 border-red py-9 bottom-0 relative ">
       <div className="mx-[3rem] my-[1.5rem] flex flex-col gap-9 justify-between  h-[20rem]">
         <div className=" flex justify-between h-full">
           <div className=" w-2/3 h-full flex justify-between">

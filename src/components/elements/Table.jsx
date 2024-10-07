@@ -1,6 +1,6 @@
 const Table = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { logic } = props;
+  const { logic, column1 = 'Nama', column2 = 'Created At', column3 = 'Updated At', column4 = 'Action' } = props;
   return (
     <div className="overflow-x-auto w-[98%] ">
       <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
@@ -10,25 +10,25 @@ const Table = (props) => {
               scope="col"
               className="px-6 py-3"
             >
-              Name
+              {column1}
             </th>
             <th
               scope="col"
               className="px-6 py-3"
             >
-              Created At
+              {column2}
             </th>
             <th
               scope="col"
               className="px-6 py-3"
             >
-              Updated At
+              {column3}
             </th>
             <th
               scope="col"
               className="px-6 py-3"
             >
-              Action
+              {column4}
             </th>
           </tr>
         </thead>

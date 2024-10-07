@@ -206,6 +206,7 @@ const Categories = () => {
         bgColor="bg-blue-500"
       />
       <Table
+        column1="Nama"
         logic={(filterData || []).map((category) => (
           <TableRow
             key={category.id}

@@ -3,6 +3,7 @@ import UserEditModal from '../components/fragmentes/UserEditModal';
 import Button from '../components/elements/Button';
 import { useState } from 'react';
 import useUpdate from '../hooks/useUpdate';
+import Table from '../components/elements/Table';
 
 const User = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/all-user');
@@ -25,8 +26,6 @@ const User = () => {
     setRoleUpd(e.target.value);
   };
 
-  console.log(data?.data?.map((user) => user));
-
   const handleUpdateRole = async () => {
     try {
       const dataWillUpdate = {
@@ -42,11 +41,13 @@ const User = () => {
     }
   };
 
+  console.log(data);
+
   return (
-    <div className="flex flex-col gap-4 items-center border-2 border-black">
+    <div className="flex flex-col items-center gap-4 border-2 border-black">
       <h1>User</h1>
 
-      {/* <table className="w-3/4 border-2 border-black table-auto text-center">
+      {/* <table className="w-3/4 text-center border-2 border-black table-auto">
         <thead>
           <tr>
             <th className="border-2 border-black">Name</th>
@@ -55,30 +56,37 @@ const User = () => {
             <th className="border-2 border-black">Action</th>
           </tr>
         </thead>
-        <tbody>
-          {data?.data?.map((user) => (
-            <tr key={user.id}>
-              <td className="border-2 border-black">{user.name}</td>
-              <td className="border-2 border-black">{user.email}</td>
-              <td className="border-2 border-black">{user.role}</td>
-              <td className="border-2 border-black">
-                <Button
-                  text="Edit Role"
-                  event={() => {
-                    setShowModal(true);
-                    setNameUpd(user.name);
-                    setRoleUpd(user.role);
-                    setUpdateId(user.id);
-                  }}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
+        <tbody></tbody>
       </table> */}
 
-      <div className="flex flex-col items-center gap-4 w-[90%]">
-        <div className="w-full grid grid-cols-4 gap-4">
+      <Table
+        logic={data?.data?.map((user) => (
+          <tr
+            key={user.id}
+            className="text-center"
+          >
+            <td className="py-2 border-b-2">{user.name}</td>
+            <td className="py-2 border-b-2">{user.email}</td>
+            <td className="py-2 border-b-2">{user.role}</td>
+            <td className="py-2 border-b-2">
+              <Button
+                text="Edit Role"
+                event={() => {
+                  console.log(`file ${user.name}: ${user.profilePictureUrl}`);
+                  setShowModal(true);
+                  setImageUrl(user.profilePictureUrl);
+                  setNameUpd(user.name);
+                  setRoleUpd(user.role);
+                  setUpdateId(user.id);
+                }}
+              />
+            </td>
+          </tr>
+        ))}
+      />
+
+      {/* <div className="flex flex-col items-center gap-4 w-[90%]">
+        <div className="grid w-full grid-cols-4 gap-4">
           {data?.data?.map((user) => (
             <div
               key={user.id}
@@ -87,7 +95,7 @@ const User = () => {
               <img
                 src={user.profilePictureUrl}
                 alt={user.name}
-                className="w-1/3 h-1/3 rounded-full"
+                className="w-1/3 rounded-full h-1/3"
               />
               <p>Name: {user.name}</p>
               <p>Email: {user.email}</p>
@@ -106,7 +114,7 @@ const User = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {showModal && (
         <UserEditModal
@@ -116,7 +124,7 @@ const User = () => {
           onEventRole={handleRole}
           onUpdateRole={() => handleUpdateRole(updateId, roleUpd)}
           onClose={() => setShowModal(false)}
-          image={''}
+          image={imageUrl}
         />
       )}
     </div>
