@@ -7,12 +7,12 @@ import { faInstagram, faLinkedin, faXTwitter } from '@fortawesome/free-brands-sv
 const Footer = () => {
   const { data, loading } = useFetch('api/v1/promos');
   return (
-    <footer className="w-full bg-white border-3 border-red py-9 bottom-0 relative ">
+    <footer className="relative bottom-0 w-full bg-white border-3 border-red py-9 ">
       <div className="mx-[3rem] my-[1.5rem] flex flex-col gap-9 justify-between  h-[20rem]">
-        <div className=" flex justify-between h-full">
-          <div className=" w-2/3 h-full flex justify-between">
-            <div className="flex flex-col gap-3 w-1/3">
-              <h1 className="text-black font-bold">Company</h1>
+        <div className="flex justify-between h-full ">
+          <div className="flex justify-between w-2/3 h-full ">
+            <div className="flex flex-col w-1/3 gap-3">
+              <h1 className="font-bold text-black">Company</h1>
               <ul>
                 <li>
                   <Link to={'#'}>About</Link>
@@ -34,8 +34,8 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="flex flex-col gap-3 w-1/3">
-              <h1 className="text-black font-bold">Explore</h1>
+            <div className="flex flex-col w-1/3 gap-3">
+              <h1 className="font-bold text-black">Explore</h1>
               <ul>
                 <li>
                   <Link to={'#'}>Recourses</Link>
@@ -48,8 +48,8 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="flex flex-col gap-3 w-1/3">
-              <h1 className="text-black font-bold">Find Promo</h1>
+            <div className="flex flex-col w-1/3 gap-3">
+              <h1 className="font-bold text-black">Find Promo</h1>
               <ul>
                 {loading ? (
                   'Loading...'
@@ -65,17 +65,17 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className=" w-1/3">
-            <div className=" w-full h-full p-3 bg-neutral-100 rounded">
-              <div className="flex flex-col gap-3 w-full ">
-                <h1 className="text-black font-bold">Subscribe</h1>
+          <div className="w-1/3 ">
+            <div className="w-full h-full p-3 rounded  bg-neutral-100">
+              <div className="flex flex-col w-full gap-3 ">
+                <h1 className="font-bold text-black">Subscribe</h1>
                 <div className="flex ">
                   <input
                     type="text"
-                    className="border-2 rounded-l-lg p-2 w-full "
+                    className="w-full p-2 border-2 rounded-l-lg "
                     placeholder="Enter your email"
                   />
-                  <button className="border-2 rounded-r-lg p-2 bg-blue-500">
+                  <button className="p-2 bg-blue-500 border-2 rounded-r-lg">
                     <FontAwesomeIcon icon={faArrowRight} />
                   </button>
                 </div>
@@ -86,8 +86,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className=" flex flex-col ">
-          <div className="flex justify-between items-center w-full">
+        <div className="flex flex-col ">
+          <div className="flex items-center justify-between w-full">
             <div className="w-[4rem] h-[4rem] border-2 border-black">Logo</div>
             <div>
               <ul className="flex gap-5 font-bold ">
@@ -100,25 +100,25 @@ const Footer = () => {
               <button className="border-2 border-black p-2 rounded-full w-[3rem] h-[3rem]">
                 <FontAwesomeIcon
                   icon={faInstagram}
-                  className="text-black text-2xl"
+                  className="text-2xl text-black"
                 />
               </button>
               <button className="border-2 border-black p-2 rounded-full w-[3rem] h-[3rem]">
                 <FontAwesomeIcon
                   icon={faXTwitter}
-                  className="text-black text-2xl"
+                  className="text-2xl text-black"
                 />
               </button>
               <button className="border-2 border-black p-2 rounded-full w-[3rem] h-[3rem]">
                 <FontAwesomeIcon
                   icon={faLinkedin}
-                  className="text-black text-2xl"
+                  className="text-2xl text-black"
                 />
               </button>
             </div>
           </div>
         </div>
-        <div className="text-center border-t-2 border-slate-600 flex justify-center items-center p-4 ">
+        <div className="flex items-center justify-center p-4 text-center border-t-2 border-slate-600 ">
           <p className="text-center">Copyright © 2024. All rights reserved.</p>
         </div>
       </div>

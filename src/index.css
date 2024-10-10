@@ -44,3 +44,9 @@
   align-items: center;
   margin-top: 2px;
 }
+
+.slick-slide > div {
+  display: flex;
+  justify-content: center;
+  margin: 0 10px;
+}
