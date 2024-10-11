@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { Navbar, Collapse, Typography, IconButton } from '@material-tailwind/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from 'react-router-dom';
@@ -8,10 +8,13 @@ import axios from 'axios';
 import ProfileElement from '../elements/ProfileElement';
 import { MoonIcon } from '@heroicons/react/24/solid';
 
-const NavListLib = () => {
+const NavListLib = ({ loginEvent }) => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
+  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
+
+  const handleOpen = () => setOpenModal(!openModal);
 
   const handleLogout = () => {
     let config = {
@@ -66,7 +69,7 @@ const NavListLib = () => {
           href="#"
           className="flex items-center transition-colors hover:text-blue-500"
         >
-          Pages
+          Home
         </a>
       </Typography>
       <Typography
@@ -79,7 +82,7 @@ const NavListLib = () => {
           href="#"
           className="flex items-center transition-colors hover:text-blue-500"
         >
-          Account
+          Categories
         </a>
       </Typography>
       <Typography
@@ -92,7 +95,7 @@ const NavListLib = () => {
           href="#"
           className="flex items-center transition-colors hover:text-blue-500"
         >
-          Blocks
+          Activities
         </a>
       </Typography>
       <Typography
@@ -105,7 +108,7 @@ const NavListLib = () => {
           href="#"
           className="flex items-center transition-colors hover:text-blue-500"
         >
-          Docs
+          Promos
         </a>
       </Typography>
       <Typography

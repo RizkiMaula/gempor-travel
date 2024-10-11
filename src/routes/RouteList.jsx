@@ -20,7 +20,7 @@ import DetailBanner from '../pages/DetailBanner';
 import EditActivity from '../pages/EditActivity';
 import Profile from '../pages/Profile';
 import ProtectedProfile from './ProtectedProfile';
-import CobaDoang from '../pages/CobaDoang';
+import LayoutLogin from '../pages/LayoutLogin';
 
 export const RouteList = [
   {
@@ -33,11 +33,17 @@ export const RouteList = [
   },
   {
     path: '/profile',
-    element: <Profile />,
-  },
-  {
-    path: '/coba-doang',
-    element: <CobaDoang />,
+    element: (
+      <ProtectedProfile>
+        <LayoutLogin />
+      </ProtectedProfile>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Profile />,
+      },
+    ],
   },
   {
     path: '/',
@@ -113,6 +119,10 @@ export const RouteList = [
       {
         path: 'users',
         element: <User />,
+      },
+      {
+        path: 'profile',
+        element: <Profile />,
       },
       {
         path: '*',

@@ -1,9 +1,12 @@
 import useFetch from '../hooks/useFetch';
 import UserEditModal from '../components/fragmentes/UserEditModal';
 import Button from '../components/elements/Button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useUpdate from '../hooks/useUpdate';
 import Table from '../components/elements/Table';
+import ReactPaginate from 'react-paginate';
+import { IconContext } from 'react-icons';
+import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 
 const User = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/all-user');
@@ -13,6 +16,20 @@ const User = () => {
   const [updateId, setUpdateId] = useState(null);
   const [imageUrl, setImageUrl] = useState('');
   const { updateItem } = useUpdate('api/v1/update-user-role');
+
+  // paginate
+  const [page, setPage] = useState(0); // simpan halaman yang aktif (di gpt currentData)
+  const [filterData, setFilterData] = useState(data?.data || []); // data akan ditampilkan setelah filter data untuk tiap halaman (di gpt data)
+  const n = 5; // jumlah maksimal data yang akan ditampilkan ()
+
+  useEffect(() => {
+    setFilterData(data?.data?.slice(page, page + n));
+  }, [data?.data]);
+
+  useEffect(() => {
+    console.log(page);
+    setFilterData(data?.data?.slice(page, page + n));
+  }, [page]);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -47,20 +64,8 @@ const User = () => {
     <div className="flex flex-col items-center gap-4 border-2 border-black">
       <h1>User</h1>
 
-      {/* <table className="w-3/4 text-center border-2 border-black table-auto">
-        <thead>
-          <tr>
-            <th className="border-2 border-black">Name</th>
-            <th className="border-2 border-black">Email</th>
-            <th className="border-2 border-black">Role</th>
-            <th className="border-2 border-black">Action</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table> */}
-
       <Table
-        logic={data?.data?.map((user) => (
+        logic={(filterData || []).map((user) => (
           <tr
             key={user.id}
             className="text-center"
@@ -85,37 +90,6 @@ const User = () => {
         ))}
       />
 
-      {/* <div className="flex flex-col items-center gap-4 w-[90%]">
-        <div className="grid w-full grid-cols-4 gap-4">
-          {data?.data?.map((user) => (
-            <div
-              key={user.id}
-              className="flex flex-col items-center border-2 border-black gap-2 p-2 w-[18.5rem] h-[18.5rem]"
-            >
-              <img
-                src={user.profilePictureUrl}
-                alt={user.name}
-                className="w-1/3 rounded-full h-1/3"
-              />
-              <p>Name: {user.name}</p>
-              <p>Email: {user.email}</p>
-              <p>Phone: {user.phoneNumber}</p>
-              <p>Role: {user.role}</p>
-
-              <Button
-                text="Edit Role"
-                event={() => {
-                  setShowModal(true);
-                  setNameUpd(user.name);
-                  setRoleUpd(user.role);
-                  setUpdateId(user.id);
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      </div> */}
-
       {showModal && (
         <UserEditModal
           text={'Edit Role'}
@@ -127,6 +101,25 @@ const User = () => {
           image={imageUrl}
         />
       )}
+
+      <ReactPaginate
+        containerClassName="pagination"
+        pageClassName="page-item"
+        activeClassName="active"
+        onPageChange={(event) => setPage((event.selected * n) % data?.data?.length || 0)} // event.selected adalah nilai halaman ke berapa (ke-n). event.selected dikali n untuk dapat mengambil data dari halaman ke berapa
+        pageCount={Math.ceil((data?.data?.length || 0) / (n || 1))}
+        breakLabel="..."
+        previousLabel={
+          <IconContext.Provider value={{ size: '1.5em', color: 'blue' }}>
+            <AiFillLeftCircle />
+          </IconContext.Provider>
+        }
+        nextLabel={
+          <IconContext.Provider value={{ size: '1.5em', color: 'blue' }}>
+            <AiFillRightCircle />
+          </IconContext.Provider>
+        }
+      />
     </div>
   );
 };

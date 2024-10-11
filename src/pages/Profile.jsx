@@ -6,6 +6,8 @@ import Button from '../components/elements/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import usePost from '../hooks/usePost';
+import NavbarUser from '../components/fragmentes/NavbarUser';
+import Footer from '../components/fragmentes/Footer';
 
 const Profile = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/user');
@@ -81,84 +83,89 @@ const Profile = () => {
   console.log(data.data);
 
   return (
-    <div className="flex justify-center border-2 border-black">
-      <div className="flex flex-col items-center justify-center w-1/3 gap-2 border-2 border-red-500">
-        <h1>Profile</h1>
-        {loading && <div>Loading...</div>}
-        {error && <div>Error: {error.message}</div>}
+    <div className="flex flex-col">
+      <NavbarUser />
+      <div className="grid grid-cols-2 gap-2 p-3">
+        <div className="flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
+          <h1>Profile</h1>
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error.message}</div>}
 
-        {data.data && (
-          <div className="flex flex-col items-center gap-2">
-            <img
-              src={data.data.profilePictureUrl}
-              alt={data.data.name}
-              className="w-[100px] h-[100px] rounded-full"
+          {data.data && (
+            <div className="flex flex-col items-center gap-2">
+              <img
+                src={data.data.profilePictureUrl}
+                alt={data.data.name}
+                className="w-[100px] h-[100px] rounded-full"
+              />
+              <p>Name: {data.data.name}</p>
+              <p>Email: {data.data.email}</p>
+              <p>Phone Number: {data.data.phoneNumber}</p>
+            </div>
+          )}
+        </div>
+        <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
+          <h1>Edit Profile</h1>
+          <form className="flex flex-col gap-2 w-[85%] p-5">
+            <label htmlFor="name">Name:</label>
+            <input
+              type="text"
+              id="name"
+              className="p-3 border-2 border-black rounded"
+              placeholder="Put Your Name Here"
+              value={formData.name}
+              onChange={(e) => setFromData({ ...formData, name: e.target.value })}
             />
-            <p>Name: {data.data.name}</p>
-            <p>Email: {data.data.email}</p>
-            <p>Phone Number: {data.data.phoneNumber}</p>
+            <label htmlFor="email">Email:</label>
+            <input
+              type="email"
+              id="email"
+              className="p-3 border-2 border-black rounded"
+              placeholder="Put Your Email Here"
+              value={formData.email}
+              onChange={(e) => setFromData({ ...formData, email: e.target.value })}
+            />
+            <label htmlFor="phoneNumber">Phone Number:</label>
+            <input
+              type="text"
+              id="phoneNumber"
+              className="p-3 border-2 border-black rounded"
+              placeholder="Put Your Phone Number Here"
+              value={formData.phoneNumber}
+              onChange={(e) => setFromData({ ...formData, phoneNumber: e.target.value })}
+            />
+            <label htmlFor="profilePicture">Profile Picture:</label>
+            <input
+              type="file"
+              id="profilePicture"
+              onChange={(e) => {
+                setProfilePictureName(e.target.files[0].name);
+                setProfilePictureFile(e.target.files[0]);
+              }}
+            />
+          </form>
+          <div className="flex gap-2 items-center justify-center">
+            <Button
+              text="Save"
+              bgColor="bg-blue-500"
+              event={handleUpdateProfile}
+            />
+
+            {role === 'admin' && (
+              <Button
+                text="Dashboard"
+                bgColor="bg-red-500"
+                event={() => navigate('/admin')}
+              />
+            )}
           </div>
-        )}
+        </div>
       </div>
-
-      <div className="flex flex-col items-center w-2/3 gap-2 border-2 border-blue-500">
-        <h1>Edit Profile</h1>
-        <form className="flex flex-col gap-2 border-2 border-black w-[85%] p-5">
-          <label htmlFor="name">Name:</label>
-          <input
-            type="text"
-            id="name"
-            className="p-3 border-2 border-black rounded"
-            placeholder="Put Your Name Here"
-            value={formData.name}
-            onChange={(e) => setFromData({ ...formData, name: e.target.value })}
-          />
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            className="p-3 border-2 border-black rounded"
-            placeholder="Put Your Email Here"
-            value={formData.email}
-            onChange={(e) => setFromData({ ...formData, email: e.target.value })}
-          />
-          <label htmlFor="phoneNumber">Phone Number:</label>
-          <input
-            type="text"
-            id="phoneNumber"
-            className="p-3 border-2 border-black rounded"
-            placeholder="Put Your Phone Number Here"
-            value={formData.phoneNumber}
-            onChange={(e) => setFromData({ ...formData, phoneNumber: e.target.value })}
-          />
-          <label htmlFor="profilePicture">Profile Picture:</label>
-          <input
-            type="file"
-            id="profilePicture"
-            onChange={(e) => {
-              setProfilePictureName(e.target.files[0].name);
-              setProfilePictureFile(e.target.files[0]);
-            }}
-          />
-        </form>
-
-        <Button
-          text="Save"
-          bgColor="bg-blue-500"
-          event={handleUpdateProfile}
-        />
-
-        {role === 'admin' && (
-          <Button
-            text="Dashboard"
-            bgColor="bg-red-500"
-            event={() => navigate('/admin')}
-          />
-        )}
-      </div>
-      <Outlet />
+      <Footer />
     </div>
   );
 };
 
 export default Profile;
+
+// col-span fungsinya menggunakan 2 kolom

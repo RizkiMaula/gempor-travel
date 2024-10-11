@@ -1,0 +1,101 @@
+    <div
+      className="flex flex-col items-center justify-center h-screen "
+      style={{ border: '2px solid black' }}
+    >
+      <h1>Register</h1>
+      <form className="flex flex-col w-1/2 gap-3 p-10 bg-red-200 h-1/2">
+        <div className="flex gap-3 ">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <p>{emailError}</p>
+        </div>
+        <div>
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <p>{nameError}</p>
+        </div>
+        <div>
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <p>{passwordError}</p>
+        </div>
+        <div>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            type="password"
+            name="confirmPassword"
+            value={passwordRepeat}
+            onChange={(e) => setPasswordRepeat(e.target.value)}
+          />
+          <p>{passwordRepeatError}</p>
+        </div>
+        <div>
+          <label htmlFor="role">Role</label>
+          <input
+            type="text"
+            name="role"
+            value="user"
+            readOnly
+            onChange={(e) => setRole(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="Number">Phone Number</label>
+          <input
+            type="text"
+            name="Number"
+            value={phoneNumber}
+            onChange={(e) => setPhoneNumber(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="image">Profile Image</label>
+          <input
+            type="file"
+            name="image"
+            onChange={(e) => setProfilePictureFile(e.target.files[0])}
+          />
+        </div>
+      </form>
+      <Button
+        text="Register"
+        bgColor="bg-red-500"
+        event={handleRegister}
+      />
+      <h4>Already have an account?</h4> <Link to={'/login'}>Login</Link>
+    </div>
+
+
+
+
+    useEffect(() => {
+      setFilterData(data?.data?.slice(page, page + n));
+    }, [data?.data]);
+
+    
+    {showModal && (
+      <UserEditModal
+        text={'Edit Role'}
+        value={roleUpd}
+        name={nameUpd}
+        onEventRole={handleRole}
+        onUpdateRole={() => handleUpdateRole(updateId, roleUpd)}
+        onClose={() => setShowModal(false)}
+        image={imageUrl}
+      />
+    )}

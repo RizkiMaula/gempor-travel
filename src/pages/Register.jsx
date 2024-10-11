@@ -4,6 +4,7 @@ import usePost from '../hooks/usePost';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Button from '../components/elements/Button';
 import { Link, useNavigate } from 'react-router-dom';
+import { Card, Typography } from '@material-tailwind/react';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -136,86 +137,228 @@ const Register = () => {
   };
 
   return (
-    <div
-      className="flex flex-col items-center justify-center h-screen "
-      style={{ border: '2px solid black' }}
-    >
-      <h1>Register</h1>
-      <form className="flex flex-col w-1/2 gap-3 p-10 bg-red-200 h-1/2">
-        <div className="flex gap-3 ">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <p>{emailError}</p>
+    // <div
+    //   className="flex flex-col items-center justify-center h-screen "
+    //   style={{ border: '2px solid black' }}
+    // >
+    //   <h1>Register</h1>
+    //   <form className="flex flex-col w-1/2 gap-3 p-10 bg-red-200 h-1/2">
+    //     <div className="flex gap-3 ">
+    //       <label htmlFor="email">Email</label>
+    //       <input
+    //         type="email"
+    //         name="email"
+    //         value={email}
+    //         onChange={(e) => setEmail(e.target.value)}
+    //       />
+    //       <p>{emailError}</p>
+    //     </div>
+    //     <div>
+    //       <label htmlFor="name">Name</label>
+    //       <input
+    //         type="text"
+    //         name="name"
+    //         value={name}
+    //         onChange={(e) => setName(e.target.value)}
+    //       />
+    //       <p>{nameError}</p>
+    //     </div>
+    //     <div>
+    //       <label htmlFor="password">Password</label>
+    //       <input
+    //         type="password"
+    //         name="password"
+    //         value={password}
+    //         onChange={(e) => setPassword(e.target.value)}
+    //       />
+    //       <p>{passwordError}</p>
+    //     </div>
+    //     <div>
+    //       <label htmlFor="confirmPassword">Confirm Password</label>
+    //       <input
+    //         type="password"
+    //         name="confirmPassword"
+    //         value={passwordRepeat}
+    //         onChange={(e) => setPasswordRepeat(e.target.value)}
+    //       />
+    //       <p>{passwordRepeatError}</p>
+    //     </div>
+    //     <div>
+    //       <label htmlFor="role">Role</label>
+    //       <input
+    //         type="text"
+    //         name="role"
+    //         value="user"
+    //         readOnly
+    //         onChange={(e) => setRole(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="Number">Phone Number</label>
+    //       <input
+    //         type="text"
+    //         name="Number"
+    //         value={phoneNumber}
+    //         onChange={(e) => setPhoneNumber(e.target.value)}
+    //       />
+    //     </div>
+    //     <div>
+    //       <label htmlFor="image">Profile Image</label>
+    //       <input
+    //         type="file"
+    //         name="image"
+    //         onChange={(e) => setProfilePictureFile(e.target.files[0])}
+    //       />
+    //     </div>
+    //   </form>
+    //   <Button
+    //     text="Register"
+    //     bgColor="bg-red-500"
+    //     event={handleRegister}
+    //   />
+    //   <h4>Already have an account?</h4> <Link to={'/login'}>Login</Link>
+    // </div>
+    <div className="w-full h-screen flex flex-col items-center justify-center border-2 border-black">
+      <Card
+        color="transparent"
+        shadow={false}
+        className="w-[50rem] flex flex-col items-center justify-around "
+      >
+        <Typography
+          variant="h4"
+          color="blue-gray"
+        >
+          Register
+        </Typography>
+
+        <div className="mb-1 w-full flex gap-6">
+          <div className="flex flex-col w-[50%] gap-3 border-2 border-black items-center">
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Email
+            </Typography>
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl w-1/2"
+            />
+            <p>{emailError}</p>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Name
+            </Typography>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl w-1/2"
+            />
+            <p>{nameError}</p>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Password
+            </Typography>
+            <input
+              type="password"
+              name="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl w-1/2"
+            />
+            <p>{passwordError}</p>
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Confirm Password
+            </Typography>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={passwordRepeat}
+              onChange={(e) => setPasswordRepeat(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl w-1/2"
+            />
+            <p>{passwordRepeatError}</p>
+          </div>
+          <div className="flex flex-col gap-3 w-[50%] border-2 border-black items-center">
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Role
+            </Typography>
+            <input
+              type="text"
+              name="role"
+              value="user"
+              readOnly
+              onChange={(e) => setRole(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl w-1/2"
+            />
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Phone Number
+            </Typography>
+            <input
+              type="text"
+              name="Number"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl w-1/2"
+            />
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Profile Image
+            </Typography>
+            <input
+              type="file"
+              name="image"
+              onChange={(e) => setProfilePictureFile(e.target.files[0])}
+            />
+          </div>
         </div>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <p>{nameError}</p>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <p>{passwordError}</p>
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={passwordRepeat}
-            onChange={(e) => setPasswordRepeat(e.target.value)}
-          />
-          <p>{passwordRepeatError}</p>
-        </div>
-        <div>
-          <label htmlFor="role">Role</label>
-          <input
-            type="text"
-            name="role"
-            value="user"
-            readOnly
-            onChange={(e) => setRole(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="Number">Phone Number</label>
-          <input
-            type="text"
-            name="Number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Profile Image</label>
-          <input
-            type="file"
-            name="image"
-            onChange={(e) => setProfilePictureFile(e.target.files[0])}
-          />
-        </div>
-      </form>
-      <Button
-        text="Register"
-        bgColor="bg-red-500"
-        event={handleRegister}
-      />
-      <h4>Already have an account?</h4> <Link to={'/login'}>Login</Link>
+
+        <Button
+          className="mt-6"
+          fullWidth
+          text="Register"
+          bgColor="bg-blue-500"
+          event={handleRegister}
+        />
+        <Typography
+          color="gray"
+          className="mt-4 text-center font-normal"
+        >
+          Already have have an account?{' '}
+          <a
+            href="/login"
+            className="font-medium text-gray-900"
+          >
+            Login
+          </a>
+        </Typography>
+      </Card>
     </div>
   );
 };

@@ -114,7 +114,6 @@ const Categories = () => {
         await axios
           .post('https://travel-journal-api-bootcamp.do.dibimbing.id/api/v1/upload-image', formData, {
             headers: {
-              'Content-Type': 'multipart/form-data',
               apiKey: '24405e01-fbc1-45a5-9f5a-be13afcd757c',
               Authorization: `Bearer ${token}`,
             },
@@ -220,7 +219,6 @@ const Categories = () => {
               setCategoryImagePreview(category.imageUrl);
               setUpdateId(category.id);
             }}
-            // yang bawah nanti dulu
             eventView={() => {
               navigate(`/admin/categories/${category.id}`);
             }}
@@ -272,7 +270,6 @@ const Categories = () => {
             <AiFillRightCircle />
           </IconContext.Provider>
         }
-        // forcePage={page}
       />
     </div>
   );

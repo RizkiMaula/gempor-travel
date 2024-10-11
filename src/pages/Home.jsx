@@ -1,12 +1,11 @@
 import UserLayout from '../components/elements/UserLayout';
 import useFetch from '../hooks/useFetch';
 import { useEffect, useState } from 'react';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import { Link } from 'react-router-dom';
 // import Carousel from '../components/elements/Carousel';
 // import ProperCarousel from '../components/elements/ProperCarousel';
-import { Button, Carousel, Tab, TabPanel, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react';
+import { Button, Card, CardBody, CardFooter, CardHeader, Carousel, Tab, TabPanel, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react';
+import LoginModal from '../components/fragmentes/LoginModal';
 
 const Home = () => {
   const { data: banners, loading: bannerLoading, error: bannerError, reFetch: bannerReFetch } = useFetch('api/v1/banners');
@@ -20,17 +19,20 @@ const Home = () => {
   const [changePrice, setChangePrice] = useState(initialPrice);
   const initialImage = promo?.data?.[1]?.imageUrl;
   const [active, setActive] = useState(initialImage);
-  const [categoryid, setCategoryid] = useState('');
+  const [categoryid, setCategoryid] = useState([]);
+
+  const [open, setOpen] = useState(false);
 
   const handleCategory = (e) => {
-    setCategoryid(e.target.value);
-    console.log(e.target.value);
+    // setCategoryid(e.target.value);
+    // console.log(e.target.value);
+    alert('clicked');
   };
+
+  // console.log(categoryid);
 
   // console.log(activities?.data?.map((v) => v.imageUrls));
   // console.log(categories?.data?.map((v) => v.name));
-
-  // console.log(activities?.data?.[1]?.imageUrls);
 
   useEffect(() => {
     if (initialImage) {
@@ -50,15 +52,9 @@ const Home = () => {
   };
 
   return (
-    <UserLayout classname="bg-blue-500">
-      <div
-        className="bg-white w-[100%] h-1/4 flex flex-col justify-center items-center"
-        style={{ border: '2px solid black', backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
-      >
-        <div
-          className="w-[100%] h-[100%] flex justify-between items-center border-3 border-black"
-          style={{ border: '2px solid black' }}
-        >
+    <UserLayout>
+      <div className="bg-white w-[90%] h-1/4 flex flex-col justify-center items-center">
+        <div className="w-[100%] h-[100%] flex justify-between items-center">
           {bannerLoading && <div>Loading...</div>}
           {bannerError && <div>Error: {bannerError}</div>}
           {banners?.data === undefined || (banners?.data?.length === 0 && <div>No data available.</div>)}
@@ -93,14 +89,8 @@ const Home = () => {
           </Carousel>
         </div>
       </div>
-      <div
-        className="bg-[#d8e9fe] w-[90%] h-1/4 flex-col flex items-center "
-        style={{ border: '2px solid black' }}
-      >
-        <div
-          className="flex items-center w-full h-1/5 justify-between px-9"
-          style={{ border: '2px solid black' }}
-        >
+      <div className="w-[90%] h-1/4 flex-col flex items-center ">
+        <div className="flex items-center w-full h-1/5 justify-between px-9">
           <h1 className="text-3xl">Discover More Promos</h1>
           <Link
             to="/promo"
@@ -137,51 +127,77 @@ const Home = () => {
         </div>
       </div>
       <div className="bg-white w-[90%] h-1/4 flex flex-col justify-center items-center">
-        <div
-          className="flex items-center w-full h-1/5 justify-between px-9"
-          style={{ border: '2px solid black' }}
-        >
+        <div className="flex items-center w-full h-1/5 justify-between px-9">
           <h1 className="text-3xl">Discover Our Fun Activities Here</h1>
         </div>
-        <div className="grid w-full gap-4 h-4/5">
-          <Tabs value={categories.data?.[0]?.name || 'default'}>
-            <TabsHeader>
-              {categories.data?.map((category) => (
-                <Tab
-                  key={category.id}
-                  value={category.name}
-                  onClick={handleCategory}
+        <div className="grid grid-cols-2 gap-2">
+          {activities?.data?.map((activity, index) => (
+            <div key={index}>
+              {/* <Card className="mt-6 w-96 ">
+                <CardHeader
+                  color="blue-gray"
+                  className="relative h-56"
                 >
-                  {category.name}
-                </Tab>
-              ))}
-            </TabsHeader>
-            <TabsBody className="grid grid-cols-1 gap-4 ">
-              {activities.data
-                ?.filter((activity) => activity.categoryId === categories.data?.id)
-                .map((activity) => (
-                  <TabPanel
-                    className="grid grid-cols-2 gap-4 md:grid-cols-3"
-                    key={activity.categoryId}
-                    value={activity.categoryId}
+                  <img
+                    src={activity.imageUrls[0]}
+                    alt="card-image"
+                  />
+                </CardHeader>
+                <CardBody>
+                  <Typography
+                    variant="h5"
+                    color="blue-gray"
+                    className="mb-2"
                   >
-                    {activity.data?.map((activity, index) => (
-                      <div key={index}>
-                        <img
-                          className="h-40 w-full max-w-full rounded-lg object-cover object-center"
-                          src={activity.imageUrls[0]}
-                          alt="image-photo"
-                        />
-                      </div>
-                    ))}
-                  </TabPanel>
-                ))}
-            </TabsBody>
-          </Tabs>
+                    {activity.title}
+                  </Typography>
+                  <Typography>{activity.description}</Typography>
+                </CardBody>
+                <CardFooter className="pt-0">
+                  <Button>Read More</Button>
+                </CardFooter>
+              </Card> */}
+              <Card>
+                <CardHeader>
+                  <img
+                    className="h-40 w-full max-w-full rounded-lg object-cover object-center"
+                    src={activity.imageUrls[0]}
+                    alt="gallery-photo"
+                  />
+                </CardHeader>
+                <CardBody>
+                  <Typography
+                    variant="h5"
+                    color="blue-gray"
+                    className="mb-2"
+                  >
+                    {activity.title}
+                  </Typography>
+                  <Typography className="truncate w-full">{activity.description}</Typography>
+                </CardBody>
+                <CardFooter className="pt-0">
+                  <Button>Read More</Button>
+                </CardFooter>
+              </Card>
+            </div>
+          ))}
         </div>
       </div>
-      <div className="bg-blue-200 w-[90%] h-1/4 flex flex-col justify-center items-center">
-        <h1 className="text-3xl">Categories</h1>
+      <div className=" w-[90%] h-1/4 flex flex-col">
+        <div className="h-1/5 flex justify-center items-center w-full">
+          <h1 className="text-3xl">Choose Your Destinaion</h1>
+        </div>
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {categories?.data?.map((category, index) => (
+            <div key={index}>
+              <img
+                className="h-40 w-full max-w-full rounded-lg object-cover object-center"
+                src={category.imageUrl}
+                alt="gallery-photo"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </UserLayout>
   );

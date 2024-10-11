@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import usePost from '../hooks/usePost';
 import Button from '../components/elements/Button';
+import { Card, Typography } from '@material-tailwind/react';
+import { Input } from 'postcss';
 const Login = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
@@ -48,37 +50,76 @@ const Login = () => {
     }
   };
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="w-full h-screen flex flex-col items-center justify-center border-2 border-black">
+      <Card
+        color="transparent"
+        shadow={false}
+        className="max-w-[25rem] border-2 border-black"
+      >
+        <Typography
+          variant="h4"
+          color="blue-gray"
+        >
+          Login
+        </Typography>
 
-      <form className="flex flex-col border-4 border-black w-[10rem] h-[10rem]">
-        <input
-          type="text"
-          name="login"
-          id="login"
-          placeholder="Email"
-          onChange={handleEmail}
-        />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          onChange={handlePassword}
-        />
-      </form>
+        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
+          <div className="mb-1 flex flex-col gap-6">
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Your Email
+            </Typography>
+            <input
+              type="text"
+              name="login"
+              id="login"
+              placeholder="Email"
+              onChange={handleEmail}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl"
+            />
+            <Typography
+              variant="h6"
+              color="blue-gray"
+              className="-mb-3"
+            >
+              Your Password
+            </Typography>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="Password"
+              onChange={handlePassword}
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl"
+            />
+          </div>
+        </form>
 
-      <Button
-        text="Login"
-        bgColor="bg-blue-500"
-        event={handleLogin}
-      />
-
-      <Button
-        text="Register"
-        bgColor="bg-red-500"
-        event={() => navigate('/register')}
-      />
+        <Button
+          className="mt-6"
+          fullWidth
+          text="Login"
+          bgColor="bg-blue-500"
+          event={handleLogin}
+        >
+          sign up
+        </Button>
+        <Typography
+          color="gray"
+          className="mt-4 text-center font-normal"
+        >
+          Haven&apos;t have an account?{' '}
+          <a
+            href="/register"
+            className="font-medium text-gray-900"
+          >
+            Register
+          </a>
+        </Typography>
+      </Card>
     </div>
   );
 };
