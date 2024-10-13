@@ -65,12 +65,12 @@ const NavListLib = ({ loginEvent }) => {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to={'/'}
           className="flex items-center transition-colors hover:text-blue-500"
         >
           Home
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -78,12 +78,12 @@ const NavListLib = ({ loginEvent }) => {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to={'/user/all-categories'}
           className="flex items-center transition-colors hover:text-blue-500"
         >
           Categories
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -91,12 +91,12 @@ const NavListLib = ({ loginEvent }) => {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to={'/user/all-activities'}
           className="flex items-center transition-colors hover:text-blue-500"
         >
           Activities
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"
@@ -104,12 +104,12 @@ const NavListLib = ({ loginEvent }) => {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <a
-          href="#"
+        <Link
+          to={'/user/all-promos'}
           className="flex items-center transition-colors hover:text-blue-500"
         >
           Promos
-        </a>
+        </Link>
       </Typography>
       <Typography
         as="li"

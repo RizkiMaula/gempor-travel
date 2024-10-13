@@ -21,6 +21,9 @@ import EditActivity from '../pages/EditActivity';
 import Profile from '../pages/Profile';
 import ProtectedProfile from './ProtectedProfile';
 import LayoutLogin from '../pages/LayoutLogin';
+import AllPromos from '../pages/AllPromos';
+import AllActivities from '../pages/AllActivities';
+import AllCategories from '../pages/AllCategories';
 
 export const RouteList = [
   {
@@ -32,7 +35,7 @@ export const RouteList = [
     element: <Login />,
   },
   {
-    path: '/profile',
+    path: '/user',
     element: (
       <ProtectedProfile>
         <LayoutLogin />
@@ -42,6 +45,23 @@ export const RouteList = [
       {
         index: true,
         element: <Profile />,
+      },
+      {
+        path: 'all-promos',
+        element: <AllPromos />,
+      },
+      {
+        path: 'all-categories',
+        element: <AllCategories />,
+      },
+      {
+        path: 'all-activities',
+        element: <AllActivities />,
+      },
+      {
+        path: '*',
+        element: <NotFound />,
+        errorElement: <NotFound />,
       },
     ],
   },

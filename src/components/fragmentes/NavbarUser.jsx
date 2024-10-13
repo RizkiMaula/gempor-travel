@@ -21,11 +21,11 @@ export default function NavbarUser() {
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography
           as="a"
-          href="#"
+          href="/"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5"
         >
-          Material Tailwind
+          Gempor Travel
         </Typography>
         <div className="hidden lg:block">
           <NavListLib />

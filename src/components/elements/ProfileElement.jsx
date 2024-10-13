@@ -39,7 +39,7 @@ const ProfileElement = ({ event }) => {
         <MenuItem className="rounded-lg py-1.5 px-3 bg-black">
           <button
             className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/10"
-            onClick={() => navigate('/profile')}
+            onClick={() => navigate('/user')}
           >
             Profile
           </button>

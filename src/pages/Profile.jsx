@@ -1,13 +1,10 @@
 import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Button from '../components/elements/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import usePost from '../hooks/usePost';
-import NavbarUser from '../components/fragmentes/NavbarUser';
-import Footer from '../components/fragmentes/Footer';
 
 const Profile = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/user');
@@ -84,7 +81,6 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col">
-      <NavbarUser />
       <div className="grid grid-cols-2 gap-2 p-3">
         <div className="flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
           <h1>Profile</h1>
@@ -161,7 +157,6 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

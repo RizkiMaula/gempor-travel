@@ -7,7 +7,6 @@ const LayoutAdmin = () => {
       <NavbarAdmin />
       <div className="border-2 border-black w-full">
         <Outlet />
-        <h1>Footer</h1>
       </div>
     </div>
   );

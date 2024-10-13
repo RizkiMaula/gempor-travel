@@ -21,6 +21,10 @@ const Activity = () => {
   const n = 5; // jumlah maksimal data yang akan ditampilkan ()
 
   useEffect(() => {
+    setFilterData(data?.data?.slice(page, page + n));
+  }, [data?.data]);
+
+  useEffect(() => {
     console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);

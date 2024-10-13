@@ -64,7 +64,7 @@ const NavbarAdmin = () => {
             variant="h5"
             color="blue-gray"
           >
-            Sidebar
+            Admin Page
           </Typography>
         </div>
         <List>
@@ -137,7 +137,7 @@ const NavbarAdmin = () => {
             variant="h6"
             className="mr-4 cursor-pointer py-1.5 w-full"
           >
-            Material Tailwind
+            Admin Page
           </Typography>
           <button
             className="w-6 h-6 border border-black"
