@@ -65,6 +65,8 @@ const User = () => {
       <h1>User</h1>
 
       <Table
+        th2="Email"
+        th3="Role"
         logic={(filterData || []).map((user) => (
           <tr
             key={user.id}

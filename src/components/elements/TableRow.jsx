@@ -13,22 +13,6 @@ const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit
   };
 
   return (
-    // <tr className="text-center">
-    //   <td className="py-2 border-b-2">{name}</td>
-    //   <td className="py-2 border-b-2">{formatDate(createdAt)}</td>
-    //   <td className="py-2 border-b-2">{formatDate(updatedAt)}</td>
-    //   <td className="flex justify-center gap-2 py-2 border-b-2">
-    //     <button onClick={eventView}>
-    //       <FontAwesomeIcon icon={faCircleInfo} />
-    //     </button>
-    //     <button onClick={eventEdit}>
-    //       <FontAwesomeIcon icon={faFilePen} />
-    //     </button>
-    //     <button onClick={eventDelete}>
-    //       <FontAwesomeIcon icon={faTrash} />
-    //     </button>
-    //   </td>
-    // </tr>
     <tr key={keyIndex}>
       <td className={classes}>
         <Typography

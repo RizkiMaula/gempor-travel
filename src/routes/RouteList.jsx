@@ -24,6 +24,7 @@ import LayoutLogin from '../pages/LayoutLogin';
 import AllPromos from '../pages/AllPromos';
 import AllActivities from '../pages/AllActivities';
 import AllCategories from '../pages/AllCategories';
+import DetailPromoUser from '../pages/DetailPromoUser';
 
 export const RouteList = [
   {
@@ -51,12 +52,24 @@ export const RouteList = [
         element: <AllPromos />,
       },
       {
+        path: 'all-promos/:id',
+        element: <DetailPromoUser />,
+      },
+      {
         path: 'all-categories',
         element: <AllCategories />,
       },
       {
+        path: 'all-categories/:id',
+        element: <DetailCategory />,
+      },
+      {
         path: 'all-activities',
         element: <AllActivities />,
+      },
+      {
+        path: 'all-activities/:id',
+        element: <DetailActivity />,
       },
       {
         path: '*',

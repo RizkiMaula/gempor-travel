@@ -43,7 +43,7 @@ const Home = () => {
   };
 
   return (
-    <UserLayout classname={'border-2 border-black'}>
+    <UserLayout>
       {/* banner */}
       <div className="bg-white w-[100%] h-[25%] flex flex-col border-2 border-black -top-50">
         <div className="w-[100%] h-[100%] flex justify-between items-center">
@@ -86,7 +86,7 @@ const Home = () => {
         <div className="flex items-center justify-between w-full py-10 px-9">
           <h1 className="text-lg sm:text-xl md:text-2xl">Discover More Promos</h1>
           <Link
-            to="/promo"
+            to="/user/all-promos"
             className="font-bold text-blue-500 hover:text-blue-700 hover:underline"
           >
             View All
@@ -155,7 +155,7 @@ const Home = () => {
         <div className="flex items-center justify-between w-full py-10 px-9">
           <h1 className="text-lg sm:text-xl md:text-2xl">Discover Fun Activities</h1>
           <Link
-            to="/promo"
+            to="/user/all-activities"
             className="font-bold text-blue-500 hover:text-blue-700 hover:underline"
           >
             View All
@@ -229,7 +229,7 @@ const Home = () => {
         <div className="flex items-center justify-between w-full py-10 px-9">
           <h1 className="text-sm sm:text-lg md:text-xl">Choose Your Destinaion</h1>
           <Link
-            to="/promo"
+            to="/user/all-categories"
             className="font-bold text-blue-500 hover:text-blue-700 hover:underline"
           >
             View All

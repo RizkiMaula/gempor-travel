@@ -1,10 +1,16 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage';
+import { Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react';
+import UserLayout from '../components/elements/UserLayout';
 
 const DetailActivity = () => {
   const { id } = useParams();
   const [dataAct, setDataActivity] = useState([]);
+  const [role, setRole] = useLocalStorage('role', '');
+
+  console.log(role);
 
   const getDataActivity = async () => {
     let config = {
@@ -40,51 +46,67 @@ const DetailActivity = () => {
   };
 
   return (
-    <>
-      <section className="detail-activity">
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Title: {dataAct?.title}</h5>
-                  <p className="card-text">Description: {dataAct?.description}</p>
-                  <p className="card-text">Date: {dataAct?.createdAt}</p>
-                  <p className="card-text">Price: {dataAct?.price}</p>
-                  <p className="card-text">Address: {dataAct?.address}</p>
-                  <p className="card-text">Country: {dataAct?.category?.name}</p>
-                  {(dataAct?.imageUrls || []).map((url, index) => (
-                    <img
-                      src={url}
-                      key={index}
-                      className="w-6 h-4"
-                      alt={url}
-                    />
-                  ))}{' '}
-                  {/** (?.) namanya optional chainig. funsinya untuk mengecek apakah dataAct.imageUrls ada atau tidak (null / undefiened) */}
-                  <p className="card-text">
-                    <iframe
-                      src={getGoogleMapsUsingRegex(dataAct?.location_maps)}
-                      style={{ border: 0 }}
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                      className="w-full rounded-md h-96"
-                    ></iframe>
-                  </p>
-                  <Link
-                    to="/admin/activity"
-                    className="btn btn-primary"
-                  >
-                    Back
-                  </Link>
-                </div>
-              </div>
-            </div>
+    <UserLayout
+      height={'h-110 md:h-[85%]'}
+      padding={'pb-10 md:p-10'}
+    >
+      <Card className="w-full h-full border-2 border-gray-400 rounded-xl lg:text-xl md:text-[1.2rem] sm:text-[0.9rem]">
+        <CardHeader
+          floated={false}
+          shadow={false}
+          color="m-0 rounded-none"
+        >
+          <img
+            src={dataAct?.imageUrls}
+            alt={dataAct?.title}
+            className="object-cover w-full h-[90%]"
+          />
+        </CardHeader>
+        <CardBody>
+          <div className="mb-2 flex items-center justify-between">
+            <Typography
+              color="blue-gray"
+              className="font-medium"
+            >
+              {dataAct?.title}
+            </Typography>
+            <Typography
+              color="blue-gray"
+              className="font-medium"
+            >
+              {`Rp. ${dataAct?.price}`}
+            </Typography>
           </div>
-        </div>
-      </section>
-    </>
+          <Typography color="gray">{dataAct?.description}</Typography>
+          <Typography
+            variant="lead"
+            color="gray"
+            className="mt-3 font-normal"
+          >
+            {dataAct?.address}
+          </Typography>
+          <Typography
+            variant="lead"
+            color="gray"
+            className="mt-3 font-normal"
+          >
+            {dataAct?.city}, {dataAct?.province}
+          </Typography>
+          <iframe
+            src={getGoogleMapsUsingRegex(dataAct?.location_maps)}
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            className="w-full rounded-md h-96"
+          ></iframe>
+        </CardBody>
+        <CardFooter>
+          {role === 'admin' && <Link to={'/admin/activity'}>Back</Link>}
+          {role === 'user' && <Link to={'/user/all-activities'}>Back</Link>}
+        </CardFooter>
+      </Card>
+    </UserLayout>
   );
 };
 

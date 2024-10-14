@@ -1,18 +1,20 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import useGetById from '../hooks/useGetById';
+import { useEffect, useState } from 'react';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage';
+import InformationLayout from '../components/elements/InformationLayout';
+import InformationCard from '../components/elements/InformationCard';
+import UserLayout from '../components/elements/UserLayout';
+import DetailedInformationCard from '../components/elements/DetailedInformationCard';
+import DetailedInformationLayout from '../components/elements/DetailedInformationLayout';
 
 // eslint-disable-next-line react/prop-types
 const DetailCategory = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  // const { data, loading, error, getDataById } = useGetById('api/v1/activity');
-  // const { data, loading, error, getDataById } = useGetById('api/v1/category');
-  const [data, setData] = useState(null);
 
-  console.log(data);
-  console.log(id);
+  const [data, setData] = useState(null);
+  const [role, setRole] = useLocalStorage('role', '');
 
   const getDataCategory = async () => {
     let config = {
@@ -27,7 +29,6 @@ const DetailCategory = () => {
     axios
       .request(config)
       .then((response) => {
-        console.log(response.data);
         setData(response.data.data);
       })
       .catch((error) => {
@@ -35,26 +36,40 @@ const DetailCategory = () => {
       });
   };
 
+  console.log(data);
+
   useEffect(() => {
     getDataCategory();
   }, []);
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
+
   return (
-    <div>
-      <h1>Detail Category</h1>
-
-      <div>
-        <h1>{data?.name}</h1>
-        <p>{data?.createdAt}</p>
-        <p>{data?.updatedAt}</p>
-        <img
-          src={data?.imageUrl}
-          alt={data?.name}
-        />
-      </div>
-
-      <button onClick={() => navigate(-1)}>Back</button>
-    </div>
+    <UserLayout
+      height={'h-110 md:h-full'}
+      padding={'pb-10 md:p-10'}
+    >
+      <DetailedInformationLayout
+        title={`Detail Category ${data?.name}`}
+        logic={
+          <DetailedInformationCard
+            title={data?.name}
+            content={data?.description}
+            imageUrl={data?.imageUrl}
+            createdAt={`Created At: ${formatDate(data?.createdAt)}`}
+            updatedAt={`Updated At: ${formatDate(data?.updatedAt)}`}
+          />
+        }
+      />
+      <Link to={'/user/all-categories'}>Back</Link>
+    </UserLayout>
   );
 };
 
