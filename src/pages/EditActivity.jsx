@@ -220,11 +220,25 @@ const EditActivity = () => {
   return (
     <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl my-[5rem] sm:my-[2rem]">
       <h1 className="block text-xl font-medium text-slate-800">Edit Activity</h1>
-
+      {!editable && (
+        <Button
+          text="Edit Activity"
+          bgColor="bg-blue-500"
+          event={() => {
+            searchParams.set('edit', 'true');
+            navigate(`/admin/activity/edit/${id}?${searchParams.toString()}`);
+          }}
+        />
+      )}
       <form
         action=""
         className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
       >
+        <img
+          src={dataAct?.imageUrls}
+          alt={dataAct?.title}
+          className="object-cover w-full h-[90%]"
+        />
         <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
           <div className=" flex justify-center flex-col md:flex-row gap-2 w-f">
             {/* select option */}
@@ -236,6 +250,7 @@ const EditActivity = () => {
                   name="category"
                   id=""
                   onChange={handleCategory}
+                  value={formData.categoryId}
                 >
                   {data?.data?.map((item, index) => (
                     <option

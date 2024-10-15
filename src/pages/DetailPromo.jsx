@@ -112,8 +112,6 @@ const DetailPromo = () => {
     getDataPromo();
   }, []);
 
-  console.log(data);
-
   if (!data.id) {
     return <h1>No data Found</h1>;
   }
