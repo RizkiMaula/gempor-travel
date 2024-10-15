@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
+import DetailedInformationLayout from '../components/elements/DetailedInformationLayout';
+import UserLayout from '../components/elements/UserLayout';
+import DetailedInformationCard from '../components/elements/DetailedInformationCard';
 
 const DetailBanner = () => {
   const { id } = useParams();
@@ -32,15 +35,6 @@ const DetailBanner = () => {
     getDataBanner();
   }, []);
 
-  const dateFormater = (date) => {
-    const newDate = new Date(date);
-    return newDate.toLocaleDateString('id-ID', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    });
-  };
-
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -49,22 +43,34 @@ const DetailBanner = () => {
     return <div>Error: {error.message}</div>;
   }
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    });
+  };
+
   return (
-    <div>
-      <h1>Detail Banner</h1>
-
-      <p>{dataBanner?.name}</p>
-      <img
-        src={dataBanner?.imageUrl}
-        alt={dataBanner?.name}
+    <UserLayout
+      height={'h-110 md:h-full'}
+      padding={'pb-10 md:p-10'}
+    >
+      <DetailedInformationLayout
+        title={`Detail Category ${dataBanner?.name}`}
+        logic={
+          <DetailedInformationCard
+            title={dataBanner?.name}
+            content={dataBanner?.description}
+            imageUrl={dataBanner?.imageUrl}
+            createdAt={`Created At: ${formatDate(dataBanner?.createdAt)}`}
+            updatedAt={`Updated At: ${formatDate(dataBanner?.updatedAt)}`}
+          />
+        }
       />
-      <div>
-        <p>{dateFormater(dataBanner?.createdAt)}</p>
-        <p>{dateFormater(dataBanner?.updatedAt)}</p>
-      </div>
-
-      <Link to="/admin/banner">Back to Banner</Link>
-    </div>
+      <Link to={'/user/all-categories'}>Back</Link>
+    </UserLayout>
   );
 };
 

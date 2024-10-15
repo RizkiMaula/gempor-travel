@@ -61,8 +61,8 @@ const User = () => {
   console.log(data);
 
   return (
-    <div className="flex flex-col items-center gap-4 border-2 border-black">
-      <h1>User</h1>
+    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+      <h1 className="text-xl md:text-2xl">User</h1>
 
       <Table
         th2="Email"

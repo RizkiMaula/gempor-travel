@@ -113,87 +113,109 @@ const AddActivity = () => {
   };
 
   return (
-    <>
-      <h1>Add Activity</h1>
+    <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl my-[5rem] sm:my-[2rem]">
+      <h1 className="block text-xl font-medium text-slate-800">Add Promo</h1>
 
       <form
         action=""
-        className="flex flex-col border-4 border-black"
+        className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
       >
-        <span>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={title}
-            onChange={handleTitle}
-          />
-        </span>
-        <span>
-          <label htmlFor="promo code">Promo code</label>
-          <input
-            type="text"
-            name="promo code"
-            id="promo code"
-            value={promo_code}
-            onChange={handleCode}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Discount Price</label>
-          <input
-            type="number"
-            name="discount"
-            id="price"
-            value={discount}
-            onChange={handleDiscount}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Min Claim Price</label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            value={minClaim}
-            onChange={handleMinClaim}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Description</label>
-          <textarea
-            id=""
-            className="w-full p-2 border rounded text-darkColor"
-            value={description}
-            onChange={handleDescription}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Term & Condition</label>
-          <textarea
-            id=""
-            className="w-full p-2 border rounded text-darkColor"
-            value={terms_condition}
-            onChange={handleTerm}
-          />
-        </span>
-        <span>
-          <input
-            type="file"
-            accept="image/*"
-            value={profilePictureName}
-            onChange={handlePicture}
-            multiple
-          />
-        </span>
+        <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* Title */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Title</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                name="title"
+                id="title"
+                value={title}
+                onChange={handleTitle}
+              />
+            </div>
+            {/* Promo Code */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Promo Code</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Price Discount"
+                name="promo code"
+                id="promo code"
+                value={promo_code}
+                onChange={handleCode}
+              />
+            </div>
+          </div>
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* Discount Price */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Discount Price</label>
+              <input
+                type="number"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Rating"
+                name="discount"
+                id="price"
+                value={discount}
+                onChange={handleDiscount}
+              />
+            </div>
+            {/* Min Claim Price */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Min Claim Price</label>
+              <input
+                type="number"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Price Discount"
+                name="price"
+                id="price"
+                value={minClaim}
+                onChange={handleMinClaim}
+              />
+            </div>
+          </div>
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* Description */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Description</label>
+              <textarea
+                id=""
+                className="w-full p-2 border rounded text-darkColor"
+                value={description}
+                onChange={handleDescription}
+              />
+            </div>
+            {/* Term & Condition */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Term & Condition</label>
+              <textarea
+                id=""
+                className="w-full p-2 border rounded text-darkColor"
+                value={terms_condition}
+                onChange={handleTerm}
+              />
+            </div>
+          </div>
+          {/* upload image */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <input
+              type="file"
+              accept="image/*"
+              value={profilePictureName}
+              onChange={handlePicture}
+              multiple
+            />
+          </div>
+        </div>
       </form>
       <Button
         bgColor="bg-blue-500"
         text="Submit"
         event={handleSubmit}
       />
-    </>
+    </div>
   );
 };
 

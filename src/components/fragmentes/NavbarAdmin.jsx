@@ -3,7 +3,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 import { Card, Typography, List, ListItem, ListItemPrefix, Collapse, IconButton, Navbar } from '@material-tailwind/react';
 import { UserCircleIcon, PowerIcon, HomeIcon, PercentBadgeIcon, QueueListIcon, Squares2X2Icon, FlagIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon } from '@heroicons/react/24/outline';
 import NavListLib from './NavList';
 import { useState } from 'react';
 
@@ -114,7 +114,7 @@ const NavbarAdmin = () => {
             User
           </ListItem>
           <hr className="my-2 border-blue-gray-50" />
-          <ListItem onClick={() => navigate('/profile')}>
+          <ListItem onClick={() => navigate('/user')}>
             <ListItemPrefix>
               <UserCircleIcon className="w-5 h-5" />
             </ListItemPrefix>
@@ -200,7 +200,7 @@ const NavbarAdmin = () => {
               User
             </ListItem>
             <hr className="my-2 border-blue-gray-50" />
-            <ListItem onClick={() => navigate('/profile')}>
+            <ListItem onClick={() => navigate('/user')}>
               <ListItemPrefix>
                 <UserCircleIcon className="w-5 h-5" />
               </ListItemPrefix>

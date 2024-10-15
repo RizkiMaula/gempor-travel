@@ -7,7 +7,6 @@ import useUpdate from '../hooks/useUpdate';
 
 const DetailPromo = () => {
   let [searchParams] = useSearchParams();
-  // const [data, setData] = useState([]);
   const [data, setData] = useState({
     title: '',
     description: '',
@@ -120,97 +119,131 @@ const DetailPromo = () => {
   }
 
   return (
-    <>
-      <h1>halaman promo</h1>
-      {!editable && (
-        <Button
-          text="Edit Promo"
-          bgColor="bg-blue-500"
-          event={() => {
-            searchParams.set('edit', 'true');
-            navigate(`/admin/promos/${id}?${searchParams.toString()}`);
-          }}
-        />
-      )}
+    <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl gap-2 my-[5rem] sm:my-[2rem]">
+      <div className="flex justify-between flex-col items-center gap-2">
+        <h1 className="block text-xl font-medium text-slate-800">Halaman Promo</h1>
+        {!editable && (
+          <Button
+            text="Edit Promo"
+            bgColor="bg-blue-500"
+            event={() => {
+              searchParams.set('edit', 'true');
+              navigate(`/admin/promos/${id}?${searchParams.toString()}`);
+            }}
+          />
+        )}
+      </div>
       {data && (
         <>
-          <span className="flex gap-2 items-center">
-            <p>Title</p>
-            <input
-              type="text"
-              value={data.title || ''}
-              onChange={(e) => setData((prev) => ({ ...prev, title: e.target.value }))}
-              disabled={!editable}
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-            />
-          </span>
-          <span className="flex flex-col gap-2">
-            <p>Description</p>
-            <textarea
-              name=""
-              id=""
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-              disabled={!editable}
-              value={data.description || ''}
-              onChange={(e) => setData((prev) => ({ ...prev, description: e.target.value }))}
-            ></textarea>
-          </span>
-          <span>
-            <p>Image</p>
+          <form
+            action=""
+            className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
+          >
             <img
+              className="h-96 w-full object-cover object-center"
               src={data.imageUrl}
               alt={data.title}
             />
-            <input
-              type="file"
-              onChange={handleChangePic}
-              disabled={!editable}
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-            />
-          </span>
-          <span className="flex flex-col gap-2">
-            <p>Terms and Conditions</p>
-            <textarea
-              name=""
-              id=""
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-              disabled={!editable}
-              value={data.terms_condition || ''}
-              onChange={(e) => setData((prev) => ({ ...prev, terms_condition: e.target.value }))}
-            ></textarea>
-          </span>
-          <span className="flex gap-2 items-center">
-            <p>Code</p>
-            <input
-              type="text"
-              value={data.promo_code || ''}
-              onChange={(e) => setData((prev) => ({ ...prev, promo_code: e.target.value }))}
-              disabled={!editable}
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-            />
-          </span>
-          <span className="flex gap-2 items-center">
-            <p>Promo Discout Price</p>
-            <input
-              type="number"
-              value={data.promo_discount_price || ''}
-              onChange={(e) => setData((prev) => ({ ...prev, promo_discount_price: e.target.value }))}
-              disabled={!editable}
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-            />
-          </span>
-          <span className="flex gap-2 items-center">
-            <p>Minimum Claim Price</p>
-            <input
-              type="number"
-              value={data.minimum_claim_price || ''}
-              onChange={(e) => setData((prev) => ({ ...prev, minimum_claim_price: e.target.value }))}
-              disabled={!editable}
-              className="border border-gray-300 rounded-md p-2 w-[20rem]"
-            />
-          </span>
+            <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
+              <div className=" flex flex-col md:flex-row gap-2 justify-center">
+                {/* Title */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Title</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    name="title"
+                    id="title"
+                    value={data.title || ''}
+                    onChange={(e) => setData((prev) => ({ ...prev, title: e.target.value }))}
+                    disabled={!editable}
+                  />
+                </div>
+                <div className="w-full max-w-sm min-w-[200px]">
+                  {/* Promo Code */}
+                  <label className="block mb-2 text-sm text-slate-600">Promo Code</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="Price Discount"
+                    name="promo code"
+                    id="promo code"
+                    value={data.promo_code || ''}
+                    onChange={(e) => setData((prev) => ({ ...prev, promo_code: e.target.value }))}
+                    disabled={!editable}
+                  />
+                </div>
+              </div>
+              <div className=" flex flex-col md:flex-row gap-2 justify-center">
+                {/* Discount Price */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Discount Price</label>
+                  <input
+                    type="number"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="Rating"
+                    name="discount"
+                    id="price"
+                    value={data.promo_discount_price || ''}
+                    onChange={(e) => setData((prev) => ({ ...prev, promo_discount_price: e.target.value }))}
+                    disabled={!editable}
+                  />
+                </div>
+                {/* Min Claim Price */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Min Claim Price</label>
+                  <input
+                    type="number"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="Price Discount"
+                    name="price"
+                    id="price"
+                    value={data.minimum_claim_price || ''}
+                    onChange={(e) => setData((prev) => ({ ...prev, minimum_claim_price: e.target.value }))}
+                    disabled={!editable}
+                  />
+                </div>
+              </div>
+              <div className=" flex flex-col md:flex-row gap-2 justify-center">
+                {/* Description */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Description</label>
+                  <textarea
+                    id=""
+                    className="w-full p-2 border rounded text-darkColor"
+                    disabled={!editable}
+                    value={data.description || ''}
+                    onChange={(e) => setData((prev) => ({ ...prev, description: e.target.value }))}
+                  />
+                </div>
+                {/* Term & Condition */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Term & Condition</label>
+                  <textarea
+                    id=""
+                    className="w-full p-2 border rounded text-darkColor"
+                    disabled={!editable}
+                    value={data.terms_condition || ''}
+                    onChange={(e) => setData((prev) => ({ ...prev, terms_condition: e.target.value }))}
+                  />
+                </div>
+              </div>
+              {/* upload image */}
+              {editable && (
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleChangePic}
+                    disabled={!editable}
+                    className="border border-gray-300 rounded-md p-2 w-[20rem]"
+                  />
+                </div>
+              )}
+            </div>
+          </form>
           {editable && (
-            <>
+            <div className="flex gap-2">
               <Button
                 text="Edit"
                 bgColor="bg-blue-500"
@@ -222,11 +255,11 @@ const DetailPromo = () => {
                 text="Cancel"
                 event={() => navigate(`/admin/promos/${id}`)}
               />
-            </>
+            </div>
           )}
         </>
       )}
-    </>
+    </div>
   );
 };
 

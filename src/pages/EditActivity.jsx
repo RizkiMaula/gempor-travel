@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
 import useUpdate from '../hooks/useUpdate';
 import useFetch from '../hooks/useFetch';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Button from '../components/elements/Button';
 
 const EditActivity = () => {
+  let [searchParams] = useSearchParams();
   const { id } = useParams();
+
   const [dataAct, setDataActivity] = useState([]);
 
   const [imgUrl, setImgUrl] = useState('');
@@ -35,6 +37,9 @@ const EditActivity = () => {
   const { data } = useFetch('api/v1/categories'); //ambil categories dan taro di scrollbar
   const { updateItem } = useUpdate('api/v1/update-activity');
   const navigate = useNavigate();
+  const editable = searchParams.get('edit') === 'true';
+
+  console.log(dataAct.data);
 
   const handleCategory = (e) => {
     setFormData((prev) => ({ ...prev, categoryId: e.target.value }));
@@ -140,10 +145,6 @@ const EditActivity = () => {
       });
   };
 
-  useEffect(() => {
-    getDataActivity(id);
-  }, []);
-
   const handleUpdate = async () => {
     try {
       let imgUrlList = [];
@@ -205,187 +206,202 @@ const EditActivity = () => {
       const response = await updateItem(id, updatedData);
       alert('Update success');
       console.log(response);
-      navigate(`/admin/activity/edit/${id}`);
+      navigate(`/admin/activity`);
     } catch (error) {
       console.log(error);
       alert(error.message);
     }
   };
 
+  useEffect(() => {
+    getDataActivity(id);
+  }, []);
+
   return (
-    <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl">
+    <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl my-[5rem] sm:my-[2rem]">
       <h1 className="block text-xl font-medium text-slate-800">Edit Activity</h1>
 
       <form
         action=""
-        className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96"
+        className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
       >
-        {/* select option */}
-        <div className="w-full max-w-sm min-w-[200px] mb-3">
-          <label className="block mb-1 text-sm text-slate-800">Category</label>
-          <div className="relative">
-            <select
-              className="w-full py-2 pl-3 pr-8 text-sm transition duration-300 bg-transparent border rounded shadow-sm appearance-none cursor-pointer placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 focus:shadow-md"
-              name="category"
-              id=""
-              onChange={handleCategory}
-              value={formData.categoryId}
-            >
-              {data?.data?.map((item, index) => (
-                <option
-                  key={index}
-                  value={item.id}
+        <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
+          <div className=" flex justify-center flex-col md:flex-row gap-2 w-f">
+            {/* select option */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-800">Category</label>
+              <div className="relative">
+                <select
+                  className="w-full py-2 pl-3 pr-8 text-sm transition duration-300 bg-transparent border rounded shadow-sm appearance-none cursor-pointer placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 focus:shadow-md"
+                  name="category"
+                  id=""
+                  onChange={handleCategory}
                 >
-                  {item.name}
-                </option>
-              ))}
-            </select>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.2"
-              stroke="currentColor"
-              className="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-slate-700"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  {data?.data?.map((item, index) => (
+                    <option
+                      key={index}
+                      value={item.id}
+                    >
+                      {item.name}
+                    </option>
+                  ))}
+                </select>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.2"
+                  stroke="currentColor"
+                  className="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-slate-700"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                  />
+                </svg>
+              </div>
+            </div>
+            {/* title */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Title</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Your Name"
+                name="title"
+                id="title"
+                value={formData.title || ''}
+                onChange={handleTitle}
               />
-            </svg>
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-6 mb-1">
-          {/* title */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Title</label>
-            <input
-              type="text"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              placeholder="Your Name"
-              name="title"
-              id="title"
-              value={formData.title || ''}
-              onChange={handleTitle}
-            />
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* price */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Price</label>
+              <input
+                type="number"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                name="price"
+                id="price"
+                value={formData.price}
+                onChange={handlePrice}
+              />
+            </div>
+            {/* price discount */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Price Discount</label>
+              <input
+                type="number"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Price Discount"
+                name="discount"
+                id="price"
+                value={formData.price_discount}
+                onChange={handleDiscount}
+              />
+            </div>
           </div>
-          {/* price */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Price</label>
-            <input
-              type="number"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              name="price"
-              id="price"
-              value={formData.price}
-              onChange={handlePrice}
-            />
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* rating */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Rating</label>
+              <input
+                type="number"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Rating"
+                name="price"
+                id="price"
+                value={formData.rating}
+                onChange={handleRating}
+              />
+            </div>
+            {/* total Review */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Total Review</label>
+              <input
+                type="number"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Price Discount"
+                name="price"
+                id="price"
+                value={formData.total_reviews}
+                onChange={handleReviews}
+              />
+            </div>
           </div>
-          {/* price discount */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Price Discount</label>
-            <input
-              type="number"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              placeholder="Price Discount"
-              name="discount"
-              id="price"
-              value={formData.discount}
-              onChange={handleDiscount}
-            />
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* Facilities */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Facilities</label>
+              <textarea
+                id=""
+                className="w-full p-2 border rounded text-darkColor"
+                value={formData.facilities || ''}
+                onChange={handleFacilities}
+              />
+            </div>
+            {/* Description */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Description</label>
+              <textarea
+                id=""
+                className="w-full p-2 border rounded text-darkColor"
+                value={formData.description || ''}
+                onChange={handleDescription}
+              />
+            </div>
           </div>
-          {/* rating */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Rating</label>
-            <input
-              type="number"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              placeholder="Rating"
-              name="price"
-              id="price"
-              value={formData.rating}
-              onChange={handleRating}
-            />
+          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            {/* Province */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Province</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="Province"
+                name="province"
+                id="province"
+                value={formData.province || ''}
+                onChange={handleProvince}
+              />
+            </div>
+            {/* City */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">City</label>
+              <input
+                type="text"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                placeholder="City"
+                name="city"
+                id="city"
+                value={formData.city || ''}
+                onChange={handleCity}
+              />
+            </div>
           </div>
-          {/* total Review */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Total Review</label>
-            <input
-              type="number"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              placeholder="Price Discount"
-              name="price"
-              id="price"
-              value={formData.reviews}
-              onChange={handleReviews}
-            />
-          </div>
-          {/* Facilities */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Facilities</label>
-            <textarea
-              id=""
-              className="w-full p-2 border rounded text-darkColor"
-              value={formData.facilities || ''}
-              onChange={handleFacilities}
-            />
-          </div>
-          {/* Description */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Description</label>
-            <textarea
-              id=""
-              className="w-full p-2 border rounded text-darkColor"
-              value={formData.description || ''}
-              onChange={handleDescription}
-            />
-          </div>
-          {/* Province */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Province</label>
-            <input
-              type="text"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              placeholder="Province"
-              name="province"
-              id="province"
-              value={formData.province || ''}
-              onChange={handleProvince}
-            />
-          </div>
-          {/* City */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">City</label>
-            <input
-              type="text"
-              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-              placeholder="City"
-              name="city"
-              id="city"
-              value={formData.city || ''}
-              onChange={handleCity}
-            />
-          </div>
-          {/* Address */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Address</label>
-            <textarea
-              id=""
-              className="w-full p-2 border rounded text-darkColor"
-              value={formData.address || ''}
-              onChange={handleAddress}
-            />
-          </div>
-          {/* Location Maps */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <label className="block mb-2 text-sm text-slate-600">Location Maps</label>
-            <textarea
-              id=""
-              className="w-full p-2 border rounded text-darkColor"
-              value={formData.location_maps || ''}
-              onChange={handleLocationMaps}
-            />
+          <div className=" flex flex-col md:flex-row gap-2 justify-center ">
+            {/* Address */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Address</label>
+              <textarea
+                id=""
+                className="w-full p-2 border rounded text-darkColor"
+                value={formData.address || ''}
+                onChange={handleAddress}
+              />
+            </div>
+            {/* Location Maps */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <label className="block mb-2 text-sm text-slate-600">Location Maps</label>
+              <textarea
+                id=""
+                className="w-full p-2 border rounded text-darkColor"
+                value={formData.location_maps || ''}
+                onChange={handleLocationMaps}
+              />
+            </div>
           </div>
           {/* upload image */}
           <div className="w-full max-w-sm min-w-[200px]">
