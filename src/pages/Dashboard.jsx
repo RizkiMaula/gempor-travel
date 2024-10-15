@@ -1,5 +1,4 @@
 import { Button, Card, CardBody, CardFooter, Typography } from '@material-tailwind/react';
-import { useNavigate } from 'react-router-dom';
 import useFetch from '../hooks/useFetch';
 
 const Dashboard = () => {
@@ -14,8 +13,8 @@ const Dashboard = () => {
   console.log(promos?.data?.length);
 
   return (
-    <div className="grid grid-cols-4 gap-4 pt-20 md:pt-0 px-10">
-      <Card className="mt-6 col-span-4 md:col-span-2 lg:col-span-1">
+    <div className="grid grid-cols-4 gap-4 px-10 pt-20 md:pt-0">
+      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
           <Typography
             variant="h5"
@@ -27,7 +26,7 @@ const Dashboard = () => {
         </CardBody>
         <CardFooter className="pt-0">{users?.data?.length}</CardFooter>
       </Card>
-      <Card className="mt-6 col-span-4 md:col-span-2 lg:col-span-1">
+      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
           <Typography
             variant="h5"
@@ -39,7 +38,7 @@ const Dashboard = () => {
         </CardBody>
         <CardFooter className="pt-0">{categories?.data?.length}</CardFooter>
       </Card>
-      <Card className="mt-6 col-span-4 md:col-span-2 lg:col-span-1">
+      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
           <Typography
             variant="h5"
@@ -51,7 +50,7 @@ const Dashboard = () => {
         </CardBody>
         <CardFooter className="pt-0">{activities?.data?.length}</CardFooter>
       </Card>
-      <Card className="mt-6 col-span-4 md:col-span-2 lg:col-span-1">
+      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
           <Typography
             variant="h5"

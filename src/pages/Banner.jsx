@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
+import TableLayouts from '../components/elements/TableLayouts';
 
 const Banner = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/banners');
@@ -201,13 +202,15 @@ const Banner = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <h1>Banner</h1>
-      <Button
-        text="Add"
-        event={() => setShowModal(true)}
-        bgColor="bg-blue-500"
-      />
+    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+      <div className="w-[90%] flex justify-between items-center py-4">
+        <h1 className="text-xl md:text-2xl">Banner</h1>
+        <Button
+          text="Add"
+          event={() => setShowModal(true)}
+          bgColor="bg-blue-500"
+        />
+      </div>
 
       <Table
         logic={(filterData || []).map((banner) => (
@@ -281,3 +284,5 @@ const Banner = () => {
 };
 
 export default Banner;
+{
+}

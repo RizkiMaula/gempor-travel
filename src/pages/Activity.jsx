@@ -58,14 +58,23 @@ const Activity = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-2">
-      <h1>Activity list</h1>
+    // <div className="flex flex-col items-center gap-2">
+    //   <h1>Activity list</h1>
 
-      <Button
-        text="add Activity"
-        bgColor="bg-blue-500"
-        event={() => navigate('/admin/add-activity')}
-      />
+    //   <Button
+    //     text="add Activity"
+    //     bgColor="bg-blue-500"
+    //     event={() => navigate('/admin/add-activity')}
+    //   />
+    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+      <div className="w-[90%] flex justify-between items-center py-4">
+        <h1 className="text-xl md:text-2xl">Activity</h1>
+        <Button
+          text="Add"
+          event={() => navigate('/admin/add-activity')}
+          bgColor="bg-blue-500"
+        />
+      </div>
 
       <Table
         logic={(filterData || []).map((activity) => (

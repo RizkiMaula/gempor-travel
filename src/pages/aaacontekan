@@ -1,123 +1,569 @@
-    <div
-      className="flex flex-col items-center justify-center h-screen "
-      style={{ border: '2px solid black' }}
-    >
-      <h1>Register</h1>
-      <form className="flex flex-col w-1/2 gap-3 p-10 bg-red-200 h-1/2">
-        <div className="flex gap-3 ">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <p>{emailError}</p>
-        </div>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <p>{nameError}</p>
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <p>{passwordError}</p>
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            value={passwordRepeat}
-            onChange={(e) => setPasswordRepeat(e.target.value)}
-          />
-          <p>{passwordRepeatError}</p>
-        </div>
-        <div>
-          <label htmlFor="role">Role</label>
-          <input
-            type="text"
-            name="role"
-            value="user"
-            readOnly
-            onChange={(e) => setRole(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="Number">Phone Number</label>
-          <input
-            type="text"
-            name="Number"
-            value={phoneNumber}
-            onChange={(e) => setPhoneNumber(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="image">Profile Image</label>
-          <input
-            type="file"
-            name="image"
-            onChange={(e) => setProfilePictureFile(e.target.files[0])}
-          />
-        </div>
-      </form>
-      <Button
-        text="Register"
-        bgColor="bg-red-500"
-        event={handleRegister}
+<div
+  className="flex flex-col items-center justify-center h-screen "
+  style={{ border: '2px solid black' }}
+>
+  <h1>Register</h1>
+  <form className="flex flex-col w-1/2 gap-3 p-10 bg-red-200 h-1/2">
+    <div className="flex gap-3 ">
+      <label htmlFor="email">Email</label>
+      <input
+        type="email"
+        name="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <h4>Already have an account?</h4> <Link to={'/login'}>Login</Link>
+      <p>{emailError}</p>
     </div>
-
-
-
-
-    useEffect(() => {
-      setFilterData(data?.data?.slice(page, page + n));
-    }, [data?.data]);
-
-    
-    {showModal && (
-      <UserEditModal
-        text={'Edit Role'}
-        value={roleUpd}
-        name={nameUpd}
-        onEventRole={handleRole}
-        onUpdateRole={() => handleUpdateRole(updateId, roleUpd)}
-        onClose={() => setShowModal(false)}
-        image={imageUrl}
+    <div>
+      <label htmlFor="name">Name</label>
+      <input
+        type="text"
+        name="name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
-    )}
+      <p>{nameError}</p>
+    </div>
+    <div>
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        name="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <p>{passwordError}</p>
+    </div>
+    <div>
+      <label htmlFor="confirmPassword">Confirm Password</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        value={passwordRepeat}
+        onChange={(e) => setPasswordRepeat(e.target.value)}
+      />
+      <p>{passwordRepeatError}</p>
+    </div>
+    <div>
+      <label htmlFor="role">Role</label>
+      <input
+        type="text"
+        name="role"
+        value="user"
+        readOnly
+        onChange={(e) => setRole(e.target.value)}
+      />
+    </div>
+    <div>
+      <label htmlFor="Number">Phone Number</label>
+      <input
+        type="text"
+        name="Number"
+        value={phoneNumber}
+        onChange={(e) => setPhoneNumber(e.target.value)}
+      />
+    </div>
+    <div>
+      <label htmlFor="image">Profile Image</label>
+      <input
+        type="file"
+        name="image"
+        onChange={(e) => setProfilePictureFile(e.target.files[0])}
+      />
+    </div>
+  </form>
+  <Button
+    text="Register"
+    bgColor="bg-red-500"
+    event={handleRegister}
+  />
+  <h4>Already have an account?</h4> <Link to={'/login'}>Login</Link>
+</div>;
 
-    
-    import { Navigate, Outlet } from 'react-router-dom';
-    import useLocalStorage from '../hooks/useLocalStorage';
-    
-    const ProtectedProfile = (props) => {
-      // eslint-disable-next-line react/prop-types
-      const { children } = props;
-      const [token, setToken] = useLocalStorage('authToken', '');
-      const [role, setRole] = useLocalStorage('role', '');
-    
-      if (!token || token === 'undefined') {
-        return <Navigate to={'/login'} />;
-      } else if (role !== 'admin' || role === '') {
-        return <Navigate to={'/*'} />;
-      }
-    
-      return <div> {children || <Outlet />} </div>;
-    };
-    
-    export default ProtectedProfile;
-    
+useEffect(() => {
+  setFilterData(data?.data?.slice(page, page + n));
+}, [data?.data]);
+
+{
+  showModal && (
+    <UserEditModal
+      text={'Edit Role'}
+      value={roleUpd}
+      name={nameUpd}
+      onEventRole={handleRole}
+      onUpdateRole={() => handleUpdateRole(updateId, roleUpd)}
+      onClose={() => setShowModal(false)}
+      image={imageUrl}
+    />
+  );
+}
+
+import { Navigate, Outlet } from 'react-router-dom';
+import useLocalStorage from '../hooks/useLocalStorage';
+
+const ProtectedProfile = (props) => {
+  // eslint-disable-next-line react/prop-types
+  const { children } = props;
+  const [token, setToken] = useLocalStorage('authToken', '');
+  const [role, setRole] = useLocalStorage('role', '');
+
+  if (!token || token === 'undefined') {
+    return <Navigate to={'/login'} />;
+  } else if (role !== 'admin' || role === '') {
+    return <Navigate to={'/*'} />;
+  }
+
+  return <div> {children || <Outlet />} </div>;
+};
+
+export default ProtectedProfile;
+
+<div className="absolute flex flex-col items-center justify-center w-1/3 gap-4 transform -translate-x-1/2 -translate-y-1/2 bg-white border-4 border-black rounded top-1/2 left-1/2 h-1/3">
+  <h4>{text}</h4>
+  <div className="flex flex-col items-center w-full gap-2 border-2 border-black">
+    <span className="flex gap-3">
+      <label htmlFor="Insert Name">Insert Name: </label>
+      <input
+        className="px-1 rounded"
+        type="text"
+        required
+        name="name"
+        placeholder="Insert Name Here"
+        onChange={onHandleName}
+      />
+    </span>
+    <input
+      type="file"
+      accept="image"
+      onChange={onHandleImage}
+    />
+  </div>
+  <div className="flex justify-around w-[75%] gap-2">
+    <Button
+      text="Add"
+      bgColor="bg-blue-500"
+      event={onAddCategory}
+    />
+    <Button
+      text="Cancel"
+      bgColor="bg-red-500"
+      event={onClose}
+    />
+  </div>
+</div>;
+
+<Card className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+  <h4>{text}</h4>
+  <div className="flex flex-col items-center w-full gap-2 border-2 border-black">
+    <span className="flex gap-3">
+      <label htmlFor="Insert Name">Insert Name: </label>
+      <input
+        className="px-1 rounded"
+        type="text"
+        required
+        name="name"
+        placeholder="Insert Name Here"
+        onChange={onHandleName}
+        value={categoryValue}
+      />
+    </span>
+    <input
+      type="file"
+      accept="image"
+      onChange={onHandleImage}
+    />
+    <img
+      src={imageValue}
+      alt={categoryValue}
+      className="w-1/2 h-1/2"
+    />
+  </div>
+  <div className="flex justify-around w-[75%] gap-2">
+    <Button
+      text="Update"
+      bgColor="bg-blue-500"
+      event={onUpdateCategory}
+    />
+    <Button
+      text="Cancel"
+      bgColor="bg-red-500"
+      event={onClose}
+    />
+  </div>
+</Card>;
+
+// update styled
+<Card className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 w-96">
+  <CardHeader
+    floated={false}
+    className="h-80"
+  >
+    <img
+      src={imageValue}
+      alt={categoryValue}
+    />
+  </CardHeader>
+  <CardBody className="flex flex-col gap-4">
+    <Typography
+      variant="h4"
+      color="blue-gray"
+    >
+      {text}
+    </Typography>
+    <Typography
+      className="-mb-2"
+      variant="h6"
+    >
+      Insert Name
+    </Typography>
+    <Input
+      label="Name"
+      size="lg"
+      required
+      onChange={onHandleName}
+    />
+    <Typography
+      className="-mb-2"
+      variant="h6"
+    >
+      Insert Image Here
+    </Typography>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={onHandleImage}
+    />
+  </CardBody>
+  <CardFooter className="flex items-center justify-between w-full gap-2">
+    <Button
+      text="Update"
+      bgColor="bg-blue-500"
+      event={onUpdateCategory}
+    />
+    <Button
+      text="Cancel"
+      bgColor="bg-red-500"
+      event={onClose}
+    />
+  </CardFooter>
+</Card>;
+
+// unstyled update
+
+<div className="absolute flex flex-col items-center justify-center w-1/3 gap-4 transform -translate-x-1/2 -translate-y-1/2 bg-white border-4 border-black rounded top-1/2 left-1/2 h-1/3">
+  <h4>{text}</h4>
+  <div className="flex flex-col items-center w-full gap-2 border-2 border-black">
+    <span className="flex gap-3">
+      <label htmlFor="Insert Name">Insert Name: </label>
+      <input
+        className="px-1 rounded"
+        type="text"
+        required
+        name="name"
+        placeholder="Insert Name Here"
+        onChange={onHandleName}
+        value={categoryValue}
+      />
+    </span>
+    <input
+      type="file"
+      accept="image"
+      onChange={onHandleImage}
+    />
+    <img
+      src={imageValue}
+      alt={categoryValue}
+      className="w-1/2 h-1/2"
+    />
+  </div>
+  <div className="flex justify-around w-[75%] gap-2">
+    <Button
+      text="Update"
+      bgColor="bg-blue-500"
+      event={onUpdateCategory}
+    />
+    <Button
+      text="Cancel"
+      bgColor="bg-red-500"
+      event={onClose}
+    />
+  </div>
+</div>;
+
+// add activity
+<form
+  action=""
+  className="flex flex-col border-4 border-black"
+>
+  <span className="flex flex-col">
+    <label htmlFor="category">Category</label>
+    <select
+      name="category"
+      id=""
+      onChange={handleCategory}
+    >
+      {data?.data?.map((item, index) => (
+        <option
+          key={index}
+          value={item.id}
+        >
+          {item.name}
+        </option>
+      ))}
+    </select>
+  </span>
+  <span>
+    <label htmlFor="title">Title</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      value={title}
+      onChange={handleTitle}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Price</label>
+    <input
+      type="number"
+      name="price"
+      id="price"
+      value={price}
+      onChange={handlePrice}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Price Discount</label>
+    <input
+      type="number"
+      name="discount"
+      id="price"
+      value={discount}
+      onChange={handleDiscount}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Rating</label>
+    <input
+      type="number"
+      name="price"
+      id="price"
+      value={rating}
+      onChange={handleRating}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Total Review</label>
+    <input
+      type="number"
+      name="price"
+      id="price"
+      value={reviews}
+      onChange={handleReviews}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Facilities</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={facilities}
+      onChange={handleFacilities}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Description</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={description}
+      onChange={handleDescription}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Province</label>
+    <input
+      type="text"
+      name="province"
+      id="province"
+      value={province}
+      onChange={handleProvince}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">City</label>
+    <input
+      type="text"
+      name="city"
+      id="city"
+      value={city}
+      onChange={handleCity}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Address</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={address}
+      onChange={handleAddress}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Location Maps</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={locationMaps}
+      onChange={handleLocationMaps}
+    />
+  </span>
+  <span>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handlePicture}
+      multiple
+    />
+  </span>
+</form>;
+
+// edit activity
+
+<form
+  action=""
+  className="flex flex-col border-4 border-black"
+>
+  <span className="flex flex-col">
+    <label htmlFor="category">Category</label>
+    <select
+      name="category"
+      id=""
+      onChange={handleCategory}
+      value={formData.categoryId || ''}
+    >
+      {data?.data?.map((item, index) => (
+        <option
+          key={index}
+          value={item.id}
+        >
+          {item.name}
+        </option>
+      ))}
+    </select>
+  </span>
+  <span>
+    <label htmlFor="title">Title</label>
+    <input
+      type="text"
+      name="title"
+      id="title"
+      value={formData.title || ''}
+      onChange={handleTitle}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Price</label>
+    <input
+      type="number"
+      name="price"
+      id="price"
+      value={formData.price}
+      onChange={handlePrice}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Price Discount</label>
+    <input
+      type="number"
+      name="discount"
+      id="price"
+      value={formData.discount}
+      onChange={handleDiscount}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Rating</label>
+    <input
+      type="number"
+      name="price"
+      id="price"
+      value={formData.rating}
+      onChange={handleRating}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Total Review</label>
+    <input
+      type="number"
+      name="price"
+      id="price"
+      value={formData.reviews}
+      onChange={handleReviews}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Facilities</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={formData.facilities || ''}
+      onChange={handleFacilities}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Description</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={formData.description || ''}
+      onChange={handleDescription}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Province</label>
+    <input
+      type="text"
+      name="province"
+      id="province"
+      value={formData.province || ''}
+      onChange={handleProvince}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">City</label>
+    <input
+      type="text"
+      name="city"
+      id="city"
+      value={formData.city || ''}
+      onChange={handleCity}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Address</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={formData.address || ''}
+      onChange={handleAddress}
+    />
+  </span>
+  <span>
+    <label htmlFor="price">Location Maps</label>
+    <textarea
+      id=""
+      className="w-full p-2 border rounded text-darkColor"
+      value={formData.location_maps || ''}
+      onChange={handleLocationMaps}
+    />
+  </span>
+  <span>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handlePicture}
+      multiple
+    />
+  </span>
+</form>;

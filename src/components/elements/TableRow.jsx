@@ -14,7 +14,7 @@ const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit
 
   return (
     <tr key={keyIndex}>
-      <td className={classes}>
+      <td className="p-4 border-b border-blue-gray-50">
         <Typography
           variant="small"
           color="blue-gray"
@@ -23,7 +23,7 @@ const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit
           {name}
         </Typography>
       </td>
-      <td className={classes}>
+      <td className="p-4 border-b border-blue-gray-50">
         <Typography
           variant="small"
           color="blue-gray"
@@ -32,7 +32,7 @@ const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit
           {formatDate(createdAt)}
         </Typography>
       </td>
-      <td className={classes}>
+      <td className="p-4 border-b border-blue-gray-50">
         <Typography
           variant="small"
           color="blue-gray"
@@ -42,7 +42,7 @@ const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit
         </Typography>
       </td>
       <td
-        className={classes}
+        className="p-4 border-b border-blue-gray-50"
         style={{ textAlign: 'center', display: 'flex', gap: '10px', justifyContent: 'center' }}
       >
         <button onClick={eventView}>

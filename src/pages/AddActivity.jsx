@@ -152,151 +152,196 @@ const AddActivity = () => {
   };
 
   return (
-    <>
-      <h1>Add Activity</h1>
+    <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl">
+      <h1 className="block text-xl font-medium text-slate-800">Add Activity</h1>
 
       <form
         action=""
-        className="flex flex-col border-4 border-black"
+        className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96"
       >
-        <span className="flex flex-col">
-          <label htmlFor="category">Category</label>
-          <select
-            name="category"
-            id=""
-            onChange={handleCategory}
-          >
-            {data?.data?.map((item, index) => (
-              <option
-                key={index}
-                value={item.id}
-              >
-                {item.name}
-              </option>
-            ))}
-          </select>
-        </span>
-        <span>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            value={title}
-            onChange={handleTitle}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Price</label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            value={price}
-            onChange={handlePrice}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Price Discount</label>
-          <input
-            type="number"
-            name="discount"
-            id="price"
-            value={discount}
-            onChange={handleDiscount}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Rating</label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            value={rating}
-            onChange={handleRating}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Total Review</label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            value={reviews}
-            onChange={handleReviews}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Facilities</label>
-          <textarea
-            id=""
-            className="w-full p-2 border rounded text-darkColor"
-            value={facilities}
-            onChange={handleFacilities}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Description</label>
-          <textarea
-            id=""
-            className="w-full p-2 border rounded text-darkColor"
-            value={description}
-            onChange={handleDescription}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Province</label>
-          <input
-            type="text"
-            name="province"
-            id="province"
-            value={province}
-            onChange={handleProvince}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">City</label>
-          <input
-            type="text"
-            name="city"
-            id="city"
-            value={city}
-            onChange={handleCity}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Address</label>
-          <textarea
-            id=""
-            className="w-full p-2 border rounded text-darkColor"
-            value={address}
-            onChange={handleAddress}
-          />
-        </span>
-        <span>
-          <label htmlFor="price">Location Maps</label>
-          <textarea
-            id=""
-            className="w-full p-2 border rounded text-darkColor"
-            value={locationMaps}
-            onChange={handleLocationMaps}
-          />
-        </span>
-        <span>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handlePicture}
-            multiple
-          />
-        </span>
+        {/* select option */}
+        <div className="w-full max-w-sm min-w-[200px] mb-3">
+          <label className="block mb-1 text-sm text-slate-800">Category</label>
+          <div className="relative">
+            <select
+              className="w-full py-2 pl-3 pr-8 text-sm transition duration-300 bg-transparent border rounded shadow-sm appearance-none cursor-pointer placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 focus:shadow-md"
+              name="category"
+              id=""
+              onChange={handleCategory}
+            >
+              {data?.data?.map((item, index) => (
+                <option
+                  key={index}
+                  value={item.id}
+                >
+                  {item.name}
+                </option>
+              ))}
+            </select>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.2"
+              stroke="currentColor"
+              className="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-slate-700"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="flex flex-col gap-6 mb-1">
+          {/* title */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Title</label>
+            <input
+              type="text"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              placeholder="Your Name"
+              name="title"
+              id="title"
+              value={title}
+              onChange={handleTitle}
+            />
+          </div>
+          {/* price */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Price</label>
+            <input
+              type="number"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              name="price"
+              id="price"
+              value={price}
+              onChange={handlePrice}
+            />
+          </div>
+          {/* price discount */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Price Discount</label>
+            <input
+              type="number"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              placeholder="Price Discount"
+              name="discount"
+              id="price"
+              value={discount}
+              onChange={handleDiscount}
+            />
+          </div>
+          {/* rating */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Rating</label>
+            <input
+              type="number"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              placeholder="Rating"
+              name="price"
+              id="price"
+              value={rating}
+              onChange={handleRating}
+            />
+          </div>
+          {/* total Review */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Total Review</label>
+            <input
+              type="number"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              placeholder="Price Discount"
+              name="price"
+              id="price"
+              value={reviews}
+              onChange={handleReviews}
+            />
+          </div>
+          {/* Facilities */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Facilities</label>
+            <textarea
+              id=""
+              className="w-full p-2 border rounded text-darkColor"
+              value={facilities}
+              onChange={handleFacilities}
+            />
+          </div>
+          {/* Description */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Description</label>
+            <textarea
+              id=""
+              className="w-full p-2 border rounded text-darkColor"
+              value={description}
+              onChange={handleDescription}
+            />
+          </div>
+          {/* Province */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Province</label>
+            <input
+              type="text"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              placeholder="Province"
+              name="province"
+              id="province"
+              value={province}
+              onChange={handleProvince}
+            />
+          </div>
+          {/* City */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">City</label>
+            <input
+              type="text"
+              className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+              placeholder="City"
+              name="city"
+              id="city"
+              value={city}
+              onChange={handleCity}
+            />
+          </div>
+          {/* Address */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Address</label>
+            <textarea
+              id=""
+              className="w-full p-2 border rounded text-darkColor"
+              value={address}
+              onChange={handleAddress}
+            />
+          </div>
+          {/* Location Maps */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <label className="block mb-2 text-sm text-slate-600">Location Maps</label>
+            <textarea
+              id=""
+              className="w-full p-2 border rounded text-darkColor"
+              value={locationMaps}
+              onChange={handleLocationMaps}
+            />
+          </div>
+          {/* upload image */}
+          <div className="w-full max-w-sm min-w-[200px]">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handlePicture}
+              multiple
+            />
+          </div>
+        </div>
       </form>
       <Button
         bgColor="bg-blue-500"
         text="Submit"
         event={handleSubmit}
       />
-    </>
+    </div>
   );
 };
 
