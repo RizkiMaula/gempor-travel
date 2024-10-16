@@ -14,10 +14,14 @@ import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
+import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
 
 const Categories = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/categories');
   const navigate = useNavigate();
+  const [showModalDetails, setShowModalDetails] = useState(false);
+  const [categoryCreatedAt, setCategoryCreatedAt] = useState('');
+  const [categoryUpdatedAt, setCategoryUpdatedAt] = useState('');
 
   // Hooks Untuk Create
   const [showModal, setShowModal] = useState(false);
@@ -226,7 +230,12 @@ const Categories = () => {
               setUpdateId(category.id);
             }}
             eventView={() => {
-              navigate(`/admin/categories/${category.id}`);
+              setShowModalDetails(true);
+              setCategoryNameUpdate(category.name);
+              setCategoryImagePreview(category.imageUrl);
+              setCategoryCreatedAt(category.createdAt);
+              setCategoryUpdatedAt(category.updatedAt);
+              setUpdateId(category.id);
             }}
           />
         ))}
@@ -238,6 +247,16 @@ const Categories = () => {
           onHandleImage={handleImage}
           onAddCategory={handleAddCategories}
           onClose={() => setShowModal(false)}
+        />
+      )}
+      {showModalDetails && (
+        <DetailsPicsModal
+          text="Category Details"
+          categoryValue={categoryNameUpdate}
+          imageValue={categoryImagePreview}
+          createdAt={categoryCreatedAt}
+          updatedAt={categoryUpdatedAt}
+          onClose={() => setShowModalDetails(false)}
         />
       )}
       {showModalUpdate && (

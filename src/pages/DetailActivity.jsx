@@ -63,7 +63,7 @@ const DetailActivity = () => {
           />
         </CardHeader>
         <CardBody>
-          <div className="mb-2 flex items-center justify-between">
+          <div className="flex items-center justify-between mb-2">
             <Typography
               color="blue-gray"
               className="font-medium"
@@ -102,8 +102,7 @@ const DetailActivity = () => {
           ></iframe>
         </CardBody>
         <CardFooter>
-          {role === 'admin' && <Link to={'/admin/activity'}>Back</Link>}
-          {role === 'user' && <Link to={'/user/all-activities'}>Back</Link>}
+          <Link to={'/user/all-activities'}>Back</Link>
         </CardFooter>
       </Card>
     </UserLayout>

@@ -14,11 +14,15 @@ import { useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
-import TableLayouts from '../components/elements/TableLayouts';
+import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
+import Loading from '../components/elements/Loading';
 
 const Banner = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/banners');
   const navigate = useNavigate();
+  const [showModalDetails, setShowModalDetails] = useState(false);
+  const [bannerUpdatedAt, setBannerUpdatedAt] = useState('');
+  const [bannerCreatedAt, setBannerCreatedAt] = useState('');
 
   // hooks Untuk delete
   const { deleteItem } = useDelete('api/v1/delete-banner');
@@ -53,14 +57,6 @@ const Banner = () => {
     console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
   // untuk delete
   const handleDelete = async (id) => {
@@ -212,25 +208,48 @@ const Banner = () => {
         />
       </div>
 
-      <Table
-        logic={(filterData || []).map((banner) => (
-          <TableRow
-            key={banner.id}
-            name={banner.name}
-            createdAt={banner.createdAt}
-            updatedAt={banner.updatedAt}
-            eventDelete={() => handleDelete(banner.id)}
-            eventEdit={() => {
-              setShowModalUpdate(true);
-              setBannerNameUpdate(banner.name);
-              setBannerImagePreview(banner.imageUrl);
-              setUpdateId(banner.id);
-            }}
-            // yang bawah nanti dulu
-            eventView={() => navigate(`/admin/banner/${banner.id}`)}
-          />
-        ))}
-      />
+      {loading && (
+        <Loading
+          type="spin"
+          color="#0000FF"
+          height="10rem"
+          width="10rem"
+        />
+      )}
+
+      {error && (
+        <div>
+          <h1>{error}</h1>
+        </div>
+      )}
+
+      {data && (
+        <Table
+          logic={(filterData || []).map((banner) => (
+            <TableRow
+              key={banner.id}
+              name={banner.name}
+              createdAt={banner.createdAt}
+              updatedAt={banner.updatedAt}
+              eventDelete={() => handleDelete(banner.id)}
+              eventEdit={() => {
+                setShowModalUpdate(true);
+                setBannerNameUpdate(banner.name);
+                setBannerImagePreview(banner.imageUrl);
+                setUpdateId(banner.id);
+              }}
+              eventView={() => {
+                setShowModalDetails(true);
+                setBannerNameUpdate(banner.name);
+                setBannerImagePreview(banner.imageUrl);
+                setBannerUpdatedAt(banner.updatedAt);
+                setBannerCreatedAt(banner.createdAt);
+                setUpdateId(banner.id);
+              }}
+            />
+          ))}
+        />
+      )}
 
       {showModal && (
         <AddPicsModal
@@ -241,7 +260,16 @@ const Banner = () => {
           onClose={() => setShowModal(false)}
         />
       )}
-
+      {showModalDetails && (
+        <DetailsPicsModal
+          text="Banner Details"
+          categoryValue={bannerNameUpdate}
+          imageValue={bannerImagePreview}
+          createdAt={bannerCreatedAt}
+          updatedAt={bannerUpdatedAt}
+          onClose={() => setShowModalDetails(false)}
+        />
+      )}
       {showModalUpdate && (
         <UpdatePicsModal
           text="Update Banner"
@@ -284,5 +312,3 @@ const Banner = () => {
 };
 
 export default Banner;
-{
-}

@@ -5,6 +5,7 @@ import useUpdate from '../hooks/useUpdate';
 import useFetch from '../hooks/useFetch';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Button from '../components/elements/Button';
+import Loading from '../components/elements/Loading';
 
 const EditActivity = () => {
   let [searchParams] = useSearchParams();
@@ -38,6 +39,7 @@ const EditActivity = () => {
   const { updateItem } = useUpdate('api/v1/update-activity');
   const navigate = useNavigate();
   const editable = searchParams.get('edit') === 'true';
+  const fetchImg = dataAct?.imageUrls;
 
   console.log(dataAct.data);
 
@@ -234,13 +236,16 @@ const EditActivity = () => {
         action=""
         className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
       >
-        <img
-          src={dataAct?.imageUrls}
-          alt={dataAct?.title}
-          className="object-cover w-full h-[90%]"
-        />
-        <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
-          <div className=" flex justify-center flex-col md:flex-row gap-2 w-f">
+        <div className="flex flex-col items-center justify-center">
+          {!fetchImg && <Loading />}
+          <img
+            src={fetchImg}
+            alt={dataAct?.title}
+            className="object-cover w-full h-[90%]"
+          />
+        </div>
+        <div className="flex flex-col gap-6 p-10 border-2 shadow-md border-slate-200 rounded-xl">
+          <div className="flex flex-col justify-center gap-2 md:flex-row w-f">
             {/* select option */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-800">Category</label>
@@ -251,6 +256,7 @@ const EditActivity = () => {
                   id=""
                   onChange={handleCategory}
                   value={formData.categoryId}
+                  disabled={!editable}
                 >
                   {data?.data?.map((item, index) => (
                     <option
@@ -288,10 +294,11 @@ const EditActivity = () => {
                 id="title"
                 value={formData.title || ''}
                 onChange={handleTitle}
+                disabled={!editable}
               />
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* price */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Price</label>
@@ -302,6 +309,7 @@ const EditActivity = () => {
                 id="price"
                 value={formData.price}
                 onChange={handlePrice}
+                disabled={!editable}
               />
             </div>
             {/* price discount */}
@@ -315,10 +323,11 @@ const EditActivity = () => {
                 id="price"
                 value={formData.price_discount}
                 onChange={handleDiscount}
+                disabled={!editable}
               />
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* rating */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Rating</label>
@@ -330,6 +339,7 @@ const EditActivity = () => {
                 id="price"
                 value={formData.rating}
                 onChange={handleRating}
+                disabled={!editable}
               />
             </div>
             {/* total Review */}
@@ -343,10 +353,11 @@ const EditActivity = () => {
                 id="price"
                 value={formData.total_reviews}
                 onChange={handleReviews}
+                disabled={!editable}
               />
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* Facilities */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Facilities</label>
@@ -355,6 +366,7 @@ const EditActivity = () => {
                 className="w-full p-2 border rounded text-darkColor"
                 value={formData.facilities || ''}
                 onChange={handleFacilities}
+                disabled={!editable}
               />
             </div>
             {/* Description */}
@@ -365,10 +377,11 @@ const EditActivity = () => {
                 className="w-full p-2 border rounded text-darkColor"
                 value={formData.description || ''}
                 onChange={handleDescription}
+                disabled={!editable}
               />
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* Province */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Province</label>
@@ -380,6 +393,7 @@ const EditActivity = () => {
                 id="province"
                 value={formData.province || ''}
                 onChange={handleProvince}
+                disabled={!editable}
               />
             </div>
             {/* City */}
@@ -393,10 +407,11 @@ const EditActivity = () => {
                 id="city"
                 value={formData.city || ''}
                 onChange={handleCity}
+                disabled={!editable}
               />
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center ">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* Address */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Address</label>
@@ -405,6 +420,7 @@ const EditActivity = () => {
                 className="w-full p-2 border rounded text-darkColor"
                 value={formData.address || ''}
                 onChange={handleAddress}
+                disabled={!editable}
               />
             </div>
             {/* Location Maps */}
@@ -415,25 +431,36 @@ const EditActivity = () => {
                 className="w-full p-2 border rounded text-darkColor"
                 value={formData.location_maps || ''}
                 onChange={handleLocationMaps}
+                disabled={!editable}
               />
             </div>
           </div>
-          {/* upload image */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handlePicture}
-              multiple
-            />
-          </div>
+          {editable && (
+            // {/* upload image */}
+            <div className="w-full max-w-sm min-w-[200px]">
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handlePicture}
+                multiple
+              />
+            </div>
+          )}
         </div>
       </form>
-      <Button
-        type="submit"
-        event={handleUpdate}
-        text="Update"
-      />
+      {editable && (
+        <div className="flex gap-2">
+          <Button
+            bgColor="bg-blue-500"
+            event={handleUpdate}
+            text="Update"
+          />
+          <Button
+            event={() => navigate(`../activity/edit/${id}`)}
+            text="Cancel"
+          />
+        </div>
+      )}
     </div>
   );
 };

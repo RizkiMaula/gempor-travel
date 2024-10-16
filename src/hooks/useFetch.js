@@ -5,7 +5,7 @@ import axios from 'axios';
 const useFetch = (endpoint) => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const getData = async () => {

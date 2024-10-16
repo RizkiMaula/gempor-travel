@@ -1,5 +1,6 @@
 import { Button, Card, CardBody, CardFooter, Typography } from '@material-tailwind/react';
 import useFetch from '../hooks/useFetch';
+import Loading from '../components/elements/Loading';
 
 const Dashboard = () => {
   const { data: users, loading: loadingUsers, error: errorUsers, reFetch: reFetchUsers } = useFetch('api/v1/all-user');
@@ -24,7 +25,15 @@ const Dashboard = () => {
             Total Users
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0">{users?.data?.length}</CardFooter>
+        <CardFooter className="pt-0">
+          {loadingUsers && (
+            <Loading
+              width="1rem"
+              height="1rem"
+            />
+          )}
+          {users?.data?.length}
+        </CardFooter>
       </Card>
       <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
@@ -36,7 +45,15 @@ const Dashboard = () => {
             Total Categories
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0">{categories?.data?.length}</CardFooter>
+        <CardFooter className="pt-0">
+          {loadingCategories && (
+            <Loading
+              width="1rem"
+              height="1rem"
+            />
+          )}
+          {categories?.data?.length}
+        </CardFooter>
       </Card>
       <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
@@ -48,7 +65,15 @@ const Dashboard = () => {
             Total Activities
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0">{activities?.data?.length}</CardFooter>
+        <CardFooter className="pt-0">
+          {loadingActivities && (
+            <Loading
+              width="1rem"
+              height="1rem"
+            />
+          )}
+          {activities?.data?.length}
+        </CardFooter>
       </Card>
       <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
         <CardBody>
@@ -60,7 +85,15 @@ const Dashboard = () => {
             Total promos
           </Typography>
         </CardBody>
-        <CardFooter className="pt-0">{promos?.data?.length}</CardFooter>
+        <CardFooter className="pt-0">
+          {loadingPromos && (
+            <Loading
+              width="1rem"
+              height="1rem"
+            />
+          )}
+          {promos?.data?.length}
+        </CardFooter>
       </Card>
     </div>
   );

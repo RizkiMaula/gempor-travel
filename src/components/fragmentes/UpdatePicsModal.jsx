@@ -73,7 +73,6 @@ const UpdatePicsModal = ({ onClose, onHandleName, onHandleImage, onUpdateCategor
           />
         </CardFooter>
       </Card>
-      ;
     </div>
   );
 };

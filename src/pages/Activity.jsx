@@ -8,6 +8,7 @@ import TableRow from '../components/elements/TableRow';
 import ReactPaginate from 'react-paginate';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
+import Loading from '../components/elements/Loading';
 
 const Activity = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/activities');
@@ -28,14 +29,6 @@ const Activity = () => {
     console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
   console.log(data);
 
@@ -68,6 +61,10 @@ const Activity = () => {
         />
       </div>
 
+      {loading && <Loading />}
+
+      {error && <div>Error: {error.message}</div>}
+
       <Table
         logic={(filterData || []).map((activity) => (
           <TableRow
@@ -76,8 +73,8 @@ const Activity = () => {
             createdAt={activity.createdAt}
             updatedAt={activity.updatedAt}
             eventDelete={() => handleDelete(activity.id)}
-            eventView={() => navigate(`/admin/activity/${activity.id}`)}
-            eventEdit={() => navigate(`../activity/edit/${activity.id}`)}
+            eventView={() => navigate(`../activity/edit/${activity.id}`)}
+            eventEdit={() => navigate(`../activity/edit/${activity.id}?edit=true`)}
           />
         ))}
       />
