@@ -15,8 +15,12 @@ import ReactPaginate from 'react-paginate';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
+import { useSelector } from 'react-redux';
+import Loading from '../components/elements/Loading';
 
 const Categories = () => {
+  // Redux
+  const dark = useSelector((state) => state.darkMode);
   const { data, loading, error, reFetch } = useFetch('api/v1/categories');
   const navigate = useNavigate();
   const [showModalDetails, setShowModalDetails] = useState(false);
@@ -57,14 +61,6 @@ const Categories = () => {
     console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
   // Untuk fungsi Delete
   const handleDelete = async (id) => {
@@ -205,7 +201,7 @@ const Categories = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+    <div className="flex flex-col items-center w-full gap-2">
       <div className="w-[90%] flex justify-between items-center py-4">
         <h1 className="text-xl md:text-2xl">Categories</h1>
         <Button
@@ -214,6 +210,11 @@ const Categories = () => {
           bgColor="bg-blue-500"
         />
       </div>
+
+      {loading && <Loading />}
+
+      {error && <div>Error: {error.message}</div>}
+
       <Table
         column1="Nama"
         logic={(filterData || []).map((category) => (
@@ -281,7 +282,7 @@ const Categories = () => {
       <ReactPaginate
         containerClassName="pagination"
         pageClassName="page-item"
-        activeClassName="active"
+        activeClassName={`${dark ? 'dark-active' : 'active'}`}
         onPageChange={(event) => setPage((event.selected * n) % data?.data?.length || 0)} // event.selected adalah nilai halaman ke berapa (ke-n). event.selected dikali n untuk dapat mengambil data dari halaman ke berapa
         pageCount={Math.ceil((data?.data?.length || 0) / (n || 1))}
         breakLabel="..."

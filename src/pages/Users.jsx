@@ -7,6 +7,7 @@ import Table from '../components/elements/Table';
 import ReactPaginate from 'react-paginate';
 import { IconContext } from 'react-icons';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
+import Loading from '../components/elements/Loading';
 
 const User = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/all-user');
@@ -31,14 +32,6 @@ const User = () => {
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   const handleRole = (e) => {
     setRoleUpd(e.target.value);
   };
@@ -61,8 +54,11 @@ const User = () => {
   console.log(data);
 
   return (
-    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+    <div className="flex flex-col items-center w-full gap-2 pt-[0.8rem] md:pt-[1rem]">
       <h1 className="text-xl md:text-2xl">User</h1>
+      {loading && <Loading />}
+
+      {error && <div>Error: {error.message}</div>}
 
       <Table
         th2="Email"

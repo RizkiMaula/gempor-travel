@@ -1,11 +1,12 @@
 import { Outlet } from 'react-router-dom';
 import NavbarAdmin from '../components/fragmentes/NavbarAdmin';
+import Footer from '../components/fragmentes/Footer';
 
 const LayoutAdmin = () => {
   return (
-    <div className="flex w-full h-full">
+    <div className="w-full border-2 border-black dark:bg-darkColor dark:text-lightTextColor transition-colors duration-500">
       <NavbarAdmin />
-      <div className="border-2 border-black w-full">
+      <div className="w-full border-2 min-h-[89.8vh] border-black">
         <Outlet />
       </div>
     </div>

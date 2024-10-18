@@ -81,8 +81,8 @@ const Profile = () => {
   };
 
   return (
-    <div className={`flex flex-col ${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
-      <div className="grid grid-cols-2 gap-2 p-3">
+    <div className={`flex flex-col`}>
+      <div className="grid grid-cols-2 gap-8 p-3">
         <div className="flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
           <h1>Profile</h1>
           {loading && <div>Loading...</div>}
@@ -102,7 +102,7 @@ const Profile = () => {
           )}
         </div>
         <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
-          <h1>Edit Profile</h1>
+          <h1 className="text-xl">Edit Profile</h1>
           <form className="flex flex-col gap-2 w-[85%] p-5">
             <label htmlFor="name">Name:</label>
             <input

@@ -44,7 +44,7 @@ const Home = () => {
   };
 
   return (
-    <UserLayout classname={`${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
+    <UserLayout>
       {/* banner */}
       <div className="bg-white w-[100%] h-[25%] flex flex-col -top-50">
         <div className="w-[100%] h-[100%] flex justify-between items-center">

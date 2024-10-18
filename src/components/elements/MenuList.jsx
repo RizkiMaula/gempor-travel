@@ -1,62 +1,56 @@
-import { Navbar, Collapse, Typography, Button, IconButton, List, ListItem, Menu, MenuHandler, MenuList, MenuItem } from '@material-tailwind/react';
-import { ChevronDownIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Bars4Icon, GlobeAmericasIcon, NewspaperIcon, PhoneIcon, RectangleGroupIcon, SquaresPlusIcon, SunIcon, TagIcon, UserGroupIcon } from '@heroicons/react/24/solid';
-import { useState, useEffect, createElement, Fragment } from 'react';
+import { Collapse, Typography, List, ListItem, Menu, MenuHandler, MenuList, MenuItem } from '@material-tailwind/react';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
+import { Bars4Icon, ReceiptPercentIcon, FaceSmileIcon, MoonIcon, SquaresPlusIcon, SunIcon, UserGroupIcon, TagIcon } from '@heroicons/react/24/solid';
+import { useState, createElement, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleMode } from '../../redux/slices/darkSlice';
+import { Link } from 'react-router-dom';
 
 const navListMenuItems = [
   {
-    title: 'Products',
+    title: 'Dashboard',
     description: 'Find the perfect solution for your needs.',
     icon: SquaresPlusIcon,
+    link: '/admin/',
   },
   {
-    title: 'About Us',
+    title: 'Activity',
     description: 'Meet and learn about our dedication',
-    icon: UserGroupIcon,
+    icon: FaceSmileIcon,
+    link: '/admin/activity',
   },
   {
-    title: 'Blog',
+    title: 'Banner',
     description: 'Find the perfect solution for your needs.',
     icon: Bars4Icon,
+    link: '/admin/banner',
   },
   {
-    title: 'Services',
-    description: 'Learn how we can help you achieve your goals.',
-    icon: SunIcon,
-  },
-  {
-    title: 'Support',
+    title: 'Category',
     description: 'Reach out to us for assistance or inquiries',
-    icon: GlobeAmericasIcon,
-  },
-  {
-    title: 'Contact',
-    description: 'Find the perfect solution for your needs.',
-    icon: PhoneIcon,
-  },
-  {
-    title: 'News',
-    description: 'Read insightful articles, tips, and expert opinions.',
-    icon: NewspaperIcon,
-  },
-  {
-    title: 'Products',
-    description: 'Find the perfect solution for your needs.',
-    icon: RectangleGroupIcon,
-  },
-  {
-    title: 'Special Offers',
-    description: 'Explore limited-time deals and bundles',
     icon: TagIcon,
+    link: '/admin/Categories',
+  },
+  {
+    title: 'Promo',
+    description: 'Learn how we can help you achieve your goals.',
+    icon: ReceiptPercentIcon,
+    link: '/admin/promos',
+  },
+  {
+    title: 'User',
+    description: 'Reach out to us for assistance or inquiries',
+    icon: UserGroupIcon,
+    link: '/admin/users',
   },
 ];
 
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const renderItems = navListMenuItems.map(({ icon, title, description }, key) => (
-    <a
-      href="#"
+  const renderItems = navListMenuItems.map(({ icon, title, link }, key) => (
+    <Link
+      to={link}
       key={key}
     >
       <MenuItem className="flex items-center gap-3 rounded-lg">
@@ -75,15 +69,9 @@ function NavListMenu() {
           >
             {title}
           </Typography>
-          <Typography
-            variant="paragraph"
-            className="text-xs !font-medium text-blue-gray-500"
-          >
-            {description}
-          </Typography>
         </div>
       </MenuItem>
-    </a>
+    </Link>
   ));
 
   return (
@@ -102,11 +90,11 @@ function NavListMenu() {
             className="font-medium"
           >
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900 dark:text-lightTextColor"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              Resources
+              Menus
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? 'rotate-180' : ''}`}
@@ -130,16 +118,19 @@ function NavListMenu() {
 }
 
 const NavList = () => {
+  // redux
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.darkMode);
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
         as="a"
-        href="#"
+        href="/"
         variant="small"
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Home</ListItem>
+        <ListItem className="flex items-center gap-2  dark:text-lightTextColor py-2 pr-4">Home</ListItem>
       </Typography>
       <NavListMenu />
       <Typography
@@ -149,7 +140,15 @@ const NavList = () => {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Contact Us</ListItem>
+        <ListItem
+          className="flex items-center gap-2 py-2 pr-4"
+          onClick={() => {
+            dispatch(toggleMode());
+          }}
+        >
+          {' '}
+          {mode.darkMode ? <MoonIcon className="w-5 h-5 dark:text-lightTextColor" /> : <SunIcon className="w-5 h-5" />}
+        </ListItem>
       </Typography>
     </List>
   );

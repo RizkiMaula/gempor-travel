@@ -14,35 +14,35 @@ const TableRow = ({ keyIndex, name, createdAt, updatedAt, eventDelete, eventEdit
 
   return (
     <tr key={keyIndex}>
-      <td className="p-4 border-b border-blue-gray-50">
+      <td className="p-4 border-b border-blue-gray-50 dark:bg-gray-400">
         <Typography
           variant="small"
           color="blue-gray"
-          className="font-normal"
+          className="font-normal dark:text-gray-800"
         >
           {name}
         </Typography>
       </td>
-      <td className="p-4 border-b border-blue-gray-50">
+      <td className="p-4 border-b border-blue-gray-50 dark:bg-gray-400">
         <Typography
           variant="small"
           color="blue-gray"
-          className="font-normal"
+          className="font-normal dark:text-gray-800"
         >
           {formatDate(createdAt)}
         </Typography>
       </td>
-      <td className="p-4 border-b border-blue-gray-50">
+      <td className="p-4 border-b border-blue-gray-50 dark:bg-gray-400">
         <Typography
           variant="small"
           color="blue-gray"
-          className="font-normal"
+          className="font-normal dark:text-gray-800"
         >
           {formatDate(updatedAt)}
         </Typography>
       </td>
       <td
-        className="p-4 border-b border-blue-gray-50"
+        className="p-4 border-b border-blue-gray-50 dark:bg-gray-400 dark:text-gray-800"
         style={{ textAlign: 'center', display: 'flex', gap: '10px', justifyContent: 'center' }}
       >
         <button onClick={eventView}>

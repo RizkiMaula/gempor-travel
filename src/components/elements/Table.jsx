@@ -8,38 +8,38 @@ const Table = (props) => {
       <table className="w-full text-center table-auto min-w-max">
         <thead>
           <tr>
-            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50 dark:bg-gray-700 dark:border-gray-700 ">
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="font-normal leading-none opacity-70"
+                className="font-normal leading-none opacity-70 dark:text-lightTextColor"
               >
                 {th1}
               </Typography>
             </th>
-            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50 dark:bg-gray-700 dark:border-gray-700">
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="font-normal leading-none opacity-70"
+                className="font-normal leading-none opacity-70 dark:text-lightTextColor"
               >
                 {th2}
               </Typography>
             </th>
-            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50 dark:bg-gray-700 dark:border-gray-700">
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="font-normal leading-none opacity-70"
+                className="font-normal leading-none opacity-70 dark:text-lightTextColor"
               >
                 {th3}
               </Typography>
             </th>
-            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <th className="p-4 border-b border-blue-gray-100 bg-blue-gray-50 dark:bg-gray-700 dark:border-gray-700">
               <Typography
                 variant="small"
                 color="blue-gray"
-                className="font-normal leading-none opacity-70"
+                className="font-normal leading-none opacity-70 dark:text-lightTextColor"
               >
                 {th4}
               </Typography>

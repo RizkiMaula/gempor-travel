@@ -34,6 +34,14 @@
   border-radius: 50%;
 }
 
+.dark-active {
+  @apply bg-blue-gray-500; /* Tailwind class for background color */
+  @apply border-2; /* Tailwind class for border width */
+  @apply border-darkColor; /* Tailwind class for border color */
+  @apply rounded-full;
+  @apply text-lightTextColor;
+}
+
 .page-item {
   list-style: none;
   padding: 2px 12px;

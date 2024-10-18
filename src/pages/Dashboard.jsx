@@ -1,6 +1,7 @@
 import { Button, Card, CardBody, CardFooter, Typography } from '@material-tailwind/react';
 import useFetch from '../hooks/useFetch';
 import Loading from '../components/elements/Loading';
+import DashboardCard from '../components/elements/DashboardCard';
 
 const Dashboard = () => {
   const { data: users, loading: loadingUsers, error: errorUsers, reFetch: reFetchUsers } = useFetch('api/v1/all-user');
@@ -15,86 +16,54 @@ const Dashboard = () => {
 
   return (
     <div className="grid grid-cols-4 gap-4 px-10 pt-20 md:pt-0">
-      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
-        <CardBody>
-          <Typography
-            variant="h5"
-            color="blue-gray"
-            className="mb-2"
-          >
-            Total Users
-          </Typography>
-        </CardBody>
-        <CardFooter className="pt-0">
-          {loadingUsers && (
+      <DashboardCard
+        title="Total Users"
+        loading={
+          loadingUsers && (
             <Loading
               width="1rem"
               height="1rem"
             />
-          )}
-          {users?.data?.length}
-        </CardFooter>
-      </Card>
-      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
-        <CardBody>
-          <Typography
-            variant="h5"
-            color="blue-gray"
-            className="mb-2"
-          >
-            Total Categories
-          </Typography>
-        </CardBody>
-        <CardFooter className="pt-0">
-          {loadingCategories && (
+          )
+        }
+        total={users?.data?.length}
+      />
+      <DashboardCard
+        title="Total Category"
+        loading={
+          loadingUsers && (
             <Loading
               width="1rem"
               height="1rem"
             />
-          )}
-          {categories?.data?.length}
-        </CardFooter>
-      </Card>
-      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
-        <CardBody>
-          <Typography
-            variant="h5"
-            color="blue-gray"
-            className="mb-2"
-          >
-            Total Activities
-          </Typography>
-        </CardBody>
-        <CardFooter className="pt-0">
-          {loadingActivities && (
+          )
+        }
+        total={categories?.data?.length}
+      />
+      <DashboardCard
+        title="Total Promos"
+        loading={
+          loadingUsers && (
             <Loading
               width="1rem"
               height="1rem"
             />
-          )}
-          {activities?.data?.length}
-        </CardFooter>
-      </Card>
-      <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">
-        <CardBody>
-          <Typography
-            variant="h5"
-            color="blue-gray"
-            className="mb-2"
-          >
-            Total promos
-          </Typography>
-        </CardBody>
-        <CardFooter className="pt-0">
-          {loadingPromos && (
+          )
+        }
+        total={promos?.data?.length}
+      />
+      <DashboardCard
+        title="Total Activities"
+        loading={
+          loadingUsers && (
             <Loading
               width="1rem"
               height="1rem"
             />
-          )}
-          {promos?.data?.length}
-        </CardFooter>
-      </Card>
+          )
+        }
+        total={activities?.data?.length}
+      />
     </div>
   );
 };

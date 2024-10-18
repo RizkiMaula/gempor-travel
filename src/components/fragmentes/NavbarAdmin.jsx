@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
-import { Card, Typography, List, ListItem, ListItemPrefix, Collapse, IconButton, Navbar } from '@material-tailwind/react';
-import { UserCircleIcon, PowerIcon, HomeIcon, PercentBadgeIcon, QueueListIcon, Squares2X2Icon, FlagIcon, MoonIcon } from '@heroicons/react/24/solid';
+import { Typography, Collapse, IconButton, Navbar } from '@material-tailwind/react';
+import { XMarkIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { Bars3Icon } from '@heroicons/react/24/outline';
-import NavListLib from './NavList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { NavList } from '../elements/MenuList';
+import ProfileElement from '../elements/ProfileElement';
 
 const NavbarAdmin = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
@@ -60,178 +60,53 @@ const NavbarAdmin = () => {
       });
   };
 
+  useEffect(() => {
+    window.addEventListener('resize', () => window.innerWidth >= 960 && setOpenNav(false));
+  }, []);
+
   return (
-    <>
-      <Card className="h-screen w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 md:flex hidden">
-        <div className="p-4 mb-2">
-          <Typography
-            variant="h5"
-            color="blue-gray"
-          >
-            Admin Page
-          </Typography>
+    <Navbar className="mx-auto max-w-screen-xl px-4 py-2 dark:bg-darkColor ">
+      <div className="flex items-center justify-between text-blue-gray-900 dark:text-lightTextColor">
+        <Typography
+          as="a"
+          href="/admin/"
+          variant="h6"
+          className="mr-4 cursor-pointer py-1.5 lg:ml-2"
+        >
+          Admin Gempor
+        </Typography>
+        <div className="hidden lg:block">
+          <NavList />
         </div>
-        <List>
-          <ListItem onClick={() => navigate('/')}>
-            <ListItemPrefix>
-              <HomeIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Home
-          </ListItem>
-          <hr className="my-2 border-blue-gray-50" />
-          <ListItem onClick={() => navigate('/admin')}>
-            <ListItemPrefix>
-              <Squares2X2Icon className="w-5 h-5" />
-            </ListItemPrefix>
-            Dashboard
-          </ListItem>
-          <ListItem onClick={() => navigate('/admin/activity')}>
-            <ListItemPrefix>
-              <UserCircleIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Activities
-          </ListItem>
-          <ListItem onClick={() => navigate('/admin/banner')}>
-            <ListItemPrefix>
-              <FlagIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Banner
-          </ListItem>
-          <ListItem onClick={() => navigate('/admin/categories')}>
-            <ListItemPrefix>
-              <QueueListIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Categories
-          </ListItem>
-
-          <ListItem onClick={() => navigate('/admin/promos')}>
-            <ListItemPrefix>
-              <PercentBadgeIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Promo
-          </ListItem>
-
-          <ListItem onClick={() => navigate('/admin/users')}>
-            <ListItemPrefix>
-              <UserCircleIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            User
-          </ListItem>
-          <hr className="my-2 border-blue-gray-50" />
-          <ListItem onClick={() => navigate('/user')}>
-            <ListItemPrefix>
-              <UserCircleIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Profile
-          </ListItem>
-          <ListItem onClick={handleLogout}>
-            <ListItemPrefix>
-              <PowerIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Log Out
-          </ListItem>
-          <ListItem onClick={handleLogout}>
-            <ListItemPrefix className="flex justify-center">
-              <MoonIcon className="w-5 h-5" />
-            </ListItemPrefix>
-            Dark
-          </ListItem>
-        </List>
-      </Card>
-
-      <nav className="w-screen fixed md:hidden z-20 top-0 bg-white border-b">
-        <div className="relative flex items-center justify-between px-6 py-3">
-          <Typography
-            as="a"
-            href="#"
-            variant="h6"
-            className="mr-4 cursor-pointer py-1.5 w-full"
-          >
-            Admin Page
-          </Typography>
-          <button
-            className="w-6 h-6 border border-black"
-            onClick={() => setOpenNav(!openNav)}
-          >
-            <Bars3Icon
-              className="w-full h-full"
+        <div className="hidden gap-2 lg:flex">
+          <ProfileElement event={handleLogout} />
+        </div>
+        <IconButton
+          variant="text"
+          color="blue-gray"
+          className="lg:hidden"
+          onClick={() => setOpenNav(!openNav)}
+        >
+          {openNav ? (
+            <XMarkIcon
+              className="h-6 w-6"
               strokeWidth={2}
             />
-          </button>
+          ) : (
+            <Bars3Icon
+              className="h-6 w-6"
+              strokeWidth={2}
+            />
+          )}
+        </IconButton>
+      </div>
+      <Collapse open={openNav}>
+        <NavList />
+        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
+          <ProfileElement event={handleLogout} />
         </div>
-      </nav>
-      {openNav && (
-        <div className="fixed top-0 left-0 h-screen w-[80vw] bg-white border z-10 px-6 pt-20 pb-6">
-          {' '}
-          <List>
-            <ListItem onClick={() => navigate('/')}>
-              <ListItemPrefix>
-                <HomeIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Home
-            </ListItem>
-            <hr className="my-2 border-blue-gray-50" />
-            <ListItem onClick={() => navigate('/admin')}>
-              <ListItemPrefix>
-                <Squares2X2Icon className="w-5 h-5" />
-              </ListItemPrefix>
-              Dashboard
-            </ListItem>
-            <ListItem onClick={() => navigate('/admin/activity')}>
-              <ListItemPrefix>
-                <UserCircleIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Activities
-            </ListItem>
-            <ListItem onClick={() => navigate('/admin/banner')}>
-              <ListItemPrefix>
-                <FlagIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Banner
-            </ListItem>
-            <ListItem onClick={() => navigate('/admin/categories')}>
-              <ListItemPrefix>
-                <QueueListIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Categories
-            </ListItem>
-
-            <ListItem onClick={() => navigate('/admin/promos')}>
-              <ListItemPrefix>
-                <PercentBadgeIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Promo
-            </ListItem>
-
-            <ListItem onClick={() => navigate('/admin/users')}>
-              <ListItemPrefix>
-                <UserCircleIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              User
-            </ListItem>
-            <hr className="my-2 border-blue-gray-50" />
-            <ListItem onClick={() => navigate('/user')}>
-              <ListItemPrefix>
-                <UserCircleIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Profile
-            </ListItem>
-            <ListItem onClick={handleLogout}>
-              <ListItemPrefix>
-                <PowerIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              Log Out
-            </ListItem>
-            <ListItem onClick={handleLogout}>
-              <ListItemPrefix className="flex justify-center">
-                <MoonIcon className="w-5 h-5" />
-              </ListItemPrefix>
-              dark
-            </ListItem>
-          </List>
-        </div>
-      )}
-    </>
+      </Collapse>
+    </Navbar>
   );
 };
 

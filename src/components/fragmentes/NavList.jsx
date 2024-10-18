@@ -107,7 +107,7 @@ const NavListLib = () => {
       >
         <Link
           to={'/user/all-promos'}
-          className="flex items-center transition-colors dark:text-red-500 hover:text-blue-500"
+          className="flex items-center transition-colors hover:text-blue-500"
         >
           Promos
         </Link>

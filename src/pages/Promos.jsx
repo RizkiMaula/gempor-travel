@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { IconContext } from 'react-icons';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
+import Loading from '../components/elements/Loading';
 
 const PromosPage = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/promos');
@@ -29,14 +30,6 @@ const PromosPage = () => {
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-
   const handleDelete = async (id) => {
     const confirmed = window.confirm('Are You Sure?');
     if (!confirmed) {
@@ -56,15 +49,19 @@ const PromosPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+    <div className="flex flex-col items-center w-full gap-2 ">
       <div className="w-[90%] flex justify-between items-center py-4">
-        <h1 className="text-xl md:text-2xl">Promo</h1>
+        <h1 className="text-xl md:text-2xl dark:text-blue-500 ">Promo</h1>
         <Button
           text="Add"
           event={() => navigate('/admin/add-promo')}
           bgColor="bg-blue-500"
         />
       </div>
+
+      {loading && <Loading />}
+
+      {error && <div>Error: {error.message}</div>}
 
       <Table
         logic={(filterData || []).map((promo) => (

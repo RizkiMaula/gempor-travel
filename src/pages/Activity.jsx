@@ -51,7 +51,7 @@ const Activity = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-full gap-2 pt-[4rem] md:pt-[5rem]">
+    <div className="flex flex-col items-center w-full gap-2 ">
       <div className="w-[90%] flex justify-between items-center py-4">
         <h1 className="text-xl md:text-2xl">Activity</h1>
         <Button
