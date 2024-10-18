@@ -5,6 +5,7 @@ import Button from '../components/elements/Button';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import usePost from '../hooks/usePost';
+import { useSelector } from 'react-redux';
 
 const Profile = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/user');
@@ -21,6 +22,8 @@ const Profile = () => {
     profilePictureUrl: '',
   });
   const navigate = useNavigate();
+  // Redux
+  const dark = useSelector((state) => state.darkMode);
 
   const handleUpdateProfile = async (e) => {
     e.preventDefault();
@@ -77,10 +80,8 @@ const Profile = () => {
     }
   };
 
-  console.log(data.data);
-
   return (
-    <div className="flex flex-col">
+    <div className={`flex flex-col ${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
       <div className="grid grid-cols-2 gap-2 p-3">
         <div className="flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
           <h1>Profile</h1>

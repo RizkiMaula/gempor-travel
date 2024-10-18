@@ -6,6 +6,7 @@ import { IconContext } from 'react-icons';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import InformationLayout from '../components/elements/InformationLayout';
 import InformationCard from '../components/elements/InformationCard';
+import { useSelector } from 'react-redux';
 
 const AllPromos = () => {
   const { data, loading, error } = useFetch('api/v1/promos');
@@ -13,6 +14,9 @@ const AllPromos = () => {
   const [page, setPage] = useState(0); // simpan halaman yang aktif (di gpt currentData)
   const [filterData, setFilterData] = useState(data?.data || []); // data akan ditampilkan setelah filter data untuk tiap halaman (di gpt data)
   const n = 5; // jumlah maksimal data yang akan ditampilkan ()
+
+  // Redux
+  const dark = useSelector((state) => state.darkMode);
 
   useEffect(() => {
     setFilterData(data?.data?.slice(page, page + n));
@@ -35,6 +39,7 @@ const AllPromos = () => {
     <UserLayout
       height={'h-110 md:h-[50%]'}
       padding={'pb-10 md:p-10'}
+      classname={`${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}
     >
       <InformationLayout
         title="All Promos"

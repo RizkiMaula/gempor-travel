@@ -84,6 +84,9 @@ const Banner = () => {
 
   const handleImage = (e) => {
     setBannerImage(e.target.value);
+    if (e.target.files[0]) {
+      setProfilePictureFile(e.target.files[0]);
+    }
   };
 
   const handleNameUpdate = (e) => {

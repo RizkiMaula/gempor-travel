@@ -6,9 +6,14 @@ import { IconContext } from 'react-icons';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import InformationLayout from '../components/elements/InformationLayout';
 import InformationCard from '../components/elements/InformationCard';
+import Loading from '../components/elements/Loading';
+import { useSelector } from 'react-redux';
 
 const AllActivities = () => {
   const { data: activities, loading: activitiesLoading, error: activitiesError, reFetch: activitiesReFetch } = useFetch('api/v1/activities');
+
+  // redux
+  const dark = useSelector((state) => state.darkMode);
 
   // paginate
   const [page, setPage] = useState(0); // simpan halaman yang aktif (di gpt currentData)
@@ -28,10 +33,11 @@ const AllActivities = () => {
     <UserLayout
       height={'h-110 md:h-[50%]'}
       padding={'pb-10 md:p-10'}
+      classname={`${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}
     >
       <InformationLayout
         title="All Activities"
-        loading={activitiesLoading && <p>Loading...</p>}
+        loading={activitiesLoading && <Loading />}
         error={activitiesError && <p>Error: {activitiesError.message}</p>}
         logic={(filterData || []).map((activity, index) => (
           <InformationCard

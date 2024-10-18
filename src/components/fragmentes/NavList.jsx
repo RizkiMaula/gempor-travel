@@ -1,20 +1,21 @@
-import { useState } from 'react';
-import { Navbar, Collapse, Typography, IconButton } from '@material-tailwind/react';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Typography } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProfileElement from '../elements/ProfileElement';
-import { MoonIcon } from '@heroicons/react/24/solid';
+import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
+import { darkMode, toggleMode } from '../../redux/slices/darkSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
-const NavListLib = ({ loginEvent }) => {
+const NavListLib = () => {
+  // redux
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.darkMode);
+
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
-  const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
-
-  const handleOpen = () => setOpenModal(!openModal);
 
   const handleLogout = () => {
     let config = {
@@ -106,7 +107,7 @@ const NavListLib = ({ loginEvent }) => {
       >
         <Link
           to={'/user/all-promos'}
-          className="flex items-center transition-colors hover:text-blue-500"
+          className="flex items-center transition-colors dark:text-red-500 hover:text-blue-500"
         >
           Promos
         </Link>
@@ -117,8 +118,12 @@ const NavListLib = ({ loginEvent }) => {
         color="blue-gray"
         className="p-1 font-medium"
       >
-        <button>
-          <MoonIcon className="w-5 h-5" />
+        <button
+          onClick={() => {
+            dispatch(toggleMode());
+          }}
+        >
+          {mode.darkMode ? <MoonIcon className="w-5 h-5" /> : <SunIcon className="w-5 h-5" />}
         </button>
       </Typography>
       <Typography
@@ -152,3 +157,13 @@ const NavListLib = ({ loginEvent }) => {
 };
 
 export default NavListLib;
+
+/**
+ * 1. toogling pake redux, inisialisai di redux
+ * 2. buat slicer di redux untuk membuat fungsi dispatch dan initial value dari theme (dark mode)
+ * 3. udah bikin slicer, buat store di redux. store buat nyimpen data redux
+ * tambahan: harusnya configurasi slicer dengan localStorage
+ * 4. inisialisasi di app.jsx dengan membuat fungsi/useEffect untuk memberikan classname di root element
+ * 5. setting tailwind config( darkmode = 'class')
+ * 6. buat toogle dan handle event onClick mengarah dispatch dari darkmode
+ */

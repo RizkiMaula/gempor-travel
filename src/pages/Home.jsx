@@ -2,11 +2,15 @@ import UserLayout from '../components/elements/UserLayout';
 import useFetch from '../hooks/useFetch';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import Carousel from '../components/elements/Carousel';
-// import ProperCarousel from '../components/elements/ProperCarousel';
-import { Button, Card, CardBody, CardFooter, CardHeader, Carousel, Tab, TabPanel, Tabs, TabsBody, TabsHeader, Typography } from '@material-tailwind/react';
+import { useSelector } from 'react-redux';
+
+import { Button, Card, CardBody, CardHeader, Carousel, Typography } from '@material-tailwind/react';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Home = () => {
+  // Redux
+  const dark = useSelector((state) => state.darkMode);
+
   const { data: banners, loading: bannerLoading, error: bannerError, reFetch: bannerReFetch } = useFetch('api/v1/banners');
   const { data: promo, loading: promoLoading, error: promoError, reFetch: promoReFetch } = useFetch('api/v1/promos');
   const { data: activities, loading: activitiesLoading, error: activitiesError, reFetch: activitiesReFetch } = useFetch('api/v1/activities');
@@ -19,11 +23,8 @@ const Home = () => {
   const initialImage = promo?.data?.[1]?.imageUrl;
   const [active, setActive] = useState(initialImage);
 
-  // console.log(categoryid);
-
-  // console.log(activities?.data?.map((v) => v.imageUrls));
-  // console.log(categories?.data?.map((v) => v.name));
-  console.log(categories?.data);
+  const [mode, setMode] = useLocalStorage('mode', dark?.darkMode || true);
+  console.log(mode);
 
   useEffect(() => {
     if (initialImage) {
@@ -43,9 +44,9 @@ const Home = () => {
   };
 
   return (
-    <UserLayout>
+    <UserLayout classname={`${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}>
       {/* banner */}
-      <div className="bg-white w-[100%] h-[25%] flex flex-col border-2 border-black -top-50">
+      <div className="bg-white w-[100%] h-[25%] flex flex-col -top-50">
         <div className="w-[100%] h-[100%] flex justify-between items-center">
           {bannerLoading && <div>Loading...</div>}
           {bannerError && <div>Error: {bannerError}</div>}
@@ -82,7 +83,7 @@ const Home = () => {
         </div>
       </div>
       {/* promo */}
-      <div className="w-[90%] flex-col flex items-center ">
+      <div className={`w-[90%] flex-col flex items-center dark:text-white`}>
         <div className="flex items-center justify-between w-full py-10 px-9">
           <h1 className="text-lg sm:text-xl md:text-2xl">Discover More Promos</h1>
           <Link
@@ -153,7 +154,7 @@ const Home = () => {
         </div>
       </div>
       {/* activities */}
-      <div className="bg-white w-[90%] flex flex-col justify-center items-center">
+      <div className="w-[90%] flex flex-col justify-center items-center">
         <div className="flex items-center justify-between w-full py-10 px-9">
           <h1 className="text-lg sm:text-xl md:text-2xl">Discover Fun Activities</h1>
           <Link

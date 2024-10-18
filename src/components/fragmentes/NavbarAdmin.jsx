@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Card, Typography, List, ListItem, ListItemPrefix, Collapse, IconButton, Navbar } from '@material-tailwind/react';
-import { UserCircleIcon, PowerIcon, HomeIcon, PercentBadgeIcon, QueueListIcon, Squares2X2Icon, FlagIcon } from '@heroicons/react/24/solid';
+import { UserCircleIcon, PowerIcon, HomeIcon, PercentBadgeIcon, QueueListIcon, Squares2X2Icon, FlagIcon, MoonIcon } from '@heroicons/react/24/solid';
 import axios from 'axios';
 import { Bars3Icon } from '@heroicons/react/24/outline';
 import NavListLib from './NavList';
@@ -45,7 +45,10 @@ const NavbarAdmin = () => {
             console.log(JSON.stringify(response.data));
             setToken('');
             setRole('');
-            navigate('/login');
+            alert('logout success');
+            setTimeout(() => {
+              navigate('/login');
+            }, 1000);
           })
           .catch((error) => {
             console.log(error);
@@ -125,6 +128,12 @@ const NavbarAdmin = () => {
               <PowerIcon className="w-5 h-5" />
             </ListItemPrefix>
             Log Out
+          </ListItem>
+          <ListItem onClick={handleLogout}>
+            <ListItemPrefix className="flex justify-center">
+              <MoonIcon className="w-5 h-5" />
+            </ListItemPrefix>
+            Dark
           </ListItem>
         </List>
       </Card>
@@ -212,42 +221,15 @@ const NavbarAdmin = () => {
               </ListItemPrefix>
               Log Out
             </ListItem>
+            <ListItem onClick={handleLogout}>
+              <ListItemPrefix className="flex justify-center">
+                <MoonIcon className="w-5 h-5" />
+              </ListItemPrefix>
+              dark
+            </ListItem>
           </List>
         </div>
       )}
-
-      {/* <Navbar className="px-6 py-3 mx-auto flex md:hidden fixed w-screen top-0 z-10">
-        <div className="flex items-center justify-between text-blue-gray-900 w-full">
-          <Typography
-            as="a"
-            href="#"
-            variant="h6"
-            className="mr-4 cursor-pointer py-1.5 w-full"
-          >
-            Material Tailwind
-          </Typography>
-          <div className="hidden lg:block"></div>
-          <IconButton
-            variant="text"
-            className="w-6 h-6 ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-            ripple={false}
-            onClick={() => setOpenNav(!openNav)}
-          >
-            {openNav ? (
-              <XMarkIcon
-                className="w-6 h-6"
-                strokeWidth={2}
-              />
-            ) : (
-              <Bars3Icon
-                className="w-6 h-6"
-                strokeWidth={2}
-              />
-            )}
-          </IconButton>
-        </div>
-        <Collapse open={openNav}></Collapse>
-      </Navbar> */}
     </>
   );
 };
