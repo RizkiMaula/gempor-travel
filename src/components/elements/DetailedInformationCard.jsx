@@ -1,5 +1,4 @@
 import { Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react';
-import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 const DetailedInformationCard = ({ indexKey, indexKeyCard, imageUrl, title, description, createdAt, updatedAt }) => {
@@ -41,7 +40,7 @@ const DetailedInformationCard = ({ indexKey, indexKeyCard, imageUrl, title, desc
         </CardBody>
         <CardFooter className="flex items-center justify-between">
           <div className="flex items-center -space-x-3">
-            <Typography className="font-normal text-[0.2rem]">{createdAt}</Typography>
+            <Typography className="font-normal text-xs">{createdAt}</Typography>
           </div>
           <Typography className="font-normal text-xs">{updatedAt}</Typography>
         </CardFooter>
