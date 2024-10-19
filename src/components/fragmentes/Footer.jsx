@@ -3,6 +3,7 @@ import useFetch from '../../hooks/useFetch';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons';
+import MyImage from '../../assets/image.png';
 
 const Footer = () => {
   const { data, loading } = useFetch('api/v1/promos');
@@ -86,7 +87,12 @@ const Footer = () => {
         </div>
         <div className="grid grid-cols-3 gap-3 w-full">
           <div className="flex justify-center col-span-3 md:col-span-1 md:justify-start">
-            <div className="w-[4rem] h-[4rem] border-2 border-black ">Logo</div>
+            <div className="w-[4rem] h-[4rem]">
+              <img
+                src={MyImage}
+                alt="logo"
+              />
+            </div>
           </div>
           <div className="col-span-3 md:col-span-1 flex justify-center items-center">
             <ul className="flex gap-5 font-bold ">
