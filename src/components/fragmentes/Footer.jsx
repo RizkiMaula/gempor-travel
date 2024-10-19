@@ -106,18 +106,21 @@ const Footer = () => {
               <FontAwesomeIcon
                 icon={faInstagram}
                 className="text-2xl "
+                onClick={() => window.open('https://www.instagram.com/')}
               />
             </button>
             <button className=" p-2 rounded-full w-[3rem] h-[3rem]">
               <FontAwesomeIcon
                 icon={faXTwitter}
                 className="text-2xl "
+                onClick={() => window.open('https://www.x.com/RizkiMa666')}
               />
             </button>
             <button className=" p-2 rounded-full w-[3rem] h-[3rem]">
               <FontAwesomeIcon
                 icon={faLinkedin}
                 className="text-2xl "
+                onClick={() => window.open('https://www.linkedin.com/in/rizkimaulana892/')}
               />
             </button>
           </div>
