@@ -44,6 +44,7 @@ const AllPromos = () => {
         title="All Promos"
         loading={loading && <p>Loading...</p>}
         error={error && <p>Error: {error.message}</p>}
+        noData={!data?.data && <p>No data available</p>}
         logic={(filterData || []).map((promo, index) => (
           <InformationCard
             key={index}

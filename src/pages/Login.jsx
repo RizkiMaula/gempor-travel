@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import usePost from '../hooks/usePost';
 import Button from '../components/elements/Button';
@@ -112,12 +112,12 @@ const Login = () => {
           className="mt-4 text-center font-normal"
         >
           Haven&apos;t have an account?{' '}
-          <a
-            href="/register"
+          <Link
+            to="/register"
             className="font-medium text-gray-900"
           >
             Register
-          </a>
+          </Link>
         </Typography>
       </Card>
     </div>
