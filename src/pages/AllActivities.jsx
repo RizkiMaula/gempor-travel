@@ -33,7 +33,6 @@ const AllActivities = () => {
     <UserLayout
       height={'h-110 md:h-[50%]'}
       padding={'pb-10 md:p-10'}
-      classname={`${dark.darkMode ? 'bg-black text-white' : 'bg-white text-black'}`}
     >
       <InformationLayout
         title="All Activities"
