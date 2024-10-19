@@ -1,4 +1,5 @@
 import { Button, Card, CardBody, CardFooter, Typography } from '@material-tailwind/react';
+import { Link } from 'react-router-dom';
 
 const NotFound = () => {
   return (
@@ -45,8 +46,8 @@ const NotFound = () => {
           </Typography>
         </CardBody>
         <CardFooter className="pt-0">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="inline-block"
           >
             <Button
@@ -70,7 +71,7 @@ const NotFound = () => {
                 />
               </svg>
             </Button>
-          </a>
+          </Link>
         </CardFooter>
       </Card>
     </div>

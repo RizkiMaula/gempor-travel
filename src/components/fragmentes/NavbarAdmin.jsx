@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import { Typography, Collapse, IconButton, Navbar } from '@material-tailwind/react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
@@ -68,12 +68,10 @@ const NavbarAdmin = () => {
     <Navbar className="mx-auto max-w-screen-xl px-4 py-2 dark:bg-darkColor ">
       <div className="flex items-center justify-between text-blue-gray-900 dark:text-lightTextColor">
         <Typography
-          as="a"
-          href="/admin/"
           variant="h6"
           className="mr-4 cursor-pointer py-1.5 lg:ml-2"
         >
-          Admin Gempor
+          <Link to={'/admin'}>Admin Gempor</Link>
         </Typography>
         <div className="hidden lg:block">
           <NavList />

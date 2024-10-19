@@ -137,87 +137,6 @@ const Register = () => {
   };
 
   return (
-    // <div
-    //   className="flex flex-col items-center justify-center h-screen "
-    //   style={{ border: '2px solid black' }}
-    // >
-    //   <h1>Register</h1>
-    //   <form className="flex flex-col w-1/2 gap-3 p-10 bg-red-200 h-1/2">
-    //     <div className="flex gap-3 ">
-    //       <label htmlFor="email">Email</label>
-    //       <input
-    //         type="email"
-    //         name="email"
-    //         value={email}
-    //         onChange={(e) => setEmail(e.target.value)}
-    //       />
-    //       <p>{emailError}</p>
-    //     </div>
-    //     <div>
-    //       <label htmlFor="name">Name</label>
-    //       <input
-    //         type="text"
-    //         name="name"
-    //         value={name}
-    //         onChange={(e) => setName(e.target.value)}
-    //       />
-    //       <p>{nameError}</p>
-    //     </div>
-    //     <div>
-    //       <label htmlFor="password">Password</label>
-    //       <input
-    //         type="password"
-    //         name="password"
-    //         value={password}
-    //         onChange={(e) => setPassword(e.target.value)}
-    //       />
-    //       <p>{passwordError}</p>
-    //     </div>
-    //     <div>
-    //       <label htmlFor="confirmPassword">Confirm Password</label>
-    //       <input
-    //         type="password"
-    //         name="confirmPassword"
-    //         value={passwordRepeat}
-    //         onChange={(e) => setPasswordRepeat(e.target.value)}
-    //       />
-    //       <p>{passwordRepeatError}</p>
-    //     </div>
-    //     <div>
-    //       <label htmlFor="role">Role</label>
-    //       <input
-    //         type="text"
-    //         name="role"
-    //         value="user"
-    //         readOnly
-    //         onChange={(e) => setRole(e.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor="Number">Phone Number</label>
-    //       <input
-    //         type="text"
-    //         name="Number"
-    //         value={phoneNumber}
-    //         onChange={(e) => setPhoneNumber(e.target.value)}
-    //       />
-    //     </div>
-    //     <div>
-    //       <label htmlFor="image">Profile Image</label>
-    //       <input
-    //         type="file"
-    //         name="image"
-    //         onChange={(e) => setProfilePictureFile(e.target.files[0])}
-    //       />
-    //     </div>
-    //   </form>
-    //   <Button
-    //     text="Register"
-    //     bgColor="bg-red-500"
-    //     event={handleRegister}
-    //   />
-    //   <h4>Already have an account?</h4> <Link to={'/login'}>Login</Link>
-    // </div>
     <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl my-[5rem] sm:my-[2rem]">
       <h1>Register</h1>
       <form
@@ -330,12 +249,12 @@ const Register = () => {
         className="mt-4 text-center font-normal"
       >
         Already have have an account?{' '}
-        <a
-          href="/login"
+        <Link
+          to="/login"
           className="font-medium text-gray-900"
         >
           Login
-        </a>
+        </Link>
       </Typography>
     </div>
   );
