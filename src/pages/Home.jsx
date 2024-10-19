@@ -93,6 +93,8 @@ const Home = () => {
             View All
           </Link>
         </div>
+        {promoLoading && <div>Loading...</div>}
+        {promoError && <div>Error: {promoError}</div>}
         <div className="grid w-full gap-4">
           <figure className="relative w-full h-96">
             <img
@@ -102,8 +104,6 @@ const Home = () => {
               onClick={handleChangeImage}
             />
             <figcaption className="absolute bottom-8 left-2/4 flex w-[calc(100%-4rem)] -translate-x-2/4 justify-between rounded-xl border border-white bg-white/75 py-4 px-6 shadow-lg shadow-black/5 saturate-200 backdrop-blur-sm">
-              {promoLoading && <div>Loading...</div>}
-              {promoError && <div>Error: {promoError}</div>}
               <div>
                 <Typography
                   variant="h5"
@@ -164,6 +164,8 @@ const Home = () => {
             View All
           </Link>
         </div>
+        {activitiesLoading && <div>Loading...</div>}
+        {activitiesError && <div>Error: {activitiesError}</div>}
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3">
           {activities?.data
             ?.filter((activity, index) => index <= 5)
@@ -240,7 +242,7 @@ const Home = () => {
             View All
           </Link>
         </div>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2">
           {categories?.data
             ?.filter((category, index) => index < 4)
             .map((category, index) => (
