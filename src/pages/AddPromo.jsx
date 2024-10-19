@@ -21,39 +21,32 @@ const AddActivity = () => {
   const { createItem } = usePost('api/v1/create-promo');
 
   const handleTitle = (e) => {
-    console.log(e.target.value);
     setTitle(e.target.value);
   };
 
   const handleCode = (e) => {
-    console.log(e.target.value);
     setCode(e.target.value);
   };
 
   const handleDiscount = (e) => {
-    console.log(e.target.value);
     setDiscount(e.target.value);
   };
 
   const handleMinClaim = (e) => {
-    console.log(e.target.value);
     setMinClaim(e.target.value);
   };
 
   const handleDescription = (e) => {
-    console.log(e.target.value);
     setDescription(e.target.value);
   };
 
   const handleTerm = (e) => {
-    console.log(e.target.value);
     setTerm(e.target.value);
   };
 
   const handlePicture = (e) => {
     setProfilePictureName(e.target.value);
     setProfilePictureFile(e.target.files[0]);
-    console.log(e.target.files);
   };
 
   const handleSubmit = async (e) => {
@@ -124,10 +117,10 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* Title */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Title</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Title</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 name="title"
                 id="title"
                 value={title}
@@ -136,10 +129,10 @@ const AddActivity = () => {
             </div>
             {/* Promo Code */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Promo Code</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Promo Code</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Price Discount"
                 name="promo code"
                 id="promo code"
@@ -151,10 +144,10 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* Discount Price */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Discount Price</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Discount Price</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Rating"
                 name="discount"
                 id="price"
@@ -164,10 +157,10 @@ const AddActivity = () => {
             </div>
             {/* Min Claim Price */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Min Claim Price</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Min Claim Price</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Price Discount"
                 name="price"
                 id="price"
@@ -179,7 +172,7 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* Description */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Description</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Description</label>
               <textarea
                 id=""
                 className="w-full p-2 border rounded text-darkColor"
@@ -189,7 +182,7 @@ const AddActivity = () => {
             </div>
             {/* Term & Condition */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Term & Condition</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Term & Condition</label>
               <textarea
                 id=""
                 className="w-full p-2 border rounded text-darkColor"
@@ -206,6 +199,7 @@ const AddActivity = () => {
               value={profilePictureName}
               onChange={handlePicture}
               multiple
+              className="w-full p-2 border rounded text-darkColor"
             />
           </div>
         </div>

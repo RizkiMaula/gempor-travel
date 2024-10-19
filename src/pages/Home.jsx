@@ -43,6 +43,8 @@ const Home = () => {
     setChangePrice(newPrice);
   };
 
+  console.log(promo?.data);
+
   return (
     <UserLayout>
       {/* banner */}
@@ -95,6 +97,7 @@ const Home = () => {
         </div>
         {promoLoading && <div>Loading...</div>}
         {promoError && <div>Error: {promoError}</div>}
+        {promo?.data === undefined || (banners?.data?.length === 0 && <div>No data available.</div>)}
         <div className="grid w-full gap-4">
           <figure className="relative w-full h-96">
             <img

@@ -41,7 +41,7 @@ const DetailedInformationCard = ({ indexKey, indexKeyCard, imageUrl, title, desc
         </CardBody>
         <CardFooter className="flex items-center justify-between">
           <div className="flex items-center -space-x-3">
-            <Typography className="font-normal text-xs">{createdAt}</Typography>
+            <Typography className="font-normal text-[0.2rem]">{createdAt}</Typography>
           </div>
           <Typography className="font-normal text-xs">{updatedAt}</Typography>
         </CardFooter>

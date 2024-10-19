@@ -145,7 +145,7 @@ const DetailPromo = () => {
             <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
               <div className=" flex flex-col md:flex-row gap-2 justify-center">
                 {/* Title */}
-                <div className="w-full max-w-sm min-w-[200px]">
+                <div className="w-full max-w-sm min-w-[200px] dark:text-black">
                   <label className="block mb-2 text-sm text-slate-600">Title</label>
                   <input
                     type="text"
@@ -157,7 +157,7 @@ const DetailPromo = () => {
                     disabled={!editable}
                   />
                 </div>
-                <div className="w-full max-w-sm min-w-[200px]">
+                <div className="w-full max-w-sm min-w-[200px] dark:text-black">
                   {/* Promo Code */}
                   <label className="block mb-2 text-sm text-slate-600">Promo Code</label>
                   <input
@@ -172,7 +172,7 @@ const DetailPromo = () => {
                   />
                 </div>
               </div>
-              <div className=" flex flex-col md:flex-row gap-2 justify-center">
+              <div className=" flex flex-col md:flex-row gap-2 justify-center dark:text-black">
                 {/* Discount Price */}
                 <div className="w-full max-w-sm min-w-[200px]">
                   <label className="block mb-2 text-sm text-slate-600">Discount Price</label>
@@ -202,7 +202,7 @@ const DetailPromo = () => {
                   />
                 </div>
               </div>
-              <div className=" flex flex-col md:flex-row gap-2 justify-center">
+              <div className=" flex flex-col md:flex-row gap-2 justify-center dark:text-black">
                 {/* Description */}
                 <div className="w-full max-w-sm min-w-[200px]">
                   <label className="block mb-2 text-sm text-slate-600">Description</label>

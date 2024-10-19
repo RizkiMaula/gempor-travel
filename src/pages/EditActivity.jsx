@@ -45,62 +45,50 @@ const EditActivity = () => {
 
   const handleCategory = (e) => {
     setFormData((prev) => ({ ...prev, categoryId: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleTitle = (e) => {
     setFormData((prev) => ({ ...prev, title: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handlePrice = (e) => {
     setFormData((prev) => ({ ...prev, price: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleDiscount = (e) => {
     setFormData((prev) => ({ ...prev, price_discount: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleRating = (e) => {
     setFormData((prev) => ({ ...prev, rating: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleReviews = (e) => {
     setFormData((prev) => ({ ...prev, total_reviews: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleFacilities = (e) => {
     setFormData((prev) => ({ ...prev, facilities: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleDescription = (e) => {
     setFormData((prev) => ({ ...prev, description: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleProvince = (e) => {
     setFormData((prev) => ({ ...prev, province: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleCity = (e) => {
     setFormData((prev) => ({ ...prev, city: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleAddress = (e) => {
     setFormData((prev) => ({ ...prev, address: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handleLocationMaps = (e) => {
     setFormData((prev) => ({ ...prev, location_maps: e.target.value }));
-    console.log(e.target.value);
   };
 
   const handlePicture = (e) => {
@@ -234,7 +222,7 @@ const EditActivity = () => {
       )}
       <form
         action=""
-        className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
+        className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4 dark:text-black"
       >
         <div className="flex flex-col items-center justify-center">
           {!fetchImg && <Loading />}

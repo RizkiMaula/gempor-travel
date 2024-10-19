@@ -162,10 +162,10 @@ const AddActivity = () => {
           <div className=" flex justify-center flex-col md:flex-row gap-2">
             {/* select option */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-800">Category</label>
+              <label className="block mb-2 text-sm text-slate-800 dark:text-black">Category</label>
               <div className="relative">
                 <select
-                  className="w-full py-2 pl-3 pr-8 text-sm transition duration-300 bg-transparent border rounded shadow-sm appearance-none cursor-pointer placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 focus:shadow-md"
+                  className="w-full py-2 pl-3 pr-8 text-sm transition duration-300 bg-transparent border rounded shadow-sm appearance-none cursor-pointer placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 focus:shadow-md dark:text-black"
                   name="category"
                   id=""
                   onChange={handleCategory}
@@ -197,10 +197,10 @@ const AddActivity = () => {
             </div>
             {/* title */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Title</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Title</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Your Name"
                 name="title"
                 id="title"
@@ -212,10 +212,10 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* price */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Price</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Price</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 name="price"
                 id="price"
                 value={price}
@@ -224,10 +224,10 @@ const AddActivity = () => {
             </div>
             {/* price discount */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Price Discount</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Price Discount</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Price Discount"
                 name="discount"
                 id="price"
@@ -239,10 +239,10 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* rating */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Rating</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Rating</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Rating"
                 name="price"
                 id="price"
@@ -252,11 +252,11 @@ const AddActivity = () => {
             </div>
             {/* total Review */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Total Review</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Total Review</label>
               <input
                 type="number"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                placeholder="Price Discount"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
+                placeholder="Price Discount "
                 name="price"
                 id="price"
                 value={reviews}
@@ -267,7 +267,7 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* Facilities */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Facilities</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Facilities</label>
               <textarea
                 id=""
                 className="w-full p-2 border rounded text-darkColor"
@@ -277,7 +277,7 @@ const AddActivity = () => {
             </div>
             {/* Description */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Description</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Description</label>
               <textarea
                 id=""
                 className="w-full p-2 border rounded text-darkColor"
@@ -289,10 +289,10 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center">
             {/* Province */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Province</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Province</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="Province"
                 name="province"
                 id="province"
@@ -302,10 +302,10 @@ const AddActivity = () => {
             </div>
             {/* City */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">City</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">City</label>
               <input
                 type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow dark:text-black"
                 placeholder="City"
                 name="city"
                 id="city"
@@ -317,7 +317,7 @@ const AddActivity = () => {
           <div className=" flex flex-col md:flex-row gap-2 justify-center ">
             {/* Address */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Address</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Address</label>
               <textarea
                 id=""
                 className="w-full p-2 border rounded text-darkColor"
@@ -327,7 +327,7 @@ const AddActivity = () => {
             </div>
             {/* Location Maps */}
             <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Location Maps</label>
+              <label className="block mb-2 text-sm text-slate-600 dark:text-black">Location Maps</label>
               <textarea
                 id=""
                 className="w-full p-2 border rounded text-darkColor"
@@ -343,6 +343,7 @@ const AddActivity = () => {
               accept="image/*"
               onChange={handlePicture}
               multiple
+              className="w-full p-2 border rounded text-darkColor"
             />
           </div>
         </div>

@@ -65,7 +65,7 @@ function NavListMenu() {
           <Typography
             variant="h6"
             color="blue-gray"
-            className="flex items-center text-sm font-bold dark:text-lightTextColor"
+            className="flex items-center text-sm font-bold dark:text-text-gray-900"
           >
             {title}
           </Typography>
