@@ -7,6 +7,7 @@ const App = () => {
   const element = useRoutes(RouteList);
   const theme = useSelector((state) => state.darkMode.darkMode);
   // const dispatch = useDispatch();
+
   useEffect(() => {
     console.log({ theme });
     const root = document.documentElement; // untuk panggil root element di document
