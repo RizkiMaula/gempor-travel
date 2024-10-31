@@ -16,6 +16,9 @@ import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
 import Loading from '../components/elements/Loading';
+// import { successAlert, errorAlert } from '../hooks/alerts/useAlert';
+import useAlert from '../hooks/alerts/useAlert';
+import Swal from 'sweetalert2';
 
 const Banner = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/banners');
@@ -35,6 +38,7 @@ const Banner = () => {
   const [bannerImage, setBannerImage] = useState('');
   const [profilePictureFile, setProfilePictureFile] = useState(null);
   const [token, setToken] = useLocalStorage('authToken', '');
+  const { successAlert, errorAlert } = useAlert();
 
   // hooks Untuk Update
   const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -108,10 +112,18 @@ const Banner = () => {
       if (profilePictureFile) {
         const acceptImage = ['image/'];
         if (!acceptImage.some((item) => profilePictureFile.type.includes(item))) {
-          return alert('Files that are allowed are only of type Image');
+          // return alert('Files that are allowed are only of type Image');
+          return errorAlert({
+            title: 'Oops!',
+            text: 'Files that are allowed are only of type Image.',
+          });
         }
         if (profilePictureFile?.size > 500 * 1024) {
-          return alert('File size exceeds 500 kb');
+          // return alert('File size exceeds 500 kb');
+          return errorAlert({
+            title: 'Oops!',
+            text: 'File size exceeds 500 kb.',
+          });
         }
         let formData = new FormData();
         formData.append('image', profilePictureFile);
@@ -141,10 +153,17 @@ const Banner = () => {
       const createdItem = await createItem(bannerData);
       reFetch();
       setShowModal(false);
-      alert(`Success: ${createdItem.message}`);
+
+      successAlert({
+        title: 'Success',
+        text: createdItem.message,
+        timer: 1500,
+      });
     } catch (error) {
-      console.log(error);
-      alert(error.message);
+      errorAlert({
+        title: 'Error',
+        text: error.message,
+      });
     }
   };
 
@@ -157,10 +176,18 @@ const Banner = () => {
       if (bannerImageUpdateFile) {
         const acceptImage = ['image/'];
         if (!acceptImage.some((item) => bannerImageUpdateFile.type.includes(item))) {
-          return alert('Files that are allowed are only of type Image');
+          // return alert('Files that are allowed are only of type Image');
+          return errorAlert({
+            title: 'Error',
+            text: 'Files that are allowed are only of type Image.',
+          });
         }
         if (bannerImageUpdateFile?.size > 500 * 1024) {
-          return alert('File size exceeds 500 kb');
+          // return alert('File size exceeds 500 kb');
+          return errorAlert({
+            title: 'Error',
+            text: 'File size exceeds 500 kb',
+          });
         }
         let formData = new FormData();
         formData.append('image', bannerImageUpdateFile);
@@ -193,10 +220,19 @@ const Banner = () => {
       const updatedItem = await updateItem(updateId, bannerData);
       reFetch();
       setShowModalUpdate(false);
-      alert(`Success: ${updatedItem.message}`);
+      // alert(`Success: ${updatedItem.message}`);
+      successAlert({
+        title: 'Success',
+        text: updatedItem.message,
+        timer: 1500,
+      });
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      // alert(error.message);
+      errorAlert({
+        title: 'Error',
+        text: error.message,
+      });
     }
   };
 
