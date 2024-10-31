@@ -18,7 +18,7 @@ import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
 import Loading from '../components/elements/Loading';
 // import { successAlert, errorAlert } from '../hooks/alerts/useAlert';
 import useAlert from '../hooks/alerts/useAlert';
-import Swal from 'sweetalert2';
+// import useDeleteAlert from '../hooks/alerts/useDeleteAlert';
 
 const Banner = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/banners');
@@ -30,6 +30,7 @@ const Banner = () => {
   // hooks Untuk delete
   const { deleteItem } = useDelete('api/v1/delete-banner');
   const [deleteId, setDeleteId] = useState(null);
+  // const { deleteAlertSuccess, deleteAlertConfirm, deleteAlertReject, deleteAlertError } = useDeleteAlert();
 
   // hooks Untuk Create
   const [showModal, setShowModal] = useState(false);
@@ -65,6 +66,7 @@ const Banner = () => {
   // untuk delete
   const handleDelete = async (id) => {
     const confirmed = window.confirm('Are You Sure?');
+    // const confirmed = deleteAlertConfirm();
     if (!confirmed) {
       setDeleteId(null);
       return;
