@@ -16,9 +16,8 @@ import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
 import Loading from '../components/elements/Loading';
-// import { successAlert, errorAlert } from '../hooks/alerts/useAlert';
 import useAlert from '../hooks/alerts/useAlert';
-// import useDeleteAlert from '../hooks/alerts/useDeleteAlert';
+import useDeleteAlert from '../hooks/alerts/useDeleteAlert';
 
 const Banner = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/banners');
@@ -30,7 +29,7 @@ const Banner = () => {
   // hooks Untuk delete
   const { deleteItem } = useDelete('api/v1/delete-banner');
   const [deleteId, setDeleteId] = useState(null);
-  // const { deleteAlertSuccess, deleteAlertConfirm, deleteAlertReject, deleteAlertError } = useDeleteAlert();
+  const { deleteAlertConfirm, deleteAlertSuccess, deleteAlertReject } = useDeleteAlert();
 
   // hooks Untuk Create
   const [showModal, setShowModal] = useState(false);
@@ -65,13 +64,6 @@ const Banner = () => {
 
   // untuk delete
   const handleDelete = async (id) => {
-    const confirmed = window.confirm('Are You Sure?');
-    // const confirmed = deleteAlertConfirm();
-    if (!confirmed) {
-      setDeleteId(null);
-      return;
-    }
-
     try {
       const response = await deleteItem(id);
       if (response.status === 'OK') {
@@ -144,6 +136,10 @@ const Banner = () => {
           })
           .catch((err) => {
             console.log(err);
+            return errorAlert({
+              title: 'Error',
+              text: 'Failed to upload image.',
+            });
           });
       }
 
@@ -272,7 +268,24 @@ const Banner = () => {
               name={banner.name}
               createdAt={banner.createdAt}
               updatedAt={banner.updatedAt}
-              eventDelete={() => handleDelete(banner.id)}
+              eventDelete={() => {
+                deleteAlertConfirm({
+                  title: 'Delete Banner',
+                  text: 'Are you sure you want to delete this banner?',
+                  onConfirm: () => {
+                    deleteAlertSuccess({
+                      text: 'Your banner has been deleted.',
+                    });
+                    handleDelete(banner.id);
+                  },
+                  onCancel: () => {
+                    deleteAlertReject({
+                      text: 'You canceled the deletion!',
+                    });
+                  },
+                });
+                // handleDelete(banner.id);
+              }}
               eventEdit={() => {
                 setShowModalUpdate(true);
                 setBannerNameUpdate(banner.name);

@@ -9,12 +9,14 @@ import ReactPaginate from 'react-paginate';
 import { AiFillLeftCircle, AiFillRightCircle } from 'react-icons/ai';
 import { IconContext } from 'react-icons';
 import Loading from '../components/elements/Loading';
+import useDeleteAlert from '../hooks/alerts/useDeleteAlert';
 
 const Activity = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/activities');
   const { deleteItem } = useDelete('api/v1/delete-activity');
   const [deleteId, setDeleteId] = useState(null);
   const navigate = useNavigate();
+  const { deleteAlertConfirm, deleteAlertSuccess, deleteAlertReject, deleteAlertError } = useDeleteAlert();
 
   // paginate
   const [page, setPage] = useState(0); // simpan halaman yang aktif (di gpt currentData)
@@ -33,11 +35,6 @@ const Activity = () => {
   console.log(data);
 
   const handleDelete = async (id) => {
-    const confirmed = window.confirm('Are You Sure?');
-    if (!confirmed) {
-      setDeleteId(null);
-      return;
-    }
     try {
       const response = await deleteItem(id);
       if (response.status === 'OK') {
@@ -72,7 +69,20 @@ const Activity = () => {
             name={activity.title}
             createdAt={activity.createdAt}
             updatedAt={activity.updatedAt}
-            eventDelete={() => handleDelete(activity.id)}
+            eventDelete={() => {
+              deleteAlertConfirm({
+                title: 'Delete Activity',
+                text: 'Are you sure you want to delete this activity?',
+                onConfirm: () => {
+                  handleDelete(activity.id);
+                  deleteAlertSuccess();
+                },
+                onCancel: () => {
+                  deleteAlertReject();
+                },
+              });
+              // handleDelete(activity.id);
+            }}
             eventView={() => navigate(`../activity/edit/${activity.id}`)}
             eventEdit={() => navigate(`../activity/edit/${activity.id}?edit=true`)}
           />

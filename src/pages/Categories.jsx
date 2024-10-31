@@ -17,6 +17,8 @@ import { IconContext } from 'react-icons';
 import DetailsPicsModal from '../components/fragmentes/DetailsPicsModal';
 import { useSelector } from 'react-redux';
 import Loading from '../components/elements/Loading';
+import useAlert from '../hooks/alerts/useAlert';
+import useDeleteAlert from '../hooks/alerts/useDeleteAlert';
 
 const Categories = () => {
   // Redux
@@ -34,10 +36,12 @@ const Categories = () => {
   const [categoryImage, setCategoryImage] = useState('');
   const [profilePictureFile, setProfilePictureFile] = useState(null);
   const [token, setToken] = useLocalStorage('authToken', '');
+  const { successAlert, errorAlert } = useAlert();
 
   // Hooks Untuk delete
   const { deleteItem } = useDelete('api/v1/delete-category');
   const [deleteId, setDeleteId] = useState(null);
+  const { deleteAlertConfirm, deleteAlertSuccess, deleteAlertError, deleteAlertReject } = useDeleteAlert();
 
   // Hooks untuk update
   const [showModalUpdate, setShowModalUpdate] = useState(false);
@@ -64,11 +68,6 @@ const Categories = () => {
 
   // Untuk fungsi Delete
   const handleDelete = async (id) => {
-    const confirmed = window.confirm('Are You Sure?');
-    if (!confirmed) {
-      setDeleteId(null);
-      return;
-    }
     try {
       const response = await deleteItem(id);
       if (response.status === 'OK') {
@@ -108,10 +107,18 @@ const Categories = () => {
       if (profilePictureFile) {
         const acceptImage = ['image/'];
         if (!acceptImage.some((item) => profilePictureFile.type.includes(item))) {
-          return alert('Files that are allowed are only of type Image');
+          // return alert('Files that are allowed are only of type Image');
+          return errorAlert({
+            title: 'Oops!',
+            text: 'Files that are allowed are only of type Image.',
+          });
         }
         if (profilePictureFile?.size > 500 * 1024) {
-          return alert('File size exceeds 500 kb');
+          // return alert('File size exceeds 500 kb');
+          return errorAlert({
+            title: 'Oops!',
+            text: 'File size exceeds 500 kb.',
+          });
         }
         let formData = new FormData();
         formData.append('image', profilePictureFile);
@@ -141,10 +148,18 @@ const Categories = () => {
       const createdItem = await createItem(bannerData);
       reFetch();
       setShowModal(false);
-      alert(`Success: ${createdItem.message}`);
+      // alert(`Success: ${createdItem.message}`);
+      successAlert({
+        title: 'Success',
+        text: createdItem.message,
+        timer: 1500,
+      });
     } catch (error) {
-      console.log(error);
-      alert(error.message);
+      // alert(error.message);
+      errorAlert({
+        title: 'Error',
+        text: error.message,
+      });
     }
   };
 
@@ -157,10 +172,18 @@ const Categories = () => {
       if (categoryImageUpdateFile) {
         const acceptImage = ['image/'];
         if (!acceptImage.some((item) => categoryImageUpdateFile.type.includes(item))) {
-          return alert('Files that are allowed are only of type Image');
+          // return alert('Files that are allowed are only of type Image');
+          return errorAlert({
+            title: 'Oops!',
+            text: 'Files that are allowed are only of type Image.',
+          });
         }
         if (categoryImageUpdateFile?.size > 500 * 1024) {
-          return alert('File size exceeds 500 kb');
+          // return alert('File size exceeds 500 kb');
+          return errorAlert({
+            title: 'Oops!',
+            text: 'File size exceeds 500 kb.',
+          });
         }
         let formData = new FormData();
         formData.append('image', categoryImageUpdateFile);
@@ -223,7 +246,23 @@ const Categories = () => {
             name={category.name}
             createdAt={category.createdAt}
             updatedAt={category.updatedAt}
-            eventDelete={() => handleDelete(category.id)}
+            eventDelete={() => {
+              deleteAlertConfirm({
+                title: 'Delete Category',
+                text: 'Are you sure you want to delete this category?',
+                onConfirm: () => {
+                  deleteAlertSuccess({
+                    text: 'Your category has been deleted.',
+                  });
+                  handleDelete(category.id);
+                },
+                onCancel: () => {
+                  deleteAlertError({
+                    text: 'Your category has not been deleted.',
+                  });
+                },
+              });
+            }}
             eventEdit={() => {
               setShowModalUpdate(true);
               setCategoryNameUpdate(category.name);
