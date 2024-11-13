@@ -118,7 +118,7 @@ const DetailPromo = () => {
 
   return (
     <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl gap-2 my-[5rem] sm:my-[2rem]">
-      <div className="flex justify-between flex-col items-center gap-2">
+      <div className="flex flex-col items-center justify-between gap-2">
         <h1 className="block text-xl font-medium text-slate-800">Halaman Promo</h1>
         {!editable && (
           <Button
@@ -138,12 +138,12 @@ const DetailPromo = () => {
             className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
           >
             <img
-              className="h-96 w-full object-cover object-center"
+              className="object-cover object-center w-full h-96"
               src={data.imageUrl}
               alt={data.title}
             />
-            <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
-              <div className=" flex flex-col md:flex-row gap-2 justify-center">
+            <div className="flex flex-col gap-6 p-10 border-2 shadow-md border-slate-200 rounded-xl">
+              <div className="flex flex-col justify-center gap-2 md:flex-row">
                 {/* Title */}
                 <div className="w-full max-w-sm min-w-[200px] dark:text-black">
                   <label className="block mb-2 text-sm text-slate-600">Title</label>
@@ -172,7 +172,7 @@ const DetailPromo = () => {
                   />
                 </div>
               </div>
-              <div className=" flex flex-col md:flex-row gap-2 justify-center dark:text-black">
+              <div className="flex flex-col justify-center gap-2 md:flex-row dark:text-black">
                 {/* Discount Price */}
                 <div className="w-full max-w-sm min-w-[200px]">
                   <label className="block mb-2 text-sm text-slate-600">Discount Price</label>
@@ -202,7 +202,7 @@ const DetailPromo = () => {
                   />
                 </div>
               </div>
-              <div className=" flex flex-col md:flex-row gap-2 justify-center dark:text-black">
+              <div className="flex flex-col justify-center gap-2 md:flex-row dark:text-black">
                 {/* Description */}
                 <div className="w-full max-w-sm min-w-[200px]">
                   <label className="block mb-2 text-sm text-slate-600">Description</label>
@@ -251,7 +251,10 @@ const DetailPromo = () => {
               />
               <Button
                 text="Cancel"
-                event={() => navigate(`/admin/promos/${id}`)}
+                event={() => {
+                  navigate(`/admin/promos/${id}`);
+                  window.location.reload();
+                }}
               />
             </div>
           )}

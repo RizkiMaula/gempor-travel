@@ -83,7 +83,7 @@ const Profile = () => {
   return (
     <div className={`flex flex-col`}>
       <div className="grid grid-cols-2 gap-8 p-3">
-        <div className="flex flex-col items-center justify-center gap-2 col-span-2 md:col-span-1">
+        <div className="flex flex-col items-center justify-center col-span-2 gap-2 md:col-span-1">
           <h1>Profile</h1>
           {loading && <div>Loading...</div>}
           {error && <div>Error: {error.message}</div>}
@@ -101,7 +101,7 @@ const Profile = () => {
             </div>
           )}
         </div>
-        <div className="flex flex-col items-center gap-2 col-span-2 md:col-span-1">
+        <div className="flex flex-col items-center col-span-2 gap-2 md:col-span-1">
           <h1 className="text-xl">Edit Profile</h1>
           <form className="flex flex-col gap-2 w-[85%] p-5">
             <label htmlFor="name">Name:</label>
@@ -141,7 +141,7 @@ const Profile = () => {
               }}
             />
           </form>
-          <div className="flex gap-2 items-center justify-center">
+          <div className="flex items-center justify-center gap-2">
             <Button
               text="Save"
               bgColor="bg-blue-500"

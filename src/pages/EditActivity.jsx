@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { useParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import useUpdate from '../hooks/useUpdate';
 import useFetch from '../hooks/useFetch';
 import useLocalStorage from '../hooks/useLocalStorage';
@@ -96,6 +96,14 @@ const EditActivity = () => {
     setProfilePictureFile(e.target.files);
   };
 
+  const getGoogleMapsUsingRegex = (url) => {
+    const regex = /<iframe.*?src=['"](.*?)['"].*?>/;
+    const match = url?.match(regex);
+    if (match) {
+      return match[1];
+    }
+  };
+
   const getDataActivity = async (id) => {
     let config = {
       method: 'get',
@@ -152,10 +160,10 @@ const EditActivity = () => {
           alert('File not valid');
           return;
         }
-        if (item?.size > 500 * 1024) {
-          alert('File too large');
-          return;
-        }
+        // if (item?.size > 500 * 1024) {
+        //   alert('File too large');
+        //   return;
+        // }
 
         let data = new FormData();
         data.append('image', item);
@@ -196,7 +204,8 @@ const EditActivity = () => {
       const response = await updateItem(id, updatedData);
       alert('Update success');
       console.log(response);
-      navigate(`/admin/activity`);
+      navigate(`/admin/activity/edit/${id}`);
+      window.location.reload();
     } catch (error) {
       console.log(error);
       alert(error.message);
@@ -436,6 +445,17 @@ const EditActivity = () => {
           )}
         </div>
       </form>
+      {!editable && (
+        <iframe
+          src={getGoogleMapsUsingRegex(dataAct?.location_maps)}
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          // className="w-full rounded-md h-96"
+          className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] h-96 bg-white rounded-xl text-slate-800 px-4 dark:text-black"
+        ></iframe>
+      )}
       {editable && (
         <div className="flex gap-2">
           <Button
