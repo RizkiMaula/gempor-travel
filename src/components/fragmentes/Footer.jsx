@@ -10,8 +10,8 @@ const Footer = () => {
   return (
     <footer className="relative bottom-0 w-full bg-blue-gray-100 py-9 dark:bg-blue-gray-700">
       <div className="mx-[3rem] my-[1.5rem] flex flex-col gap-9 justify-between ">
-        <div className="grid grid-cols-4 gap-4 h-full ">
-          <div className="flex flex-col w-1/3 gap-3 col-span-2 md:col-span-1">
+        <div className="grid h-full grid-cols-4 gap-4 ">
+          <div className="flex flex-col w-1/3 col-span-2 gap-3 md:col-span-1">
             <h1 className="font-bold ">Company</h1>
             <ul>
               <li>
@@ -34,7 +34,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col w-1/3 gap-3 col-span-2 md:col-span-1">
+          <div className="flex flex-col w-1/3 col-span-2 gap-3 md:col-span-1">
             <h1 className="font-bold ">Explore</h1>
             <ul>
               <li>
@@ -48,7 +48,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="flex flex-col w-1/3 gap-3 col-span-4 md:col-span-1">
+          <div className="flex flex-col w-1/3 col-span-4 gap-3 md:col-span-1">
             <h1 className="font-bold ">Find Promo</h1>
             <ul>
               {loading ? (
@@ -65,7 +65,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-span-4 md:col-span-1">
-            <div className="w-full h-full rounded  bg-neutral-100">
+            <div className="w-full h-full rounded bg-neutral-100">
               <div className="flex flex-col w-full gap-3 ">
                 <h1 className="font-bold ">Subscribe</h1>
                 <div className="flex">
@@ -85,7 +85,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-3 w-full">
+        <div className="grid w-full grid-cols-3 gap-3">
           <div className="flex justify-center col-span-3 md:col-span-1 md:justify-start">
             <div className="w-[4rem] h-[4rem]">
               <img
@@ -94,14 +94,14 @@ const Footer = () => {
               />
             </div>
           </div>
-          <div className="col-span-3 md:col-span-1 flex justify-center items-center">
+          <div className="flex items-center justify-center col-span-3 md:col-span-1">
             <ul className="flex gap-5 font-bold ">
               <li>Terms</li>
               <li>Privacy</li>
               <li>Cookies</li>
             </ul>
           </div>
-          <div className="flex gap-3 col-span-3 md:col-span-1 items-center justify-center md:justify-end">
+          <div className="flex items-center justify-center col-span-3 gap-3 md:col-span-1 md:justify-end">
             <button className=" p-2 rounded-full w-[3rem] h-[3rem]">
               <FontAwesomeIcon
                 icon={faInstagram}

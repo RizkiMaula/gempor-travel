@@ -107,7 +107,7 @@ function NavListMenu() {
           </Typography>
         </MenuHandler>
         <MenuList className="hidden max-w-screen-xl rounded-xl lg:block">
-          <ul className="grid grid-cols-3 gap-y-2 outline-none outline-0">{renderItems}</ul>
+          <ul className="grid grid-cols-3 outline-none gap-y-2 outline-0">{renderItems}</ul>
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
@@ -122,7 +122,7 @@ const NavList = () => {
   const dispatch = useDispatch();
   const mode = useSelector((state) => state.darkMode);
   return (
-    <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
+    <List className="p-0 mt-4 mb-6 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
       <Typography
         as="a"
         href="/"
@@ -130,7 +130,7 @@ const NavList = () => {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2  dark:text-lightTextColor py-2 pr-4">Home</ListItem>
+        <ListItem className="flex items-center gap-2 py-2 pr-4 dark:text-lightTextColor">Home</ListItem>
       </Typography>
       <NavListMenu />
       <Typography

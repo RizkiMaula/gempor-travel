@@ -4,7 +4,7 @@ import NavbarUser from '../components/fragmentes/NavbarUser';
 
 const LayoutUsers = () => {
   return (
-    <div className="w-full h-full flex flex-col dark:bg-darkColor dark:text-lightTextColor transition-colors duration-500">
+    <div className="flex flex-col w-full h-full transition-colors duration-500 dark:bg-darkColor dark:text-lightTextColor">
       <NavbarUser />
       <Outlet />
       <Footer />
