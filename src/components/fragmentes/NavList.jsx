@@ -7,6 +7,7 @@ import ProfileElement from '../elements/ProfileElement';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import { darkMode, toggleMode } from '../../redux/slices/darkSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import useAlert from '../../hooks/alerts/useAlert';
 
 const NavListLib = () => {
   // redux
@@ -15,6 +16,7 @@ const NavListLib = () => {
 
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
+  const { successAlert } = useAlert();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -46,6 +48,10 @@ const NavListLib = () => {
           .request(config)
           .then((response) => {
             console.log(JSON.stringify(response.data));
+            setTimeout(() => {
+              navigate('/');
+            }, 1000);
+            successAlert({ title: 'Success', text: 'Logout Success' });
             setToken('');
             setRole('');
           })

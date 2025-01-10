@@ -4,11 +4,14 @@ import useLocalStorage from '../hooks/useLocalStorage';
 import usePost from '../hooks/usePost';
 import Button from '../components/elements/Button';
 import { Card, Typography } from '@material-tailwind/react';
+import useAlert from '../hooks/alerts/useAlert';
 const Login = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const { successAlert, errorAlert } = useAlert();
 
   const { createItem: login } = usePost('api/v1/login'); // createItem: login itu buat aliasnya. (bahasa manusianya "login itu alias dari createItem yang ada di hook usePost")
 
@@ -30,26 +33,27 @@ const Login = () => {
     try {
       const loginData = { email, password };
       const response = await login(loginData);
-      console.log(response);
-      console.log(`role: ${response.data.role}, token: ${response.token}`);
       setToken(response.token);
       setRole(response.data.role);
       setTimeout(() => {
         if (response.data.role === 'admin') {
+          successAlert({ title: 'Success', text: 'Login Success as Admin' });
           navigate('/admin');
         } else {
+          successAlert({ title: 'Success', text: 'Login Success' });
           if (response.data.role === 'user') {
             navigate('/');
           }
         }
       }, 3000);
     } catch (error) {
-      alert(`error: ${error}`);
+      // alert(`error: ${error}`);
+      errorAlert({ title: 'Error', text: error });
       console.log(error);
     }
   };
   return (
-    <div className="w-full h-screen flex flex-col items-center justify-center border-2 border-black">
+    <div className="flex flex-col items-center justify-center w-full h-screen border-2 border-black">
       <Card
         color="transparent"
         shadow={false}
@@ -62,8 +66,8 @@ const Login = () => {
           Login
         </Typography>
 
-        <form className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96">
-          <div className="mb-1 flex flex-col gap-6">
+        <form className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96">
+          <div className="flex flex-col gap-6 mb-1">
             <Typography
               variant="h6"
               color="blue-gray"
@@ -108,7 +112,7 @@ const Login = () => {
         </Button>
         <Typography
           color="gray"
-          className="mt-4 text-center font-normal"
+          className="mt-4 font-normal text-center"
         >
           Haven&apos;t have an account?{' '}
           <Link

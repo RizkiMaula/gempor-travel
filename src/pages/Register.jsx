@@ -25,6 +25,7 @@ const Register = () => {
   const [nameError, setNameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [passwordRepeatError, setPasswordRepeatError] = useState('');
+  const [phoneNumberError, setPhoneNumberError] = useState('');
 
   const { createItem } = usePost('api/v1/register');
 
@@ -47,9 +48,17 @@ const Register = () => {
       return false;
     }
 
+    if (emailPattern.test(email)) {
+      setEmailError('');
+    }
+
     if (!name) {
       setNameError('Please enter your name.');
       return false;
+    }
+
+    if (name) {
+      setNameError('');
     }
 
     if (!password) {
@@ -57,14 +66,26 @@ const Register = () => {
       return false;
     }
 
+    if (password) {
+      setPasswordError('');
+    }
+
     if (password !== passwordRepeat) {
       setPasswordRepeatError('Passwords do not match.');
       return false;
     }
 
+    if (password === passwordRepeat) {
+      setPasswordRepeatError('');
+    }
+
     if (!phoneNumberPattern.test(phoneNumber)) {
-      setPasswordError('Please enter a valid phone number.');
+      setPhoneNumberError('Please enter a valid phone number.');
       return false;
+    }
+
+    if (phoneNumberPattern.test(phoneNumber)) {
+      setPhoneNumberError('');
     }
 
     return true;
@@ -143,8 +164,8 @@ const Register = () => {
         action=""
         className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
       >
-        <div className="flex flex-col gap-6 border-2 border-slate-200 shadow-md rounded-xl p-10">
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+        <div className="flex flex-col gap-6 p-10 border-2 shadow-md border-slate-200 rounded-xl">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* Email */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Email</label>
@@ -172,7 +193,7 @@ const Register = () => {
               <p>{nameError}</p>
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* Password */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Password</label>
@@ -200,7 +221,7 @@ const Register = () => {
               <p>{passwordRepeatError}</p>
             </div>
           </div>
-          <div className=" flex flex-col md:flex-row gap-2 justify-center">
+          <div className="flex flex-col justify-center gap-2 md:flex-row">
             {/* Role */}
             <div className="w-full max-w-sm min-w-[200px]">
               <label className="block mb-2 text-sm text-slate-600">Role</label>
@@ -246,7 +267,7 @@ const Register = () => {
       />
       <Typography
         color="gray"
-        className="mt-4 text-center font-normal"
+        className="mt-4 font-normal text-center"
       >
         Already have have an account?{' '}
         <Link

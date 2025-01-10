@@ -7,11 +7,13 @@ import { Bars3Icon } from '@heroicons/react/24/outline';
 import { useEffect, useState } from 'react';
 import { NavList } from '../elements/MenuList';
 import ProfileElement from '../elements/ProfileElement';
+import useAlert from '../../hooks/alerts/useAlert';
 
 const NavbarAdmin = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
   const [openNav, setOpenNav] = useState(false);
+  const { successAlert, errorAlert } = useAlert();
 
   const navigate = useNavigate();
 
@@ -46,13 +48,12 @@ const NavbarAdmin = () => {
             console.log(JSON.stringify(response.data));
             setToken('');
             setRole('');
-            alert('logout success');
-            setTimeout(() => {
-              navigate('/login');
-            }, 1000);
+            navigate('/login');
+            successAlert({ title: 'Success', text: 'Logout Success' });
           })
           .catch((error) => {
             console.log(error);
+            errorAlert({ title: 'Error', text: error });
           });
       })
       .catch((error) => {
@@ -65,7 +66,7 @@ const NavbarAdmin = () => {
   }, []);
 
   return (
-    <Navbar className="mx-auto max-w-screen-xl px-4 py-2 dark:bg-darkColor ">
+    <Navbar className="max-w-screen-xl px-4 py-2 mx-auto dark:bg-darkColor ">
       <div className="flex items-center justify-between text-blue-gray-900 dark:text-lightTextColor">
         <Typography
           variant="h6"
@@ -87,12 +88,12 @@ const NavbarAdmin = () => {
         >
           {openNav ? (
             <XMarkIcon
-              className="h-6 w-6"
+              className="w-6 h-6"
               strokeWidth={2}
             />
           ) : (
             <Bars3Icon
-              className="h-6 w-6"
+              className="w-6 h-6"
               strokeWidth={2}
             />
           )}
@@ -100,7 +101,7 @@ const NavbarAdmin = () => {
       </div>
       <Collapse open={openNav}>
         <NavList />
-        <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
+        <div className="flex items-center w-full gap-2 flex-nowrap lg:hidden">
           <ProfileElement event={handleLogout} />
         </div>
       </Collapse>

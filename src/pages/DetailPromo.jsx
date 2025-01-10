@@ -234,7 +234,7 @@ const DetailPromo = () => {
                     accept="image/*"
                     onChange={handleChangePic}
                     disabled={!editable}
-                    className="border border-gray-300 rounded-md p-2 w-[20rem]"
+                    className="border border-gray-300 rounded-md p-2 w-[20rem] dark:text-black"
                   />
                 </div>
               )}

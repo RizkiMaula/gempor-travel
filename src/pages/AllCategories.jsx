@@ -14,7 +14,7 @@ const AllCategories = () => {
   // paginate
   const [page, setPage] = useState(0); // simpan halaman yang aktif (di gpt currentData)
   const [filterData, setFilterData] = useState(data?.data || []); // data akan ditampilkan setelah filter data untuk tiap halaman (di gpt data)
-  const n = 5; // jumlah maksimal data yang akan ditampilkan ()
+  const n = 6; // jumlah maksimal data yang akan ditampilkan ()
 
   // redux
   const dark = useSelector((state) => state.darkMode);

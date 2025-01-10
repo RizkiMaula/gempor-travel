@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import usePost from '../hooks/usePost';
 import { useSelector } from 'react-redux';
+import useAlert from '../hooks/alerts/useAlert';
 
 const Profile = () => {
   const { data, loading, error, reFetch } = useFetch('api/v1/user');
@@ -15,6 +16,7 @@ const Profile = () => {
   const [profilePictureName, setProfilePictureName] = useState('');
   const [profilePictureFile, setProfilePictureFile] = useState(null);
   const { createItem } = usePost('api/v1/update-profile');
+  const { successAlert, errorAlert } = useAlert();
   const [formData, setFromData] = useState({
     name: '',
     email: '',
@@ -68,7 +70,8 @@ const Profile = () => {
       };
       const response = await createItem(data);
       console.log(data);
-      alert(response.message);
+      // alert(response.message);
+      successAlert({ title: 'Success', text: response.message });
       reFetch();
       formData.name = '';
       formData.email = '';
@@ -76,7 +79,8 @@ const Profile = () => {
       formData.profilePictureUrl = '';
     } catch (error) {
       console.log(error);
-      alert(error.message);
+      // alert(error.message);
+      errorAlert({ title: 'Error', text: 'Something went wrong, please try again' });
     }
   };
 
@@ -108,7 +112,7 @@ const Profile = () => {
             <input
               type="text"
               id="name"
-              className="p-3 border-2 border-black rounded"
+              className="p-3 border-2 border-black rounded dark:text-black"
               placeholder="Put Your Name Here"
               value={formData.name}
               onChange={(e) => setFromData({ ...formData, name: e.target.value })}
@@ -117,7 +121,7 @@ const Profile = () => {
             <input
               type="email"
               id="email"
-              className="p-3 border-2 border-black rounded"
+              className="p-3 border-2 border-black rounded dark:text-black"
               placeholder="Put Your Email Here"
               value={formData.email}
               onChange={(e) => setFromData({ ...formData, email: e.target.value })}
@@ -126,7 +130,7 @@ const Profile = () => {
             <input
               type="text"
               id="phoneNumber"
-              className="p-3 border-2 border-black rounded"
+              className="p-3 border-2 border-black rounded dark:text-black"
               placeholder="Put Your Phone Number Here"
               value={formData.phoneNumber}
               onChange={(e) => setFromData({ ...formData, phoneNumber: e.target.value })}
