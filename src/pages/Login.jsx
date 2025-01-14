@@ -5,6 +5,8 @@ import usePost from '../hooks/usePost';
 import Button from '../components/elements/Button';
 import { Card, Typography } from '@material-tailwind/react';
 import useAlert from '../hooks/alerts/useAlert';
+import image2 from '../assets/login2.jpg';
+
 const Login = () => {
   const [token, setToken] = useLocalStorage('authToken', '');
   const [role, setRole] = useLocalStorage('role', '');
@@ -53,11 +55,16 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center w-full h-screen border-2 border-black">
+    <div className="flex items-center justify-center w-full min-h-screen">
+      <img
+        src={image2}
+        alt="Group-1"
+        className="w-[60%] h-[60%] hidden md:block object-cover"
+      />
       <Card
         color="transparent"
         shadow={false}
-        className="max-w-[25rem] border-2 border-black"
+        className="max-w-[25rem] flex flex-col items-center justify-center border-2 shadow-2xl py-10 gap-3"
       >
         <Typography
           variant="h4"
@@ -66,7 +73,7 @@ const Login = () => {
           Login
         </Typography>
 
-        <form className="max-w-screen-lg mt-8 mb-2 w-80 sm:w-96">
+        <form className="max-w-screen-lg px-10 mt-8 mb-2 w-80 sm:w-96">
           <div className="flex flex-col gap-6 mb-1">
             <Typography
               variant="h6"
@@ -96,14 +103,13 @@ const Login = () => {
               id="password"
               placeholder="Password"
               onChange={handlePassword}
-              className=" !border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl"
+              className="!border-t-blue-gray-200 focus:!border-t-gray-900 p-3 border-2 border-gray-300 rounded-xl"
             />
           </div>
         </form>
 
         <Button
-          className="mt-6"
-          fullWidth
+          className="gap-3 mt-6 mb-2 w-80 sm:w-96"
           text="Login"
           bgColor="bg-blue-500"
           event={handleLogin}
@@ -117,7 +123,7 @@ const Login = () => {
           Haven&apos;t have an account?{' '}
           <Link
             to="/register"
-            className="font-medium text-gray-900"
+            className="font-medium text-gray-900 hover:underline hover:text-blue-600"
           >
             Register
           </Link>

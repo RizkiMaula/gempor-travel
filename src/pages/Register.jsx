@@ -4,7 +4,8 @@ import usePost from '../hooks/usePost';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Button from '../components/elements/Button';
 import { Link, useNavigate } from 'react-router-dom';
-import { Card, Typography } from '@material-tailwind/react';
+import { Typography } from '@material-tailwind/react';
+import image from '../assets/login2.jpg';
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -71,7 +72,7 @@ const Register = () => {
     }
 
     if (password !== passwordRepeat) {
-      setPasswordRepeatError('Passwords do not match.');
+      setPasswordRepeatError('Password do not match.');
       return false;
     }
 
@@ -158,125 +159,121 @@ const Register = () => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center bg-transparent rounded-xl my-[5rem] sm:my-[2rem]">
-      <h1>Register</h1>
-      <form
-        action=""
-        className="max-w-screen-lg mt-4 mb-2 w-[85%] lg:w-[53.75rem] md:w-[33.75rem] sm:w-[31.75rem] bg-white rounded-xl text-slate-800 px-4"
-      >
-        <div className="flex flex-col gap-6 p-10 border-2 shadow-md border-slate-200 rounded-xl">
-          <div className="flex flex-col justify-center gap-2 md:flex-row">
-            {/* Email */}
-            <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Email</label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                name="email"
-                placeholder="example@mail.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <p>{emailError}</p>
+    <div className="relative flex flex-col items-center justify-center min-h-screen pb-6 bg-transparent">
+      <div className="flex items-center">
+        <img
+          src={image}
+          alt="Register"
+          className="object-cover w-[60%] h-[60%] rounded-xl hidden md:block"
+        />
+        <div className="flex flex-col items-center justify-center">
+          <form
+            action=""
+            className="flex flex-col items-center justify-center max-w-screen-lg px-4 mt-4 mb-2 bg-white rounded-xl text-slate-800"
+          >
+            <div className="flex flex-col gap-6 p-10 border-2 shadow-md border-slate-200 rounded-xl">
+              <div className="flex flex-col justify-center gap-2">
+                {/* Email */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Email</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    name="email"
+                    placeholder="example@mail.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  <p className="text-red-500">{emailError}</p>
+                </div>
+                {/* Name */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Name</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="Joko"
+                    name="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                  <p className="text-red-500">{nameError}</p>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center gap-2">
+                {/* Password */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Password</label>
+                  <input
+                    type="password"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="*****"
+                    name="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  <p className="text-red-500">{passwordError}</p>
+                </div>
+                {/* Confirm Password */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Confirm Password</label>
+                  <input
+                    type="password"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="*****"
+                    name="confirmPassword"
+                    value={passwordRepeat}
+                    onChange={(e) => setPasswordRepeat(e.target.value)}
+                  />
+                  <p className="text-red-500">{passwordRepeatError}</p>
+                </div>
+              </div>
+              <div className="flex flex-col justify-center gap-2">
+                {/* Phone Number */}
+                <div className="w-full max-w-sm min-w-[200px]">
+                  <label className="block mb-2 text-sm text-slate-600">Phone Number</label>
+                  <input
+                    type="text"
+                    className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
+                    placeholder="Phone Number"
+                    name="Number"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
+                  <p className="text-red-500">{phoneNumberError}</p>
+                </div>
+                {/* upload image */}
+                <div className="w-full max-w-sm min-w-[200px] mt-4">
+                  <input
+                    type="file"
+                    name="image"
+                    onChange={(e) => setProfilePictureFile(e.target.files[0])}
+                  />
+                </div>
+              </div>
             </div>
-            {/* Name */}
-            <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Name</label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                placeholder="Joko"
-                name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <p>{nameError}</p>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center gap-2 md:flex-row">
-            {/* Password */}
-            <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Password</label>
-              <input
-                type="password"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                placeholder="*****"
-                name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <p>{passwordError}</p>
-            </div>
-            {/* Confirm Password */}
-            <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Confirm Password</label>
-              <input
-                type="password"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                placeholder="*****"
-                name="confirmPassword"
-                value={passwordRepeat}
-                onChange={(e) => setPasswordRepeat(e.target.value)}
-              />
-              <p>{passwordRepeatError}</p>
-            </div>
-          </div>
-          <div className="flex flex-col justify-center gap-2 md:flex-row">
-            {/* Role */}
-            <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Role</label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                placeholder="Price Discount"
-                name="role"
-                value="user"
-                readOnly
-                onChange={(e) => setRole(e.target.value)}
-              />
-            </div>
-            {/* Phone Number */}
-            <div className="w-full max-w-sm min-w-[200px]">
-              <label className="block mb-2 text-sm text-slate-600">Phone Number</label>
-              <input
-                type="text"
-                className="w-full px-3 py-2 text-sm transition duration-300 bg-transparent border rounded-md shadow-sm placeholder:text-slate-400 text-slate-700 border-slate-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 focus:shadow"
-                placeholder="Phone Number"
-                name="Number"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-              />
-            </div>
-          </div>
-          {/* upload image */}
-          <div className="w-full max-w-sm min-w-[200px]">
-            <input
-              type="file"
-              name="image"
-              onChange={(e) => setProfilePictureFile(e.target.files[0])}
-            />
-          </div>
+          </form>
+          <Button
+            className="w-full mt-6"
+            fullWidth
+            text="Register"
+            bgColor="bg-blue-500"
+            event={handleRegister}
+          />
+          <Typography
+            color="gray"
+            className="mt-4 font-normal text-center"
+          >
+            Already have have an account?{' '}
+            <Link
+              to="/login"
+              className="font-medium text-gray-900 hover:underline hover:cursor-pointer hover:text-blue-500"
+            >
+              Login
+            </Link>
+          </Typography>
         </div>
-      </form>
-      <Button
-        className="mt-6"
-        fullWidth
-        text="Register"
-        bgColor="bg-blue-500"
-        event={handleRegister}
-      />
-      <Typography
-        color="gray"
-        className="mt-4 font-normal text-center"
-      >
-        Already have have an account?{' '}
-        <Link
-          to="/login"
-          className="font-medium text-gray-900"
-        >
-          Login
-        </Link>
-      </Typography>
+      </div>
     </div>
   );
 };
