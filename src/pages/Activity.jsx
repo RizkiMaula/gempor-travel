@@ -28,11 +28,8 @@ const Activity = () => {
   }, [data?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
-
-  console.log(data);
 
   const handleDelete = async (id) => {
     try {
@@ -43,7 +40,6 @@ const Activity = () => {
       }
     } catch (error) {
       alert(error.message);
-      console.log(error);
     }
   };
 

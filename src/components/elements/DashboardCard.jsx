@@ -1,6 +1,6 @@
 import { Card, CardBody, CardFooter, Typography } from '@material-tailwind/react';
 
-// eslint disable-next-line react/prop-types
+// eslint-disable-next-line react/prop-types
 const DashboardCard = ({ total, title, loading }) => {
   return (
     <Card className="col-span-4 mt-6 md:col-span-2 lg:col-span-1">

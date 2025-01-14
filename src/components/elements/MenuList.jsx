@@ -65,7 +65,7 @@ function NavListMenu() {
           <Typography
             variant="h6"
             color="blue-gray"
-            className="flex items-center text-sm font-bold dark:text-text-gray-900"
+            className="flex items-center text-sm font-bold dark:text-gray-100"
           >
             {title}
           </Typography>
@@ -94,7 +94,7 @@ function NavListMenu() {
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
-              Menus
+              Menu
               <ChevronDownIcon
                 strokeWidth={2.5}
                 className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? 'rotate-180' : ''}`}

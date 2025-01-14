@@ -28,7 +28,6 @@ const User = () => {
   }, [data?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 
@@ -46,12 +45,9 @@ const User = () => {
       setShowModal(false);
       reFetch();
     } catch (error) {
-      console.log(error);
       alert(`error: ${error}`);
     }
   };
-
-  console.log(data);
 
   return (
     <div className="flex flex-col items-center w-full gap-2 pt-[0.8rem] md:pt-[1rem]">
@@ -75,7 +71,6 @@ const User = () => {
               <Button
                 text="Edit Role"
                 event={() => {
-                  console.log(`file ${user.name}: ${user.profilePictureUrl}`);
                   setShowModal(true);
                   setImageUrl(user.profilePictureUrl);
                   setNameUpd(user.name);

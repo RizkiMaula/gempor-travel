@@ -58,7 +58,6 @@ const Banner = () => {
   }, [data?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 
@@ -72,7 +71,6 @@ const Banner = () => {
       }
     } catch (error) {
       alert(error.message);
-      console.log(error);
     }
   };
 
@@ -135,10 +133,9 @@ const Banner = () => {
             }
           })
           .catch((err) => {
-            console.log(err);
             return errorAlert({
               title: 'Error',
-              text: 'Failed to upload image.',
+              text: `Failed to upload image. Error: ${err.message}`,
             });
           });
       }
@@ -199,12 +196,14 @@ const Banner = () => {
           })
           .then((res) => {
             if (res.status === 200) {
-              console.log(res.data);
               urlFoto = res.data.url;
             }
           })
           .catch((err) => {
-            console.log(err);
+            return errorAlert({
+              title: 'Error',
+              text: `Failed to upload image. Error: ${err.message}`,
+            });
           });
       }
 
@@ -218,15 +217,12 @@ const Banner = () => {
       const updatedItem = await updateItem(updateId, bannerData);
       reFetch();
       setShowModalUpdate(false);
-      // alert(`Success: ${updatedItem.message}`);
       successAlert({
         title: 'Success',
         text: updatedItem.message,
         timer: 1500,
       });
     } catch (error) {
-      console.log(error);
-      // alert(error.message);
       errorAlert({
         title: 'Error',
         text: error.message,

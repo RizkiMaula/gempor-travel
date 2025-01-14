@@ -26,7 +26,6 @@ const PromosPage = () => {
   }, [data?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 
@@ -44,7 +43,6 @@ const PromosPage = () => {
       }
     } catch (error) {
       alert(error.message);
-      console.log(error);
     }
   };
 

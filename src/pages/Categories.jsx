@@ -62,7 +62,6 @@ const Categories = () => {
   }, [data?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 
@@ -75,8 +74,7 @@ const Categories = () => {
         setDeleteId(null);
       }
     } catch (error) {
-      alert(error.message);
-      console.log(error);
+      return errorAlert({ title: 'Oops!', text: error.message });
     }
   };
   // buat handle input nama di modal nanti
@@ -135,8 +133,10 @@ const Categories = () => {
             }
           })
           .catch((err) => {
-            console.log(err);
-            return alert('Failed to upload image');
+            return errorAlert({
+              title: 'Oops!',
+              text: `Failed to upload image. ${err.message}`,
+            });
           });
       }
 
@@ -197,12 +197,11 @@ const Categories = () => {
           })
           .then((res) => {
             if (res.status === 200) {
-              console.log(res.data);
               urlFoto = res.data.url;
             }
           })
           .catch((err) => {
-            console.log(err);
+            return alert('Failed to upload image');
           });
       }
 
@@ -218,8 +217,7 @@ const Categories = () => {
       setShowModalUpdate(false);
       alert(`Success: ${createdItem.message}`);
     } catch (error) {
-      console.log(error);
-      alert(error.message);
+      return errorAlert({ title: 'Error', text: `Error: ${error.message}` });
     }
   };
 
