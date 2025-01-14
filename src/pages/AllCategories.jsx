@@ -25,7 +25,6 @@ const AllCategories = () => {
   }, [data?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(data?.data?.slice(page, page + n));
   }, [page]);
 

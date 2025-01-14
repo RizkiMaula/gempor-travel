@@ -25,7 +25,6 @@ const AllActivities = () => {
   }, [activities?.data]);
 
   useEffect(() => {
-    console.log(page);
     setFilterData(activities?.data?.slice(page, page + n));
   }, [page]);
 

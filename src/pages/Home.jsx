@@ -24,7 +24,6 @@ const Home = () => {
   const [active, setActive] = useState(initialImage);
 
   const [mode, setMode] = useLocalStorage('mode', dark?.darkMode || true);
-  console.log(mode);
 
   useEffect(() => {
     if (initialImage) {
@@ -42,8 +41,6 @@ const Home = () => {
     setChangePromo(newPromoCode);
     setChangePrice(newPrice);
   };
-
-  console.log(promo?.data);
 
   return (
     <UserLayout>
