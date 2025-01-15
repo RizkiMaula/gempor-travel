@@ -65,7 +65,7 @@ function NavListMenu() {
           <Typography
             variant="h6"
             color="blue-gray"
-            className="flex items-center text-sm font-bold dark:text-gray-100"
+            className="flex items-center text-sm font-bold text-gray-300 md:text-black"
           >
             {title}
           </Typography>
@@ -147,7 +147,7 @@ const NavList = () => {
           }}
         >
           {' '}
-          {mode.darkMode ? <MoonIcon className="w-5 h-5 dark:text-lightTextColor" /> : <SunIcon className="w-5 h-5" />}
+          {mode.darkMode ? <MoonIcon className="w-5 h-5 dark:text-lightTextColor " /> : <SunIcon className="w-5 h-5" />}
         </ListItem>
       </Typography>
     </List>
